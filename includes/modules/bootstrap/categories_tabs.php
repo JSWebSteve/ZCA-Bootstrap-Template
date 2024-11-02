@@ -47,7 +47,7 @@ foreach ($categories_tab as $category) {
     }
     // create link to top level category
     $links_list[] =
-        '<li class="nav-item" role="presentation">' .
+        '<li class="nav-item m-1" role="presentation">' .
         '<a class="' . $new_style . '" href="' . zen_href_link(FILENAME_DEFAULT, 'cPath=' . (int)$category['categories_id']) . '" ' .
         'role="tab" aria-selected="' . ($current_category_tab === (int)$category['categories_id'] ? 'true' : 'false') . '">' .
         $categories_tab_current .
