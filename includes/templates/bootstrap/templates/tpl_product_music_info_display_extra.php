@@ -2,7 +2,7 @@
 /**
  * Page Template
  *
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * Provides a music-product's 'extra' information on a product's information
  * page display; normally rendered after the 'ask-a-question' block.

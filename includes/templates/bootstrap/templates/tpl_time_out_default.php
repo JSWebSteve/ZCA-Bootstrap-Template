@@ -2,6 +2,8 @@
 /**
  * Page Template
  *
+ * BOOTSTRAP v5.0.0
+ *
  * @package templateSystem
  * @copyright Copyright 2003-2018 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -28,23 +30,25 @@ if (zen_is_logged_in()) {
 
 <div id="login-card" class="card">
   <h2 id="login-card-header" class="card-header">
-<?php echo HEADING_RETURNING_CUSTOMER; ?>
+    <?php echo HEADING_RETURNING_CUSTOMER; ?>
   </h2>
   <div id="login-card-body" class="card-body">
-<label class="inputLabel" for="login-email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?></label>
-<?php echo zen_draw_input_field('email_address', '', zen_set_field_length(TABLE_CUSTOMERS, 'customers_email_address', '40') . ' id="login-email-address" autocomplete="off"', 'email'); ?>
-<div class="p-2"></div>
+    <div class="form-floating mb-3">
+      <?php echo zen_draw_input_field('email_address', '', zen_set_field_length(TABLE_CUSTOMERS, 'customers_email_address', '40') . ' id="login-email-address" class="form-control" placeholder="' . ENTRY_EMAIL_ADDRESS . '" autocomplete="username" required', 'email'); ?>
+      <label class="form-label" for="login-email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?><span class="text-danger">*</span></label>
+    </div>
 
-<label class="inputLabel" for="login-password"><?php echo ENTRY_PASSWORD; ?></label>
-<?php echo zen_draw_password_field('password', '', zen_set_field_length(TABLE_CUSTOMERS, 'customers_password', 40) . ' id="login-password" autocomplete="off"'); ?>
-<div class="p-2"></div>
+    <div class="form-floating mb-3">
+      <?php echo zen_draw_password_field('password', '', zen_set_field_length(TABLE_CUSTOMERS, 'customers_password', 40) . ' id="login-password" class="form-control" placeholder="' . ENTRY_PASSWORD . '" autocomplete="current-password" required'); ?>
+      <label class="form-label" for="login-password"><?php echo ENTRY_PASSWORD; ?><span class="text-danger">*</span></label>
+    </div>
 
-<?php echo zen_draw_hidden_field('securityToken', $_SESSION['securityToken']); ?>
+    <?php echo zen_draw_hidden_field('securityToken', $_SESSION['securityToken']); ?>
 
-<div id="timeOutDefault-btn-toolbar" class="btn-toolbar justify-content-between my-3" role="toolbar">
-    <?php echo '<a href="' . zen_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . TEXT_PASSWORD_FORGOTTEN . '</a>'; ?>
-<?php echo zen_image_submit(BUTTON_IMAGE_LOGIN, BUTTON_LOGIN_ALT); ?>
-</div>
+    <div id="timeOutDefault-btn-toolbar" class="d-flex justify-content-between align-items-center my-3" role="toolbar">
+      <?php echo '<a href="' . zen_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . TEXT_PASSWORD_FORGOTTEN . '</a>'; ?>
+      <?php echo zen_image_submit(BUTTON_IMAGE_LOGIN, BUTTON_LOGIN_ALT, '', 'btn btn-primary'); ?>
+    </div>
 
   </div>
 </div>

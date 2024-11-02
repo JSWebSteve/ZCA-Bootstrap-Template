@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=conditions.<br />
  * Displays conditions page.
@@ -30,7 +30,7 @@ if (DEFINE_CONDITIONS_STATUS === '1' || DEFINE_CONDITIONS_STATUS === '2') {
 <?php
 }
 ?>
-    <div id="conditionsDefault-btn-toolbar" class="btn-toolbar my-3" role="toolbar">
+    <div id="conditionsDefault-btn-toolbar" class="d-flex justify-content-start my-3" role="toolbar">
         <?php echo zca_back_link(); ?>
     </div>
 </div>

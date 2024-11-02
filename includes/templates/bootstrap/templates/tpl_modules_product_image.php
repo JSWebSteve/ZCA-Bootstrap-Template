@@ -2,7 +2,7 @@
 /**
  * Module Template
  * 
- * BOOTSTRAP v1.0.BETA
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2016 Zen Cart Development Team
@@ -14,9 +14,8 @@
 
 <?php require(DIR_WS_MODULES . zen_get_module_directory(FILENAME_MAIN_PRODUCT_IMAGE)); ?>
 
-<?php echo zen_image(addslashes($products_image_medium), addslashes($products_name), MEDIUM_IMAGE_WIDTH, MEDIUM_IMAGE_HEIGHT); ?>
+<div id="productMainImage" class="text-center mb-3">
+    <?php echo zen_image(addslashes($products_image_medium), addslashes($products_name), MEDIUM_IMAGE_WIDTH, MEDIUM_IMAGE_HEIGHT, 'class="img-fluid" alt="' . addslashes($products_name) . '"'); ?>
+</div>
 
 <div class="p-3"></div>
-
-
-

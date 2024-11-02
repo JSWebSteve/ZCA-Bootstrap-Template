@@ -2,7 +2,7 @@
 /**
  * Module Template
  * 
- * BOOTSTRAP v3.6.4
+ * BOOTSTRAP v5.0.0
  *
  * Displays content related to "also-purchased-products"
  *

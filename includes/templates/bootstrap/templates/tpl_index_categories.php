@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * Loaded by main_page=index
  * Displays category/sub-category listing
@@ -26,7 +26,7 @@ if ($show_welcome === true) {
     $screen_reader_only = '';
     if ($heading_title === '') {
         $heading_title = HEADING_TITLE_SCREENREADER;
-        $screen_reader_only = ' sr-only';
+        $screen_reader_only = ' visually-hidden';
     }
 ?>
     <h1 id="indexCategories-pageHeading" class="pageHeading<?php echo $screen_reader_only; ?>"><?php echo $heading_title; ?></h1>
@@ -68,7 +68,7 @@ if (PRODUCT_LIST_CATEGORIES_IMAGE_STATUS_TOP === 'true') {
     if ($categories_image = zen_get_categories_image($current_category_id)) {
 ?>
     <div id="indexCategories-categoryImage" class="categoryImage">
-        <?php echo zen_image(DIR_WS_IMAGES . $categories_image, '', SUBCATEGORY_IMAGE_TOP_WIDTH, SUBCATEGORY_IMAGE_TOP_HEIGHT); ?>
+        <?php echo zen_image(DIR_WS_IMAGES . $categories_image, '', SUBCATEGORY_IMAGE_TOP_WIDTH, SUBCATEGORY_IMAGE_TOP_HEIGHT, 'class="img-fluid" alt="' . $current_categories_name . '"'); ?>
     </div>
 <?php
     }

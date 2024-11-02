@@ -1,6 +1,6 @@
 <?php
 /**
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * index category_row.php
  *
@@ -50,15 +50,15 @@ if ($category_row_layout_style === 'columns') {
     // Starting with v3.6.3, a categories' fluid layout can be identified.  If predefined (like
     // in an /extra_datafiles .php module), that override is used.
     //
-    $grid_cards_classes = 'row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3';
+    $grid_cards_classes = 'row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 g-4';
     if (!isset($grid_category_classes_matrix)) {
         // this array is intentionally in reverse order, with largest index first
         $grid_category_classes_matrix = [
-            '12' => 'row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6',
-            '10' => 'row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5',
-            '9' => 'row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-5',
-            '8' => 'row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4',
-            '6' => 'row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3',
+            '12' => 'row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4',
+            '10' => 'row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-4',
+            '9' => 'row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4',
+            '8' => 'row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4',
+            '6' => 'row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 g-4',
         ];
     }
 }
@@ -83,10 +83,6 @@ foreach ($categories as $next_category) {
     // strip out 0_ from top level cats
     $cPath_new = str_replace('=' . (int)TOPMOST_CATEGORY_PARENT_ID . '_', '=', $cPath_new);
 
-    // -----
-    // Starting with v3.6.3, a categories' fluid layout can be identified.  If predefined (like
-    // in an /extra_datafiles .php module), that override is used.
-    //
     if ($category_row_layout_style === 'fluid') {
         // determine classes to use based on number of grid-columns used by "center" column
         if (isset($center_column_width)) {
@@ -97,18 +93,19 @@ foreach ($categories as $next_category) {
                 }
             }
         }
-        $list_box_contents[$rows]['params'] = 'class="row ' . $grid_cards_classes . ' text-center"';
+        $list_box_contents[$rows]['params'] = 'class="row ' . $grid_cards_classes . ' text-center" role="list"';
     }
 
     $wrap_class = ($category_row_layout_style === 'columns') ? '' : 'col';
     $list_box_contents[$rows][] = [
-        'params' => 'class="categoryListBoxContents card mb-3 p-3 text-center"',
+        'params' => 'class="categoryListBoxContents card h-100 text-center" role="listitem"',
         'text' =>
-            '<a href="' . zen_href_link(FILENAME_DEFAULT, $cPath_new) . '">' .
-                zen_image(DIR_WS_IMAGES . $next_category['categories_image'], $next_category['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT, 'loading="lazy"') .
-                '<br>' .
-                $next_category['categories_name'] .
-            '</a>',
+            '<div class="card-body d-flex flex-column">' .
+            '<a href="' . zen_href_link(FILENAME_DEFAULT, $cPath_new) . '" class="text-decoration-none">' .
+                zen_image(DIR_WS_IMAGES . $next_category['categories_image'], $next_category['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT, 'class="img-fluid mb-3" loading="lazy"') .
+                '<h5 class="card-title">' . $next_category['categories_name'] . '</h5>' .
+            '</a>' .
+            '</div>',
         'wrap_with_classes' => $wrap_class,
         'card_type' => $category_row_layout_style,
     ];

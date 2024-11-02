@@ -2,7 +2,7 @@
 /**
  * Page Template
  *
- * BOOTSTRAP v3.7.1
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=checkout_payment.<br />
  * Displays the allowed payment modules, for selection by customer.
@@ -19,10 +19,10 @@
         <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
     </div>
 
-    <?php echo zen_draw_form('checkout_payment', zen_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post'); ?>
+    <?php echo zen_draw_form('checkout_payment', zen_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'class="needs-validation" novalidate'); ?>
     <?php echo zen_draw_hidden_field('action', 'submit'); ?>
 
-        <h1 id="checkoutPaymentDefault-pageHeading" class="pageHeading"><?php echo HEADING_TITLE; ?></h1>
+    <h1 id="checkoutPaymentDefault-pageHeading" class="pageHeading"><?php echo HEADING_TITLE; ?></h1>
 <?php
 if ($messageStack->size('redemptions') > 0) {
     echo $messageStack->output('redemptions');
@@ -38,11 +38,11 @@ if ($messageStack->size('checkout_payment') > 0) {
 if (!$payment_modules->in_special_checkout()) {
 // ** END PAYPAL EXPRESS CHECKOUT **
 ?>
-        <div class="card-columns">
-
+    <div class="row">
+        <div class="col-md-6">
             <div id="billingAddress-card" class="card mb-3">
-                <h4 class="card-header"><?php echo TITLE_BILLING_ADDRESS; ?></h4>
-                <div class="card-body p-3">
+                <h4 id="billingAddress-card-header" class="card-header"><?php echo TITLE_BILLING_ADDRESS; ?></h4>
+                <div id="billingAddress-card-body" class="card-body p-3" aria-labelledby="billingAddress-card-header">
                     <div class="row">
                         <div class="billToAddress col-sm-5">
                             <address><?php echo zen_address_label($_SESSION['customer_id'], $_SESSION['billto'], true, ' ', '<br />'); ?></address>
@@ -52,7 +52,7 @@ if (!$payment_modules->in_special_checkout()) {
 <?php
     if (MAX_ADDRESS_BOOK_ENTRIES >= 2) {
 ?>
-                            <div class="btn-toolbar justify-content-end mt-3" role="toolbar">
+                            <div class="d-flex justify-content-end mt-3">
                                 <?php echo zca_button_link(zen_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL'), BUTTON_CHANGE_ADDRESS_ALT, 'button_change_address'); ?>
                             </div>
 <?php
@@ -63,14 +63,14 @@ if (!$payment_modules->in_special_checkout()) {
                 </div>
             </div>
 
-<?php
+            <?php
 // ** BEGIN PAYPAL EXPRESS CHECKOUT **
 }
 // ** END PAYPAL EXPRESS CHECKOUT ** ?>
 
             <div id="yourTotal-card" class="card mb-3">
-                <h4 class="card-header"><?php echo TEXT_YOUR_TOTAL; ?></h4>
-                <div class="card-body p-3">
+                <h4 id="yourTotal-card-header" class="card-header"><?php echo TEXT_YOUR_TOTAL; ?></h4>
+                <div id="yourTotal-card-body" class="card-body p-3" aria-labelledby="yourTotal-card-header">
 <?php
     if (MODULE_ORDER_TOTAL_INSTALLED) {
         $order_totals = $order_total_modules->process();
@@ -92,9 +92,11 @@ if (!$payment_modules->in_special_checkout()) {
 ?>
                 </div>
             </div>
+        </div>
 
+        <div class="col-md-6">
 <?php
-    $selection =  $order_total_modules->credit_selection();
+    $selection = $order_total_modules->credit_selection();
     if (count($selection) > 0) {
         for ($i = 0, $n = count($selection); $i < $n; $i++) {
             if (isset($_GET['credit_class_error_code']) && ($_GET['credit_class_error_code'] == (isset($selection[$i]['id'])) ? $selection[$i]['id'] : 0)) {
@@ -105,36 +107,51 @@ if (!$payment_modules->in_special_checkout()) {
             for ($j = 0, $n2 = (isset($selection[$i]['fields']) ? count($selection[$i]['fields']) : 0); $j < $n2; $j++) {
 ?>
             <div class="card mb-3">
-                <h4 class="card-header"><?php echo $selection[$i]['module']; ?></h4>
-                <div class="card-body p-3">
+                <h4 id="<?php echo $selection[$i]['id']; ?>-card-header" class="card-header"><?php echo $selection[$i]['module']; ?></h4>
+                <div id="<?php echo $selection[$i]['id']; ?>-card-body" class="card-body p-3" aria-labelledby="<?php echo $selection[$i]['id']; ?>-card-header">
                     <?php echo $selection[$i]['redeem_instructions']; ?>
 <?php
                 if (isset($selection[$i]['checkbox'])) {
 ?>
-                    <div><?php echo $selection[$i]['checkbox']; ?></div>
+                    <div class="form-check form-switch">
+                        <?php echo $selection[$i]['checkbox']; ?>
+                    </div>
 <?php
                 }
 ?>
 
 <?php
-                if (strpos($selection[$i]['fields'][$j]['field'], 'type="checkbox"') !== false) {   // intercept checkbox selections
+                if (strpos($selection[$i]['fields'][$j]['field'], 'type="checkbox"') !== false) {
+
+                    $field = $selection[$i]['fields'][$j]['field'];
+                    $field = preg_replace('/class="([^"]*)"/', 'class="form-check-input $1"', $field);
 ?>
-                    <div class="custom-control custom-checkbox">
-                      <?php echo $selection[$i]['fields'][$j]['field']; ?>
-                      <label class="custom-control-label"<?php echo isset($selection[$i]['fields'][$j]['tag']) ? ' for="'.$selection[$i]['fields'][$j]['tag'].'"': ''; ?>><?php echo $selection[$i]['fields'][$j]['title']; ?></label>
+                    <div class="form-check">
+                        <?php echo $field; ?>
+                        <label class="form-check-label"<?php echo isset($selection[$i]['fields'][$j]['tag']) ? ' for="'.$selection[$i]['fields'][$j]['tag'].'"': ''; ?>><?php echo $selection[$i]['fields'][$j]['title']; ?></label>
                     </div>
 <?php
-                } elseif (strpos($selection[$i]['fields'][$j]['field'], 'type="radio"') !== false) {    // intercept radio selections
+                } elseif (strpos($selection[$i]['fields'][$j]['field'], 'type="radio"') !== false) {
+
+                    $field = $selection[$i]['fields'][$j]['field'];
+                    $field = preg_replace('/class="([^"]*)"/', 'class="form-check-input $1"', $field);
 ?>
-                    <div class="custom-control custom-radio">
-                      <?php echo $selection[$i]['fields'][$j]['field']; ?>
-                      <label class="custom-control-label"<?php echo isset($selection[$i]['fields'][$j]['tag']) ? ' for="'.$selection[$i]['fields'][$j]['tag'].'"': ''; ?>><?php echo $selection[$i]['fields'][$j]['title']; ?></label>
+                    <div class="form-check">
+                        <?php echo $field; ?>
+                        <label class="form-check-label"<?php echo isset($selection[$i]['fields'][$j]['tag']) ? ' for="'.$selection[$i]['fields'][$j]['tag'].'"': ''; ?>><?php echo $selection[$i]['fields'][$j]['title']; ?></label>
                     </div>
 <?php
                 } else {
+
+                    $field = $selection[$i]['fields'][$j]['field'];
+                    $field = preg_replace('/class="([^"]*)"/', 'class="form-control $1"', $field);
+                    $field = preg_replace('/placeholder="[^"]*"/', '', $field);
+                    $field = preg_replace('/<input/', '<input placeholder=" "', $field);
 ?>
-                    <label class="inputLabel"<?php echo ($selection[$i]['fields'][$j]['tag']) ? ' for="'.$selection[$i]['fields'][$j]['tag'].'"': ''; ?>><?php echo $selection[$i]['fields'][$j]['title']; ?></label>
-                    <?php echo $selection[$i]['fields'][$j]['field']; ?>
+                    <div class="form-floating mb-3">
+                        <?php echo $field; ?>
+                        <label<?php echo ($selection[$i]['fields'][$j]['tag']) ? ' for="'.$selection[$i]['fields'][$j]['tag'].'"': ''; ?>><?php echo $selection[$i]['fields'][$j]['title']; ?></label>
+                    </div>
 <?php
                 }
 ?>
@@ -149,8 +166,8 @@ if (!$payment_modules->in_special_checkout()) {
 // ** END PAYPAL EXPRESS CHECKOUT **
 ?>
             <div id="paymentMethod-card" class="card mb-3">
-                <h4 class="card-header"><?php echo HEADING_PAYMENT_METHOD; ?></h4>
-                <div class="card-body p-3">
+                <h4 id="paymentMethod-card-header" class="card-header"><?php echo HEADING_PAYMENT_METHOD; ?></h4>
+                <div id="paymentMethod-card-body" class="card-body p-3" aria-labelledby="paymentMethod-card-header">
 <?php
         if (SHOW_ACCEPTED_CREDIT_CARDS !== '0') {
             if (SHOW_ACCEPTED_CREDIT_CARDS === '1') {
@@ -185,8 +202,8 @@ if (!$payment_modules->in_special_checkout()) {
                     $radio_value = (isset($_SESSION['payment']) && $selection[$i]['id'] == $_SESSION['payment']);
 ?>
                         <div class="card-header">
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <?php echo zen_draw_radio_field('payment', $selection[$i]['id'], $radio_value, 'id="pmt-'.$selection[$i]['id'].'"'); ?>
+                            <div class="form-check">
+                                <?php echo zen_draw_radio_field('payment', $selection[$i]['id'], $radio_value, 'id="pmt-'.$selection[$i]['id'].'" class="form-check-input"'); ?>
 <?php
                 }
             } else {
@@ -195,13 +212,13 @@ if (!$payment_modules->in_special_checkout()) {
 <?php
             }
 ?>
-                                <label for="pmt-<?php echo $selection[$i]['id']; ?>" class="custom-control-label radioButtonLabel"><?php echo $selection[$i]['module']; ?></label>
+                                <label for="pmt-<?php echo $selection[$i]['id']; ?>" class="form-check-label"><?php echo $selection[$i]['module']; ?></label>
                             </div>
                         </div>
 <?php
             if (defined('MODULE_ORDER_TOTAL_COD_STATUS') && MODULE_ORDER_TOTAL_COD_STATUS === 'true' && $selection[$i]['id'] === 'cod') {
 ?>
-<div class="alert alert-danger" role="alert"><?php echo TEXT_INFO_COD_FEES; ?></div>
+                        <div class="alert alert-danger" role="alert"><?php echo TEXT_INFO_COD_FEES; ?></div>
 <?php
             } else {
                 // echo 'WRONG ' . $selection[$i]['id'];
@@ -220,8 +237,10 @@ if (!$payment_modules->in_special_checkout()) {
 <?php
                 for ($j=0, $n2=sizeof($selection[$i]['fields']); $j<$n2; $j++) {
 ?>
-<label <?php echo (isset($selection[$i]['fields'][$j]['tag']) ? 'for="'.$selection[$i]['fields'][$j]['tag'] . '" ' : ''); ?>class="inputLabelPayment"><?php echo isset($selection[$i]['fields'][$j]['title']) ? $selection[$i]['fields'][$j]['title'] : ''; ?></label><?php echo $selection[$i]['fields'][$j]['field']; ?>
-                            <div class="p-2"></div>
+                            <div class="form-floating mb-3">
+                                <?php echo $selection[$i]['fields'][$j]['field']; ?>
+                                <label <?php echo (isset($selection[$i]['fields'][$j]['tag']) ? 'for="'.$selection[$i]['fields'][$j]['tag'] . '" ' : ''); ?>><?php echo isset($selection[$i]['fields'][$j]['title']) ? $selection[$i]['fields'][$j]['title'] : ''; ?></label>
+                            </div>
 <?php
                 }
 ?>
@@ -240,27 +259,29 @@ if (!$payment_modules->in_special_checkout()) {
 <?php // ** BEGIN PAYPAL EXPRESS CHECKOUT **
       } else {
 ?>
-            <input type="hidden" name="payment" value="<?php echo $_SESSION['payment']; ?>" />
+        <input type="hidden" name="payment" value="<?php echo $_SESSION['payment']; ?>" />
 <?php
       }
       // ** END PAYPAL EXPRESS CHECKOUT **
 ?>
             <div id="orderComments-card" class="card mb-3">
-                <h4 class="card-header"><?php echo HEADING_ORDER_COMMENTS; ?></h4>
-                <div class="card-body p-3">
-                    <?php echo zen_draw_textarea_field('comments', '45', '3', (isset($comments) ? $comments : ''), 'aria-label="' . HEADING_ORDER_COMMENTS . '"'); ?>
+                <h4 id="orderComments-card-header" class="card-header"><?php echo HEADING_ORDER_COMMENTS; ?></h4>
+                <div id="orderComments-card-body" class="card-body p-3" aria-labelledby="orderComments-card-header">
+                    <?php echo zen_draw_textarea_field('comments', '45', '3', (isset($comments) ? $comments : ''), 'id="comments" class="form-control" aria-label="' . HEADING_ORDER_COMMENTS . '"'); ?>
                 </div>
             </div>
+
 <?php
     if (DISPLAY_CONDITIONS_ON_CHECKOUT === 'true') {
 ?>
             <div id="conditions-card" class="card mb-3">
-                <h4 class="card-header"><?php echo TABLE_HEADING_CONDITIONS; ?></h4>
-                <div class="card-body p-3">
+                <h4 id="conditions-card-header" class="card-header"><?php echo TABLE_HEADING_CONDITIONS; ?></h4>
+                <div id="conditions-card-body" class="card-body p-3" aria-labelledby="conditions-card-header">
                     <?php echo TEXT_CONDITIONS_DESCRIPTION;?>
 
-                    <div class="custom-control custom-checkbox">
-                        <?php echo zen_draw_checkbox_field('conditions', '1', (isset($_SESSION['conditions']) && ($_SESSION['conditions'] === '1')), 'id="conditions" required oninput="this.setCustomValidity(\'\')" oninvalid="this.setCustomValidity(\'' . ERROR_CONDITIONS_NOT_ACCEPTED . '\')"');?><label class="custom-control-label checkboxLabel" for="conditions"><?php echo TEXT_CONDITIONS_CONFIRM; ?></label>
+                    <div class="form-check">
+                        <?php echo zen_draw_checkbox_field('conditions', '1', (isset($_SESSION['conditions']) && ($_SESSION['conditions'] === '1')), 'id="conditions" class="form-check-input" required aria-label="' . TEXT_CONDITIONS_CONFIRM . '"');?>
+                        <label class="form-check-label" for="conditions"><?php echo TEXT_CONDITIONS_CONFIRM; ?></label>
                     </div>
 
                 </div>
@@ -269,6 +290,7 @@ if (!$payment_modules->in_special_checkout()) {
     }
 ?>
         </div>
+    </div>
 <?php
     // -----
     // Starting with the as-delivered Zen Cart 1.5.8a, styling has been removed from various checkout language
@@ -277,10 +299,14 @@ if (!$payment_modules->in_special_checkout()) {
     //
     $title_continue_checkout = str_replace(['<strong>', '</strong>'], '', TITLE_CONTINUE_CHECKOUT_PROCEDURE);
 ?>
-        <div id="paymentSubmit" class="btn-toolbar justify-content-between" role="toolbar">
-            <?php echo '<strong>' . $title_continue_checkout . '</strong><br>' . TEXT_CONTINUE_CHECKOUT_PROCEDURE; ?>
-            <?php echo zen_image_submit(BUTTON_IMAGE_CONTINUE_CHECKOUT, BUTTON_CONTINUE_ALT, 'onclick="submitFunction(' . zen_user_has_gv_account($_SESSION['customer_id']) . ',' . $order->info['total'] . ')"'); ?>
+    <div id="paymentSubmit" class="d-flex justify-content-between align-items-center mt-3" role="group">
+        <div>
+            <strong><?php echo $title_continue_checkout; ?></strong><br><?php echo TEXT_CONTINUE_CHECKOUT_PROCEDURE; ?>
         </div>
+        <div>
+            <?php echo zen_image_submit(BUTTON_IMAGE_CONTINUE_CHECKOUT, BUTTON_CONTINUE_ALT, 'onclick="submitFunction(' . zen_user_has_gv_account($_SESSION['customer_id']) . ',' . $order->info['total'] . ')" class="btn btn-primary"'); ?>
+        </div>
+    </div>
     <?php echo '</form>'; ?>
 
 <?php
@@ -289,5 +315,5 @@ if (!$payment_modules->in_special_checkout()) {
     }
 ?>
 
-    <?php require $template->get_template_dir('tpl_cvv_help.php', DIR_WS_TEMPLATE, $current_page_base, 'modalboxes') . '/tpl_cvv_help.php'; ?>
+<?php require $template->get_template_dir('tpl_cvv_help.php', DIR_WS_TEMPLATE, $current_page_base, 'modalboxes') . '/tpl_cvv_help.php'; ?>
 </div>

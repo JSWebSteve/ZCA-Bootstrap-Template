@@ -2,7 +2,7 @@
 /**
  * Specials
  * 
- * BOOTSTRAP v3.6.5
+ * BOOTSTRAP v5.0.0
  *
  * @package page
  * @copyright Copyright 2003-2006 Zen Cart Development Team

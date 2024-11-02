@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -38,7 +38,7 @@ if ($reviews_split->number_of_rows > 0) {
             <?php echo sprintf(TEXT_REVIEW_DATE_ADDED, zen_date_short($review['date_added'])); ?>
         </div>
         <div id="review<?php echo $reviews_id; ?>-card-body" class="card-body">
-            <h1 id="review<?php echo $reviews_id; ?>-productName" class="productName"><?php echo $review['products_name']; ?></h1>
+            <h2 id="review<?php echo $reviews_id; ?>-productName" class="productName"><?php echo $review['products_name']; ?></h2>
 
             <div class="row">
                 <div class="col-sm text-center">

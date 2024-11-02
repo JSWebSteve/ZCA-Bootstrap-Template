@@ -2,7 +2,7 @@
 // -----
 // account_history: Use the template-specific splitPageResults formatting, if the ZCA Bootstrap template is installed and active.
 //
-// Last updated: Bootstrap 3.4.0
+// Last updated: Bootstrap 5.0.0
 //
 if ($accountHasHistory && function_exists('zca_bootstrap_active') && zca_bootstrap_active()) {
     // -----

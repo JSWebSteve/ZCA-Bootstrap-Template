@@ -2,7 +2,7 @@
 /**
  * tpl_brands_default
  * 
- * BOOTSTRAP v3.4.0
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
@@ -27,17 +27,19 @@ if (empty($brands['featured']) && empty($brands['other'])) {
 ?>
     <div id="featuredBrands">
         <h2><?php echo FEATURED_BRANDS; ?></h2>
-        <div class="row">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
 <?php
         foreach ($brands['featured'] as $record) {
             $manufacturers_name = $record['manufacturers_name'];
 ?>
-            <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3 text-center mb-2">
-                <div class="border p-2">
-                    <a href="<?php echo zen_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $record['manufacturers_id']); ?>">
-                        <?php echo zen_image(DIR_WS_IMAGES . $record['manufacturers_image'], $manufacturers_name, BRANDS_IMAGE_WIDTH, BRANDS_IMAGE_HEIGHT); ?>
-                        <span class="d-block"><?php echo $manufacturers_name; ?></span>
-                    </a>
+            <div class="col">
+                <div id="featuredBrand-<?php echo $record['manufacturers_id']; ?>" class="card h-100">
+                    <div class="card-body text-center">
+                        <a href="<?php echo zen_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $record['manufacturers_id']); ?>">
+                            <?php echo zen_image(DIR_WS_IMAGES . $record['manufacturers_image'], $manufacturers_name, BRANDS_IMAGE_WIDTH, BRANDS_IMAGE_HEIGHT, 'class="card-img-top"'); ?>
+                            <h5 class="card-title mt-2"><?php echo $manufacturers_name; ?></h5>
+                        </a>
+                    </div>
                 </div>
             </div>
 <?php
@@ -53,19 +55,21 @@ if (empty($brands['featured']) && empty($brands['other'])) {
     //
     if (!empty($brands['other'])) {
 ?>
-    <div class="otherBrands">
+    <div class="otherBrands mt-4">
         <h2><?php echo OTHER_BRANDS; ?></h2>
-        <div class="row">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
 <?php
         foreach ($brands['other'] as $record) {
             $manufacturers_name = $record['manufacturers_name'];
 ?>
-            <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3 text-center mb-2">
-                <div class="border p-2">
-                    <a href="<?php echo zen_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $record['manufacturers_id']); ?>">
-                        <?php echo zen_image(DIR_WS_IMAGES . $record['manufacturers_image'], $manufacturers_name, BRANDS_IMAGE_WIDTH, BRANDS_IMAGE_HEIGHT); ?>
-                        <span class="d-block"><?php echo $manufacturers_name; ?></span>
-                    </a>
+            <div class="col">
+                <div id="otherBrand-<?php echo $record['manufacturers_id']; ?>" class="card h-100">
+                    <div class="card-body text-center">
+                        <a href="<?php echo zen_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $record['manufacturers_id']); ?>">
+                            <?php echo zen_image(DIR_WS_IMAGES . $record['manufacturers_image'], $manufacturers_name, BRANDS_IMAGE_WIDTH, BRANDS_IMAGE_HEIGHT, 'class="card-img-top"'); ?>
+                            <h5 class="card-title mt-2"><?php echo $manufacturers_name; ?></h5>
+                        </a>
+                    </div>
                 </div>
             </div>
 <?php

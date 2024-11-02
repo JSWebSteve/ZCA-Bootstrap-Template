@@ -2,7 +2,7 @@
 /**
  * messageStack Class.
  *
- * BOOTSTRAP v3.0.0
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -29,45 +29,36 @@ class zca_messageStack extends messageStack
         $duplicate = false;
         if (strlen($message) > 0) {
             if ($type == 'error') {
-//-bof-zca_bootstrap  *** 1 of 1 ***          
-//        $theAlert = array('params' => 'class="messageStackError larger"', 'class' => $class, 'text' => zen_image($template->get_template_dir(ICON_IMAGE_ERROR, DIR_WS_TEMPLATE, $current_page_base,'images/icons'). '/' . ICON_IMAGE_ERROR, ICON_ERROR_ALT) . '  ' . $message);
                 $theAlert = array(
-                    'params' => 'class="alert alert-danger"', 
+                    'params' => 'id="msg-' . $class . '" class="alert alert-danger" role="alert"', 
                     'class' => $class, 
-                    'text' => '<i class="fas fa-exclamation-triangle fa-lg" data-title="' . ICON_ERROR_ALT . '"></i>  ' . $message
+                    'text' => '<i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i><span class="visually-hidden">' . ICON_ERROR_ALT . '</span> ' . $message
                 );
             } elseif ($type == 'warning') {
-//        $theAlert = array('params' => 'class="messageStackWarning larger"', 'class' => $class, 'text' => zen_image($template->get_template_dir(ICON_IMAGE_WARNING, DIR_WS_TEMPLATE, $current_page_base,'images/icons'). '/' . ICON_IMAGE_WARNING, ICON_WARNING_ALT) . '  ' . $message);
                 $theAlert = array(
-                    'params' => 'class="alert alert-warning"', 
+                    'params' => 'id="msg-' . $class . '" class="alert alert-warning" role="alert"', 
                     'class' => $class, 
-                    'text' => '<i class="fas fa-exclamation-circle fa-lg" data-title="'.ICON_WARNING_ALT.'"></i>  ' . $message
+                    'text' => '<i class="bi bi-exclamation-circle-fill" aria-hidden="true"></i><span class="visually-hidden">' . ICON_WARNING_ALT . '</span> ' . $message
                 );
             } elseif ($type == 'success') {
-//        $theAlert = array('params' => 'class="messageStackSuccess larger"', 'class' => $class, 'text' => zen_image($template->get_template_dir(ICON_IMAGE_SUCCESS, DIR_WS_TEMPLATE, $current_page_base,'images/icons'). '/' . ICON_IMAGE_SUCCESS, ICON_SUCCESS_ALT) . '  ' . $message);
                 $theAlert = array(
-                    'params' => 'class="alert alert-success"', 
+                    'params' => 'id="msg-' . $class . '" class="alert alert-success" role="alert"', 
                     'class' => $class, 
-                    'text' => '<i class="fas fa-check-circle fa-lg" data-title="'.ICON_SUCCESS_ALT.'"></i>  ' . $message
+                    'text' => '<i class="bi bi-check-circle-fill" aria-hidden="true"></i><span class="visually-hidden">' . ICON_SUCCESS_ALT . '</span> ' . $message
                 );
             } elseif ($type == 'caution') {
-//        $theAlert = array('params' => 'class="messageStackCaution larger"', 'class' => $class, 'text' => zen_image($template->get_template_dir(ICON_IMAGE_WARNING, DIR_WS_TEMPLATE, $current_page_base,'images/icons'). '/' . ICON_IMAGE_WARNING, ICON_WARNING_ALT) . '  ' . $message);
                 $theAlert = array(
-                    'params' => 'class="alert alert-info"', 
+                    'params' => 'id="msg-' . $class . '" class="alert alert-info" role="alert"', 
                     'class' => $class, 
-                    'text' => '<i class="fas fa-question-circle fa-lg" data-title="'.ICON_WARNING_ALT.'"></i>  ' . $message
+                    'text' => '<i class="bi bi-info-circle-fill" aria-hidden="true"></i><span class="visually-hidden">' . ICON_WARNING_ALT . '</span> ' . $message
                 );
-        
             } else {
-//        $theAlert = array('params' => 'class="messageStackError larger"', 'class' => $class, 'text' => $message);
                 $theAlert = array(
-                    'params' => 'class="alert alert-danger"', 
+                    'params' => 'id="msg-' . $class . '" class="alert alert-danger" role="alert"', 
                     'class' => $class, 
                     'text' => $message
                 );
-        
             }
-//-eof-zca_bootstrap  *** 1 of 1 ***      
 
             foreach ($this->messages as $next_message) {
                 if ($theAlert['text'] == $next_message['text'] && $theAlert['class'] == $next_message['class']) {

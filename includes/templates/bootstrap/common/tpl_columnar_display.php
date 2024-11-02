@@ -2,7 +2,7 @@
 /**
  * Common Template - tpl_columnar_display.php
  *
- * BOOTSTRAP v3.6.4
+ * BOOTSTRAP v5.0.0
  *
  * This file is used for generating columnar output where needed, based on the supplied array of table-cell contents.
  *
@@ -27,26 +27,28 @@ if ($card_body_id !== '') {
     $card_body_id = ' id="' . $card_body_id . '"';
 }
 ?>
-<div class="card mb-3<?= $card_main_class ?>"<?= $card_main_id ?>>
-<?php
-echo $title;
-?>
+<div class="card mb-3<?= $card_main_class ?>"<?= $card_main_id ?> role="region">
+    <?= $title ?>
     <div class="card-body text-center"<?= $card_body_id ?>>
 <?php
 if (is_array($list_box_contents)) {
     foreach ($list_box_contents as $row => $cols) {
-        $r_params = $list_box_contents[$row]['params'] ?? 'class="card-deck text-center"';
+        $r_params = $list_box_contents[$row]['params'] ?? 'class="row row-cols-1 row-cols-md-3 g-4 text-center"';
 ?>
         <div <?= $r_params ?>>
 <?php
         foreach ($cols as $col) {
             if ($cols === 'params') {
-                continue; // a $cols index named 'params' is only display-instructions ($r_params above) for the row, no data, so skip this iteration
+                continue;
             }
 
             if (!empty($col['wrap_with_classes'])) {
 ?>
-            <div class="<?= $col['wrap_with_classes'] ?>">
+            <div class="col mb-3 <?= $col['wrap_with_classes'] ?>">
+<?php
+            } else {
+?>
+            <div class="col mb-3">
 <?php
             }
 
@@ -56,15 +58,12 @@ if (is_array($list_box_contents)) {
             }
             if (isset($col['text'])) {
 ?>
-                <div<?= $c_params ?>><?= $col['text'] ?></div>
+                <div class="card h-100 p-3"<?= $c_params ?>><?= $col['text'] ?></div>
 <?php
             }
-
-            if (!empty($col['wrap_with_classes'])) {
 ?>
             </div>
 <?php
-            }
         }
 ?>
         </div>

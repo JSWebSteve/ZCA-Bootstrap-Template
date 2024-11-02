@@ -1,19 +1,23 @@
 // -----
 // AJAX search for the Zen Cart Bootstrap template.
 //
-// Bootstrap v3.6.0
+// BOOTSTRAP v5.0.0
 //
-jQuery(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
     // -----
     // When a search-icon is clicked, display the search form.
     //
-    jQuery('#search-icon, #mobile-search').on('click', function(event) {
-        jQuery('#search-wrapper').modal();
+    document.querySelectorAll('#search-icon, #mobile-search').forEach(function(element) {
+        element.addEventListener('click', function(event) {
+            var searchWrapper = document.getElementById('search-wrapper');
+            var modal = new bootstrap.Modal(searchWrapper);
+            modal.show();
+        });
     });
 
-    jQuery('#search-wrapper').on('shown.bs.modal', function() {
-        jQuery('#search-input').focus();
-        jQuery('#search-input').trigger('focus');
+    var searchWrapper = document.getElementById('search-wrapper');
+    searchWrapper.addEventListener('shown.bs.modal', function() {
+        document.getElementById('search-input').focus();
     });
 
     // -----
@@ -21,31 +25,43 @@ jQuery(document).ready(function() {
     // is seen on the search-input, gather the current keywords, submit them to the 
     // AJAX handler and display the returned HTML in the search-content section.
     //
-    jQuery('#search-input').on('keyup touchend', function(event) {
+    var searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('keyup', handleSearch);
+    searchInput.addEventListener('touchend', handleSearch);
+
+    function handleSearch(event) {
         // -----
         // If the "Enter/Go" key is pressed, send the customer to the advanced-search-results
         // page with the current keywords.  Replacing Safari's "smart quotes" with 'vanilla' quotes
         // for matching.
         //
-        var keyword = this.value.replace(/”|“/g, '"');
-        keyword.replace(/‘|’/g, "'");
+        var keyword = this.value.replace(/"|"/g, '"');
+        keyword = keyword.replace(/'|'/g, "'");
 
-        var separator = (jQuery('#search-page').val().indexOf('?') == -1) ? '?' : '&';
-        var searchLink = jQuery('#search-page').val()+separator+'keyword='+keyword;
+        var searchPage = document.getElementById('search-page').value;
+        var separator = (searchPage.indexOf('?') == -1) ? '?' : '&';
+        var searchLink = searchPage + separator + 'keyword=' + encodeURIComponent(keyword);
+
         if (event.keyCode == 13) {
             window.location.replace(searchLink);
+            return;
         }
 
-        zcJS.ajax({
-            url: 'ajax.php?act=ajaxBootstrapSearch&method=searchProducts',
-            data: {
-                keywords: keyword
+        fetch('ajax.php?act=ajaxBootstrapSearch&method=searchProducts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache'
             },
-            cache: false,
-            headers: { 'cache-control': 'no-cache' },
-        }).done(function(response) {
-            jQuery('#search-content').html(response.searchHtml);
-            jQuery('#search-content .sugg-button').attr('href', searchLink);
-        });
-    });
+            body: 'keywords=' + encodeURIComponent(keyword)
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('search-content').innerHTML = data.searchHtml;
+            document.querySelectorAll('#search-content .sugg-button').forEach(function(button) {
+                button.setAttribute('href', searchLink);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+    }
 });

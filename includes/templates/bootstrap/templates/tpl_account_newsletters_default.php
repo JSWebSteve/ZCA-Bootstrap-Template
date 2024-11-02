@@ -2,7 +2,7 @@
 /**
  * Page Template
  *
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=account_newsletters.<br />
  * Subscribe/Unsubscribe from General Newsletter
@@ -24,20 +24,20 @@
 <!--bof general newsletter card-->
     <div id="generalNewsletter-card" class="card mb-3">
         <h4 id="generalNewsletter-card-header" class="card-header"><?php echo MY_NEWSLETTERS_GENERAL_NEWSLETTER; ?></h4>
-        <div id="generalNewsletter-card-body" class="card-body p-3">
-            <div class="custom-control custom-checkbox">
-                <?php echo zen_draw_checkbox_field('newsletter_general', '1', ($newsletter->fields['customers_newsletter'] === '1'), 'id="newsletter"'); ?>
-                <label class="custom-control-label" for="newsletter"><?php echo MY_NEWSLETTERS_GENERAL_NEWSLETTER_DESCRIPTION; ?></label>
+        <div id="generalNewsletter-card-body" class="card-body p-3" aria-labelledby="generalNewsletter-card-header">
+            <div class="form-check form-switch">
+                <?php echo zen_draw_checkbox_field('newsletter_general', '1', ($newsletter->fields['customers_newsletter'] === '1'), 'id="newsletter-switch" class="form-check-input" aria-label="' . MY_NEWSLETTERS_GENERAL_NEWSLETTER . '"'); ?>
+                <label class="form-check-label" for="newsletter-switch"><?php echo MY_NEWSLETTERS_GENERAL_NEWSLETTER_DESCRIPTION; ?></label>
             </div>
 
-            <div id="generalNewsletter-btn-toolbar" class="btn-toolbar justify-content-end my-3" role="toolbar">
-                <?php echo zen_image_submit(BUTTON_IMAGE_UPDATE, BUTTON_UPDATE_ALT); ?>
+            <div id="generalNewsletter-btn-toolbar" class="d-flex justify-content-end my-3" role="toolbar">
+                <?php echo zen_image_submit(BUTTON_IMAGE_UPDATE, BUTTON_UPDATE_ALT, '', 'btn btn-primary'); ?>
             </div>
         </div>
     </div>
 <!--eof general newsletter card-->
 
-    <div id="accountNewslettersDefault-btn-toolbar" class="btn-toolbar my-3" role="toolbar">
+    <div id="accountNewslettersDefault-btn-toolbar" class="d-flex justify-content-start my-3" role="toolbar">
         <?php echo zca_button_link(zen_href_link(FILENAME_ACCOUNT, '', 'SSL'), BUTTON_BACK_ALT, 'button_back'); ?>
     </div>
 

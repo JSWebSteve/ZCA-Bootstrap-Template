@@ -3,7 +3,7 @@
 // Part of the One-Page Checkout plugin, provided under GPL 2.0 license by lat9 (cindy@vinosdefrutastropicales.com).
 // Copyright (C) 2013-2024, Vinos de Frutas Tropicales.  All rights reserved.
 //
-// Last updated: OPC v2.5.0/Bootstrap v3.6.4
+// Last updated: OPC v2.5.0/Bootstrap v5.0.0
 //
 // -----
 // Process the "credit-selection", e.g. coupon-code entry, gift-voucher redeem-code, block(s) for the active
@@ -25,7 +25,7 @@ if ($shipping_module_available) {
 
         if (isset($_GET['credit_class_error_code']) && $_GET['credit_class_error_code'] == $current_selection['id']) {
 ?>
-<div class="messageStackError">
+<div class="alert alert-danger" role="alert">
     <?= zen_output_string_protected($_GET['credit_class_error']) ?>
 </div>
 <?php
@@ -47,22 +47,22 @@ if ($shipping_module_available) {
 
         foreach ($current_selection['fields'] as $current_field) {
 ?>
-<div class="checkoutOne<?= ucfirst($ot_class) ?> card mb-3">
-    <h4 class="card-header"><?= $current_selection['module'] ?></h4>
-    <div class="card-body">
+<div id="checkoutOne<?= ucfirst($ot_class) ?>" class="card mb-3">
+    <h4 id="<?= $ot_class ?>-heading" class="card-header"><?= $current_selection['module'] ?></h4>
+    <div class="card-body" aria-labelledby="<?= $ot_class ?>-heading">
         <?= $current_selection['redeem_instructions'] ?>
         <div class="gvBal larger">
             <?= (!empty($current_selection['checkbox'])) ? $current_selection['checkbox'] : '' ?>
         </div>
-        <label class="inputLabel"<?= (!empty($current_field['tag'])) ? (' for="' . $current_field['tag'] . '"') : '' ?>>
+        <label class="form-label"<?= (!empty($current_field['tag'])) ? (' for="' . $current_field['tag'] . '"') : '' ?>>
             <?= $current_field['title'] ?>
         </label>
         <?= $current_field['field'] ?? '' ?>
 <?php
             if (!empty($current_selection['checkbox']) || !empty($current_field['field'])) {
 ?>
-        <div class="mt-3 text-right">
-            <?= zen_image_button(BUTTON_IMAGE_SUBMIT, ALT_TEXT_APPLY_DEDUCTION, $additional_parms, $secondary_class) ?>
+        <div class="d-flex justify-content-end mt-3">
+            <?= zen_image_submit(BUTTON_IMAGE_SUBMIT, ALT_TEXT_APPLY_DEDUCTION, $additional_parms, $secondary_class . ' btn btn-primary') ?>
         </div>
 <?php
             }

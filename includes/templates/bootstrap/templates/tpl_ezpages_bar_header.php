@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v1.0.BETA
+ * BOOTSTRAP v5.0.0
  * 
  * Displays EZ-Pages Header-Bar content.<br />
  *
@@ -19,11 +19,15 @@
   include(DIR_WS_MODULES . zen_get_module_directory('ezpages_bar_header.php'));
 ?>
 <?php if (!empty($var_linksList)) { ?>
-<div id="ezpagesBarHeader" class="ezpagesBar rounded">
-<ul class="nav nav-pills">
-<?php for ($i=1, $n=sizeof($var_linksList); $i<=$n; $i++) {  ?>
-  <li class="nav-item"><a class="nav-link" href="<?php echo $var_linksList[$i]['link']; ?>"><?php echo $var_linksList[$i]['name']; ?></a></li>
-<?php } // end FOR loop ?>
-</ul>
-</div>
+<nav id="ezpagesBarHeader" class="ezpagesBar rounded" aria-label="EZ-Pages Header Navigation">
+    <ul class="nav nav-pills justify-content-center">
+    <?php for ($i=1, $n=sizeof($var_linksList); $i<=$n; $i++) {  ?>
+        <li class="nav-item">
+            <a id="ezpagesBarHeader-link-<?php echo $i; ?>" class="nav-link" href="<?php echo $var_linksList[$i]['link']; ?>">
+                <?php echo $var_linksList[$i]['name']; ?>
+            </a>
+        </li>
+    <?php } // end FOR loop ?>
+    </ul>
+</nav>
 <?php } ?>

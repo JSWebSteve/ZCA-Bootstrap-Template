@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2016 Zen Cart Development Team
@@ -23,15 +23,18 @@ if ($messageStack->size('password_forgotten') > 0) {
         <div id="passwordForgottenDefault-card" class="card mb-3">
             <h4 id="passwordForgottenDefault-card-header" class="card-header"><?php echo HEADING_TITLE; ?></h4>
             <div id="passwordForgottenDefault-card-body" class="card-body p-3">
-                <div id="passwordForgottenDefault-required-info" class="required-info text-right"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
+                <div id="passwordForgottenDefault-required-info" class="required-info text-end"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
 
-                <label for="email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?></label>
-                <?php echo zen_draw_input_field('email_address', '', zen_set_field_length(TABLE_CUSTOMERS, 'customers_email_address', '40') . ' id="email-address" autocomplete="username" placeholder="' . ENTRY_EMAIL_ADDRESS_TEXT . '" required', 'email'); ?>
+                <div class="form-floating mb-3">
+                    <?php echo zen_draw_input_field('email_address', '', zen_set_field_length(TABLE_CUSTOMERS, 'customers_email_address', '40') . ' id="email-address" autocomplete="username" placeholder="' . ENTRY_EMAIL_ADDRESS . '" class="form-control" required', 'email'); ?>
+                    <label class="form-label" for="email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?><span class="text-danger">*</span></label>
+                </div>
             </div>
         </div>
 
-        <div id="passwordForgottenDefault-btn-toolbar" class="btn-toolbar justify-content-between" role="toolbar">
-            <?php echo zca_back_link() . zen_image_submit(BUTTON_IMAGE_SUBMIT, BUTTON_SUBMIT_ALT); ?>
+        <div id="passwordForgottenDefault-btn-toolbar" class="d-flex justify-content-between" role="toolbar" aria-label="Password forgotten form buttons">
+            <?php echo zca_back_link(); ?>
+            <?php echo zen_image_submit(BUTTON_IMAGE_SUBMIT, BUTTON_SUBMIT_ALT, '', 'btn btn-primary'); ?>
         </div>
 
     <?php echo '</form>'; ?>

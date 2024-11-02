@@ -2,7 +2,7 @@
 /**
  * Side Box Template
  * 
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2011 Zen Cart Development Team
@@ -16,9 +16,9 @@ $content = '<div id="' . str_replace('_', '-', $box_id . 'Content') . '" class="
 if ($is_carousel === true) {
     $carousel_fade = in_array('whats_new', $sidebox_carousels_to_fade) ? 'carousel-fade' : '';
     $content .=
-        '<div class="carousel slide ' . $carousel_fade . '" data-ride="carousel">
+        '<div class="carousel slide ' . $carousel_fade . '" data-bs-ride="carousel">
             <div class="carousel-inner">' .
-                '<div class="card-deck h-100">';
+                '<div class="card-group h-100">';
 }
 
 $active_class = 'active';
@@ -35,16 +35,15 @@ while (!$random_whats_new_sidebox_product->EOF) {
     $content .=
         "\n" .
         $carousel_start .
-        '<div class="card mb-3 p-3 sideBoxContentItem">' .
-            '<a href="' . $whats_new_link . '" title="' . zen_output_string_protected($whats_new_name) . '">' .
-                zen_image(DIR_WS_IMAGES . $current_new['products_image'], $whats_new_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) .
-                '<br>' .
-                $whats_new_name .
-            '</a>' .
-            '<div>' .
-                $whats_new_price .
-            '</div>' .
-        '</div>' .
+        '<div id="product-' . $whats_new_id . '" class="card mb-3 p-3 sideBoxContentItem h-100">
+            <div class="card-body">
+                <a href="' . $whats_new_link . '" title="' . zen_output_string_protected($whats_new_name) . '">
+                    <div class="product-img">' . zen_image(DIR_WS_IMAGES . $current_new['products_image'], $whats_new_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, '', true, 'class="card-img-top"') . '</div>
+                    <h5 class="card-title product-name">' . $whats_new_name . '</h5>
+                    <p class="card-text product-price">' . $whats_new_price . '</p>
+                </a>
+            </div>
+        </div>' .
         $carousel_end;
 
     $active_class = '';

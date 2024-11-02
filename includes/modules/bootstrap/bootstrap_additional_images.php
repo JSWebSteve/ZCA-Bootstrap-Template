@@ -3,7 +3,7 @@
  * additional_images module, modal version.  This module 'lists' thumbnails of each
  * additional image at the bottom of the modal.
  * 
- * BOOTSTRAP v3.7.1
+ * BOOTSTRAP v5.0.0
  *
  * Prepares list of additional product images to be displayed in template
  *
@@ -21,16 +21,10 @@ $images_array = [];
 if ($products_image !== '' && $flag_show_product_info_additional_images !== '0') {
     $products_image_info = pathinfo($products_image);
 
-    $products_image_extension = $products_image_info['extension'];  //-Note, does not include the leading '.'!
+    $products_image_extension = $products_image_info['extension'];
     $products_image_base = $products_image_info['filename'];
     $products_image_directory = $products_image_info['dirname'];
 
-    // -----
-    // Additional images in subdirectories *always" require an intervening '_' to match.
-    // So do those in the /images root if we're running on zc210 or later and the
-    // additional images' "mode" setting indicates that we're running in 'strict' mode,
-    // in which case the intervening '_' is also needed.
-    //
     zen_define_default('ADDITIONAL_IMAGES_MODE', 'legacy');
     if (ADDITIONAL_IMAGES_MODE === 'legacy' && $products_image_directory === '.') {
         $products_image_base .= '?';
@@ -60,16 +54,24 @@ if ($num_images !== 0) {
     $col = 0;
     $slideNumber = 1;
     foreach ($images_array as $base_image) {
-        $thumb = '<a id="carousel-selector-' . $slideNumber . '" data-slide-to="' . $slideNumber . '" data-target="#productImagesCarousel">';
-        $thumb .= zen_image($base_image, $products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+        $thumb = '<a id="carousel-selector-' . $slideNumber . '" 
+            data-bs-slide-to="' . $slideNumber . '" 
+            data-bs-target="#productImagesCarousel" 
+            role="button" 
+            aria-label="' . sprintf(ARIA_THUMBNAIL_SLIDE_NUMBER, $slideNumber) . '">';
+        $thumb .= zen_image($base_image, 
+            $products_name, 
+            SMALL_IMAGE_WIDTH, 
+            SMALL_IMAGE_HEIGHT, 
+            'class="img-thumbnail" loading="lazy"');
         $thumb .= '</a>';
         $slideNumber++;
 
         // List Box array generation:
         $list_box_contents[$row][$col] = [
-            'params' => 'class="list-inline-item"',
+            'params' => 'class="list-inline-item" role="listitem"',
             'text' => $thumb
         ];
         $col++;
-    } // end for loop
-} // endif
+    }
+}

@@ -2,7 +2,7 @@
 /**
  * Module Template
  * 
- * BOOTSTRAP v1.0.BETA
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2016 Zen Cart Development Team
@@ -14,4 +14,9 @@
 
 ?>
 
-<div id="categoryIcon" class="categoryIcon <?php echo 'text-' . $align; ?>"><?php echo '<a href="' . zen_href_link(FILENAME_DEFAULT, 'cPath=' . $_GET['cPath'], 'NONSSL') . '">' . $category_icon_display_image . $category_icon_display_name .  '</a>'; ?></div>
+<div id="categoryIcon" class="categoryIcon <?php echo 'text-' . $align; ?>">
+  <a href="<?php echo zen_href_link(FILENAME_DEFAULT, 'cPath=' . $_GET['cPath'], 'NONSSL'); ?>" aria-label="<?php echo $category_icon_display_name; ?>">
+    <?php echo $category_icon_display_image; ?>
+    <span class="category-name"><?php echo $category_icon_display_name; ?></span>
+  </a>
+</div>

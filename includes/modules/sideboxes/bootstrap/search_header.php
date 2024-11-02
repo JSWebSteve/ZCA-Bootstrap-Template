@@ -2,7 +2,7 @@
 // -----
 // Header search, modified for the Bootstrap-4 template's AJAX search extension.
 //
-// Bootstrap v3.4.2.
+// Bootstrap v5.0.0
 //
 /**
  * search_header ("sidebox") - this is a search field that appears in the navigation header

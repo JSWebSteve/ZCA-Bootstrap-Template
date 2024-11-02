@@ -2,7 +2,7 @@
 // -----
 // Part of the Bootstrap template, assigning colors based on those configured.
 //
-// BOOTSTRAP v3.7.0
+// BOOTSTRAP v3.7.3
 //
 // Starting with Bootstrap v3.5.2, any color-specifications defined in that and follow-on
 // versions start out, on an upgrade, with a value of 'not-set' to give the site a chance
@@ -312,7 +312,7 @@ nav.navbar .btn:hover {
 <?php
 //- Centerboxes
 ?>
-.centerBoxContents.card {
+.centerBoxWrapper {
     color: <?= ZCA_CENTERBOX_TEXT_COLOR ?>;
     background-color: <?= ZCA_CENTERBOX_BACKGROUND_COLOR ?>;
 }
@@ -323,14 +323,14 @@ nav.navbar .btn:hover {
 <?php
 //- Category cards
 ?>
-.categoryListBoxContents.card {
+#subCategory-card-body {
     color: <?= ZCA_CENTERBOX_TEXT_COLOR ?>;
     background-color: <?= ZCA_CENTERBOX_BACKGROUND_COLOR ?>;
 }
-.categoryListBoxContents {
+.categoryListBoxContents.card {
     background-color: <?= ZCA_CENTERBOX_CARD_BACKGROUND_COLOR ?>;
 }
-.categoryListBoxContents:hover {
+.categoryListBoxContents.card:hover {
     background-color: <?= ZCA_CENTERBOX_CARD_BACKGROUND_COLOR_HOVER ?>;
 }
 <?php
@@ -359,13 +359,13 @@ a.page-link:hover {
 .sideBoxContentItem:hover {
     background-color: <?= ZCA_SIDEBOX_CARD_BACKGROUND_COLOR_HOVER ?>;
 }
-.centerBoxContents {
+.centerBoxContents.card {
     background-color: <?= ZCA_CENTERBOX_CARD_BACKGROUND_COLOR ?>;
 }
-.centerBoxContents:hover {
+.centerBoxContents.card:hover {
     background-color: <?= ZCA_CENTERBOX_CARD_BACKGROUND_COLOR_HOVER ?>;
 }
-.centerBoxContentsListing:hover {
+.centerBoxContentsListing.card:hover {
     background-color: <?= ZCA_CENTERBOX_CARD_BACKGROUND_COLOR_HOVER ?>;
 }
 .listingProductImage {
@@ -474,9 +474,9 @@ button.button_confirm_order:hover {
 //- "Sold Out" button colors (it's not a hoverable/clickable button).
 ?>
 button.button_sold_out_sm, button.button_sold_out_sm:hover, button.button_sold_out, button.button_sold_out:hover {
-    <?= ($zca_sold_out_background_color !== '') ? "background-color: $zca_sold_out_background_color;" : '' ?>
-    <?= ($zca_sold_out_color !== '') ? "color: $zca_sold_out_color;" : '' ?>
-    <?= ($zca_sold_out_border_color !== '') ? "border-color: $zca_sold_out_border_color;" : '' ?>
+    <?= ($zca_sold_out_background_color !== '') ? "background-color: $zca_sold_out_background_color !important;" : '' ?>
+    <?= ($zca_sold_out_color !== '') ? "color: $zca_sold_out_color !important;" : '' ?>
+    <?= ($zca_sold_out_border_color !== '') ? "border-color: $zca_sold_out_border_color !important;" : '' ?>
 }
 <?php
 //- Carousel prev/next and indicators

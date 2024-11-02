@@ -2,7 +2,7 @@
 /**
  * Common Template - tpl_header.php
  *
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  *
  * @copyright Copyright 2003-2020 Zen Cart Development Team
@@ -23,12 +23,12 @@ if (!empty($flag_disable_header)) {
     <div id="navMainWrapper">
         <div id="navMain">
             <nav class="navbar fixed-top mx-3 navbar-expand-lg rounded-bottom" aria-label="<?= TEXT_HEADER_ARIA_LABEL_NAVBAR ?>">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
                         <li id="nav-home" class="nav-item" title="<?= HEADER_TITLE_CATALOG ?>">
                             <a class="nav-link" href="<?= zen_href_link(FILENAME_DEFAULT) ?>">
                                 <i class="fas fa-home"></i> <?= HEADER_TITLE_CATALOG ?>
@@ -78,6 +78,7 @@ require DIR_WS_MODULES . zen_get_module_sidebox_directory('search_header.php');
         </div>
     </div>
 <!--eof-navigation display-->
+
 
 <!--bof-branding display-->
 <?php
@@ -163,3 +164,4 @@ if (EZPAGES_STATUS_HEADER === '1' || (EZPAGES_STATUS_HEADER === '2' && zen_is_wh
 ?>
 <!--eof-header ezpage links-->
 </div>
+

@@ -8,7 +8,7 @@
 // Note that the base Zen Cart's handling of the shopping-cart page already loads that
 // jscript file if the shipping-estimator is to be displayed as an on-page listing!
 //
-// BOOTSTRAP 3.6.4
+// BOOTSTRAP 5.0.0
 //
 if (!(function_exists('zca_bootstrap_active') && zca_bootstrap_active()) || SHOW_SHIPPING_ESTIMATOR_BUTTON !== '1') {
     return;

@@ -2,7 +2,7 @@
 /**
  * product_notifications sidebox - displays a box inviting the customer to sign up for notifications of updates to current product
  *
- * BOOTSTRAP v3.0.0
+ * BOOTSTRAP v5.0.0
  * 
  * @package templateSystem
  * @copyright Copyright 2003-2005 Zen Cart Development Team

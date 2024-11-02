@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.5.2
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=account_notifications.<br />
  * Allows customer to manage product notifications
@@ -24,14 +24,14 @@
 <!--bof global product notifications card-->
     <div id="globalNotifications-card" class="card mb-3">
         <h3 id="globalNotifications-card-header" class="card-header"><?php echo GLOBAL_NOTIFICATIONS_TITLE; ?></h3>
-        <div id="globalNotifications-card-body" class="card-body p-3">
-            <div class="custom-control custom-checkbox">
-                <?php echo zen_draw_checkbox_field('product_global', '1', ($global->fields['global_product_notifications'] === '1'), 'id="globalnotify"'); ?>
-                <label class="custom-control-label" for="globalnotify"><?php echo GLOBAL_NOTIFICATIONS_DESCRIPTION; ?></label>
+        <div id="globalNotifications-card-body" class="card-body p-3" aria-labelledby="globalNotifications-card-header">
+            <div class="form-check form-switch">
+                <?php echo zen_draw_checkbox_field('product_global', '1', ($global->fields['global_product_notifications'] === '1'), 'id="globalnotify" class="form-check-input" aria-label="' . GLOBAL_NOTIFICATIONS_TITLE . '"'); ?>
+                <label class="form-check-label" for="globalnotify"><?php echo GLOBAL_NOTIFICATIONS_DESCRIPTION; ?></label>
             </div>
 
-            <div id="productNotifications-btn-toolbar" class="btn-toolbar justify-content-end my-3" role="toolbar">
-                <?php echo zen_image_submit(BUTTON_IMAGE_UPDATE, BUTTON_UPDATE_ALT); ?>
+            <div id="productNotifications-btn-toolbar" class="d-flex justify-content-end my-3" role="toolbar">
+                <?php echo zen_image_submit(BUTTON_IMAGE_UPDATE, BUTTON_UPDATE_ALT, '', 'btn btn-primary'); ?>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@ if ($flag_global_notifications !== '1') {
 <!--bof product notifications card-->
     <div id="productNotifications-card" class="card mb-3">
         <h3 id="productNotifications-card-header" class="card-header"><?php echo NOTIFICATIONS_TITLE; ?></h3>
-        <div id="productNotifications-card-body" class="card-body p-3">
+        <div id="productNotifications-card-body" class="card-body p-3" aria-labelledby="productNotifications-card-header">
 <?php
     if ($flag_products_check) {
 ?>
@@ -54,15 +54,15 @@ if ($flag_global_notifications !== '1') {
          */
         foreach ($notificationsArray as $notifications) {
 ?>
-            <div class="custom-control custom-checkbox">
-                <?php echo zen_draw_checkbox_field('notify[]', $notifications['products_id'], true, 'id="notify-' . $notifications['counter'] . '"')?>
-                <label class="custom-control-label" for="notify-<?php echo $notifications['counter']; ?>"><?php echo $notifications['products_name']; ?></label>
+            <div class="form-check">
+                <?php echo zen_draw_checkbox_field('notify[]', $notifications['products_id'], true, 'id="notify-' . $notifications['counter'] . '" class="form-check-input" aria-label="' . $notifications['products_name'] . '"')?>
+                <label class="form-check-label" for="notify-<?php echo $notifications['counter']; ?>"><?php echo $notifications['products_name']; ?></label>
             </div>
 <?php
         }
 ?>
-            <div id="productNotifications-btn-toolbar" class="btn-toolbar justify-content-end my-3" role="toolbar">
-                <?php echo zen_image_submit(BUTTON_IMAGE_UPDATE, BUTTON_UPDATE_ALT); ?>
+            <div id="productNotifications-btn-toolbar" class="d-flex justify-content-end my-3" role="toolbar">
+                <?php echo zen_image_submit(BUTTON_IMAGE_UPDATE, BUTTON_UPDATE_ALT, '', 'btn btn-primary'); ?>
             </div>
 <?php
     } else {
@@ -74,9 +74,9 @@ if ($flag_global_notifications !== '1') {
 ?>
         </div>
     </div>
-<!--bof product notifications card-->
+<!--eof product notifications card-->
 
-    <div id="accountNewslettersDefault-btn-toolbar" class="btn-toolbar my-3" role="toolbar">
+    <div id="accountNewslettersDefault-btn-toolbar" class="d-flex justify-content-start my-3" role="toolbar">
         <?php echo zca_button_link(zen_href_link(FILENAME_ACCOUNT, '', 'SSL'), BUTTON_BACK_ALT, 'button_back'); ?>
     </div>
 <?php

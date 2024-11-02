@@ -2,7 +2,7 @@
 /**
  * Page Template
  *
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=product_free_shipping_info.
  * Displays details of a "free-shipping" product (provided it is assigned to the product-free-shipping product type)

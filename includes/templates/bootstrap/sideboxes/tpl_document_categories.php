@@ -8,7 +8,7 @@
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Drbyte Sun Jan 7 21:28:50 2018 -0500 Modified in v1.5.6 $
  *
- * BOOTSTRAP v3.5.2
+ * BOOTSTRAP v5.0.0
  *
  */
 $content = '<div id="' . str_replace('_', '-', $box_id . 'Content') . '" class="list-group-flush sideBoxContent">';
@@ -25,7 +25,7 @@ foreach ($box_categories_array as $next_category) {
             break;
     }
 
-    $content .= '<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center ' . $new_style . '" href="' . zen_href_link(FILENAME_DEFAULT, $next_category['path']) . '">';
+    $content .= '<a id="category-' . $next_category['path'] . '" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center ' . $new_style . '" href="' . zen_href_link(FILENAME_DEFAULT, $next_category['path']) . '">';
 
     if ($next_category['current']) {
         if ($next_category['has_sub_cat']) {
@@ -43,7 +43,7 @@ foreach ($box_categories_array as $next_category) {
 
     if (SHOW_COUNTS === 'true') {
         if ((CATEGORIES_COUNT_ZERO === '1' && $next_category['count'] == 0) || $next_category['count'] >= 1) {
-            $content .= '<span class="badge badge-pill">' . CATEGORIES_COUNT_PREFIX . $next_category['count'] . CATEGORIES_COUNT_SUFFIX . '</span>';
+            $content .= '<span class="badge rounded-pill bg-secondary">' . CATEGORIES_COUNT_PREFIX . $next_category['count'] . CATEGORIES_COUNT_SUFFIX . '</span>';
         }
     }
 

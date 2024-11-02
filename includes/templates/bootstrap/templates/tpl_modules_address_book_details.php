@@ -2,7 +2,7 @@
 /**
  * Module Template
  * 
- * BOOTSTRAP v3.0.0
+ * BOOTSTRAP v5.0.0
  *
  * Displays address-book details/selection
  *
@@ -16,7 +16,7 @@
 <!--bof address details card-->
 <div id="addressDetails-card" class="card mb-3">
     <h4 id="addressDetails-card-header" class="card-header"><?php echo HEADING_TITLE; ?></h4>
-    <div id="addressDetails-card-body" class="card-body p-3">
+    <div id="addressDetails-card-body" class="card-body p-3" aria-labelledby="addressDetails-card-header">
     <?php require $template->get_template_dir('tpl_modules_common_address_format.php', DIR_WS_TEMPLATE, $current_page_base, 'templates') . '/tpl_modules_common_address_format.php'; ?>
     </div>
 </div>

@@ -2,7 +2,7 @@
 // -----
 // Part of the ZCA Bootstrap template, @zcadditions, @lat9, @marco-pm
 //
-// BOOTSTRAP 3.6.3
+// BOOTSTRAP v5.0.0
 //
 class ZcaBootstrapObserver extends base
 {
@@ -181,7 +181,6 @@ class ZcaBootstrapObserver extends base
                     } else {
                         $show_normal_price = '<span class="mx-auto w-100 p-1 productBasePrice">' . $this->displayPrice($this->display_normal_price) . '</span>';
                     }
-
                 }
                 $p2 = true;
                 $p3 = $show_normal_price;
@@ -239,7 +238,7 @@ class ZcaBootstrapObserver extends base
                     $this->sec_class = '';
                 }
 
-                $css_button = '<button type="submit" class="btn '. $this->button_name . $this->sec_class . '"' . $this->parameters . '>' . $this->text . '</button>';
+                $css_button = '<button type="submit" id="' . $this->button_name . '" class="btn ' . $this->button_name . $this->sec_class . '"' . $this->parameters . ' aria-label="' . $this->text . '">' . $this->text . '</button>';
                 $p2 = $css_button;
                 break;
 
@@ -258,7 +257,7 @@ class ZcaBootstrapObserver extends base
                     $this->sec_class = '';
                 }
 
-                $css_button = '<button type="button" class="btn '. $this->button_name . $this->sec_class . '"' . $this->parameters . '>' . $this->text . '</button>';
+                $css_button = '<button type="button" id="' . $this->button_name . '" class="btn ' . $this->button_name . $this->sec_class . '"' . $this->parameters . ' aria-label="' . $this->text . '">' . $this->text . '</button>';
                 $p2 = $css_button;
                 break;
 
@@ -275,9 +274,9 @@ class ZcaBootstrapObserver extends base
             case 'NOTIFY_ZEN_DRAW_SELECTION_FIELD':
                 $selection = $p2;
                 if (strpos($selection, 'class="') !== false) {
-                    $selection = str_replace('class="', 'class="custom-control-input ', $selection);
+                    $selection = str_replace('class="', 'class="form-check-input ', $selection);
                 } else {
-                    $selection = str_replace('<input ', '<input class="custom-control-input" ', $selection);
+                    $selection = str_replace('<input ', '<input class="form-check-input" ', $selection);
                 }
                 $p2 = $selection;
                 break;
@@ -295,9 +294,9 @@ class ZcaBootstrapObserver extends base
             case 'NOTIFY_ZEN_DRAW_PULL_DOWN_MENU':
                 $field = $p2;
                 if (strpos($field, 'class="') !== false) {
-                    $field = str_replace('class="', 'class="custom-select ', $field);
+                    $field = str_replace('class="', 'class="form-select ', $field);
                 } else {
-                    $field = str_replace('<select ', '<select class="custom-select" ', $field);
+                    $field = str_replace('<select ', '<select class="form-select" ', $field);
                 }
                 $p2 = $field;
                 break;
@@ -313,11 +312,11 @@ class ZcaBootstrapObserver extends base
                     $sold_out_button_class = 'button_sold_out_sm';
                     $sold_out_button_name = BUTTON_SOLD_OUT_SMALL_ALT;
                 }
-                $p2 = '<button class="btn ' . $sold_out_button_class . '" type="button" disabled>' . $sold_out_button_name . '</button>';
+                $p2 = '<button type="button" id="sold-out-' . $p1['products_id'] . '" class="btn ' . $sold_out_button_class . '" disabled aria-label="' . $sold_out_button_name . '">' . $sold_out_button_name . '</button>';
                 break;
 
             case 'NOTIFY_ORDER_COUPON_LINK':
-                $zc_coupon_link = '<a data-toggle="modal" data-id="'. $p1['coupon_id']. '" href="#couponHelpModal">';
+                $zc_coupon_link = '<a data-bs-toggle="modal" data-id="' . $p1['coupon_id'] . '" href="#couponHelpModal" role="button" aria-haspopup="dialog">';
                 $p2 = $zc_coupon_link;
                 break;
 
@@ -325,22 +324,17 @@ class ZcaBootstrapObserver extends base
                 if (PRODUCT_INFO_SHOW_BOOTSTRAP_MODAL_POPUPS === 'Yes') {
                     $products_image_large = $p1['products_image_large'];
                     $i = $p1['index'];
-                    $link = '<a href="javascript:void(0)" class="imageModal">';
-                    $link .= '<img src="' . $products_image_large . '" height="' . SMALL_IMAGE_HEIGHT . '" width="'. SMALL_IMAGE_WIDTH . '" id="' . $i . '" alt="' . zen_output_string_protected($p1['products_name']) . '">';
+                    $link = '<a href="javascript:void(0)" id="imageModal-' . $i . '" class="imageModal" role="button" aria-label="' . TEXT_CLICK_TO_ENLARGE . '">';
+                    $link .= '<img src="' . $products_image_large . '" height="' . SMALL_IMAGE_HEIGHT . '" width="' . SMALL_IMAGE_WIDTH . '" alt="' . zen_output_string_protected($p1['products_name']) . '">';
                     $link .= '<div class="p-1"></div>';
                     $link .= '<span class="imgLink">' . TEXT_CLICK_TO_ENLARGE . '</span>';
                     $link .= '</a>';
                     
                     $p2 = $link;
-                    $p3 = 'class="card p-3 mb-3"';
+                    $p3 = 'id="card-' . $i . '" class="card p-3 mb-3" role="article" aria-labelledby="imageModal-' . $i . '"';
                 }
                 break;
 
-            // -----
-            // zc158 adds a variable ($payment_title) for the templates' use in displaying the
-            // payment-method's title.  That's not in zc157, so we'll mimic the zc158 handling so
-            // that the template can play in both versions!
-            //
             case 'NOTIFY_HEADER_END_CHECKOUT_CONFIRMATION':
                 global $payment_title, $credit_covers;
                 if (!isset($payment_title)) {
@@ -348,11 +342,8 @@ class ZcaBootstrapObserver extends base
                 }
                 break;
 
-            // -----
-            // zc158 adds this notification to the core, possibly hand-edited for zc157 installations.
-            //
             case 'NOTIFY_OT_COUPON_GENERATE_POPUP_LINK':
-                $p2 = '<a data-toggle="modal" data-id="' . $p1['coupon_id'] . '" href="#couponHelpModal">' . $p1['coupon_code'] . '</a>';
+                $p2 = '<a data-bs-toggle="modal" data-id="' . $p1['coupon_id'] . '" href="#couponHelpModal" role="button" aria-haspopup="dialog">' . $p1['coupon_code'] . '</a>';
                 break;
 
             default:
@@ -376,7 +367,7 @@ class ZcaBootstrapObserver extends base
     }
 
     // -----
-    // This function creates the display of a given price in the current currency.  The caller is PRESUMED
+    // This function creates the display of a given price in the current currency. The caller is PRESUMED
     // to have set $this->products_tax_class_id or a PHP error will result.
     //
     protected function displayPrice($value)

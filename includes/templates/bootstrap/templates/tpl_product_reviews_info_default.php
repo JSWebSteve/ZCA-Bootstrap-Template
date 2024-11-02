@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2005 Zen Cart Development Team
@@ -89,7 +89,7 @@ if ($reviews_counter > 1) {
   <div id="productsReview-card-header" class="card-header">
 <?php echo sprintf(TEXT_REVIEW_DATE_ADDED, zen_date_short($review_info->fields['date_added'])); ?>
   </div>
-  <div id="productsReview-card-body" class="card-body">
+  <div id="productsReview-card-body" class="card-body" aria-labelledby="productsReview-card-header">
 <div id="productsReview-rating" class="rating text-center"> 
 <h3 class="rating"><?php echo zca_get_rating_stars($review_info->fields['reviews_rating'], 'xs'); ?></h3>
   </div>      

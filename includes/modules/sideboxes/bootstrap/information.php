@@ -2,7 +2,7 @@
 /**
  * information sidebox - displays list of general info links, as defined in this file
  *
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce

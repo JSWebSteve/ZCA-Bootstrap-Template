@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v1.0.BETA
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=download_time_out.<br />
  * Displays "your download session has timed out" if such timeout has occurred
@@ -19,7 +19,6 @@
 
 <h1 id="downloadTimeOutDefault-pageHeading" class="pageHeading"><?php echo HEADING_TITLE; ?></h1>
 
-
 <div id="downloadTimeOutDefault-content" class="content"><?php echo TEXT_INFORMATION; ?></div>
 
-</div> 
+</div>

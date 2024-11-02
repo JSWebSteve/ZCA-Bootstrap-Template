@@ -3,10 +3,10 @@
 // Part of the One-Page Checkout plugin, provided under GPL 2.0 license by lat9 (cindy@vinosdefrutastropicales.com).
 // Copyright (C) 2017-2022, Vinos de Frutas Tropicales.  All rights reserved.
 //
-// Last updated: OPC v2.4.2/Bootstrap v3.5.2
+// Last updated: OPC v2.4.2/Bootstrap v5.0.0
 //
 ?>
-<div class="centerColumn" id="loginOpcDefault">
+<div id="loginOpcDefault" class="centerColumn">
     <h1 id="loginDefaultHeading"><?php echo HEADING_TITLE; ?></h1>
 <?php 
 if ($messageStack->size('login') > 0) {
@@ -38,24 +38,25 @@ foreach ($column_blocks as $display_blocks) {
                 //
                 case 'L':
 ?>
-            <div class="card mb-2">
-                <h2 class="card-header"><?php echo HEADING_RETURNING_CUSTOMER_OPC; ?></h2>
-                <div class="card-body">
+            <div id="returningCustomers-card" class="card mb-2">
+                <h2 id="returningCustomers-card-header" class="card-header"><?php echo HEADING_RETURNING_CUSTOMER_OPC; ?></h2>
+                <div id="returningCustomers-card-body" class="card-body" aria-labelledby="returningCustomers-card-header">
                     <div class="card-text"><?php echo TEXT_RETURNING_CUSTOMER_OPC; ?>
 <?php 
                     echo zen_draw_form($login_formname, zen_href_link(FILENAME_LOGIN, 'action=process' . (isset($_GET['gv_no']) ? '&gv_no=' . preg_replace('/[^0-9.,%]/', '', $_GET['gv_no']) : ''), 'SSL'), 'post', 'id="loginForm"'); 
 ?>
-                    <div class="opc-label"><label for="login-email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?></label></div>
-<?php 
-                    echo zen_draw_input_field('email_address', '', 'size="18" id="login-email-address" autofocus placeholder="' . ENTRY_EMAIL_ADDRESS_TEXT . '"' . ((int)ENTRY_EMAIL_ADDRESS_MIN_LENGTH > 0 ? ' required' : ''), 'email'); 
-?>
+                    <div class="form-floating mb-3">
+                        <?php echo zen_draw_input_field('email_address', '', 'size="18" id="login-email-address" autocomplete="username" class="form-control" placeholder="' . ENTRY_EMAIL_ADDRESS . '"' . ((int)ENTRY_EMAIL_ADDRESS_MIN_LENGTH > 0 ? ' required' : ''), 'email'); ?>
+                        <label class="form-label" for="login-email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?><?php echo ((int)ENTRY_EMAIL_ADDRESS_MIN_LENGTH > 0 ? '<span class="text-danger">*</span>' : ''); ?></label>
+                    </div>
 
-                        <div class="opc-label"><label for="login-password"><?php echo ENTRY_PASSWORD; ?></label></div>
-<?php 
-                    echo zen_draw_password_field('password', '', 'size="18" id="login-password" autocomplete="off" placeholder="' . ENTRY_REQUIRED_SYMBOL . '"' . ((int)ENTRY_PASSWORD_MIN_LENGTH > 0 ? ' required' : '')); 
-?>
+                    <div class="form-floating mb-3">
+                        <?php echo zen_draw_password_field('password', '', 'size="18" id="login-password" autocomplete="current-password" class="form-control" placeholder="' . ENTRY_PASSWORD . '"' . ((int)ENTRY_PASSWORD_MIN_LENGTH > 0 ? ' required' : '')); ?>
+                        <label class="form-label" for="login-password"><?php echo ENTRY_PASSWORD; ?><?php echo ((int)ENTRY_PASSWORD_MIN_LENGTH > 0 ? '<span class="text-danger">*</span>' : ''); ?></label>
+                    </div>
+
                     <div id="opc-pwf"><?php echo '<a href="' . zen_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . TEXT_PASSWORD_FORGOTTEN . '</a>'; ?></div>
-                    <div class="text-right"><?php echo zen_image_submit(BUTTON_IMAGE_LOGIN, BUTTON_LOGIN_ALT); ?></div>
+                    <div class="d-flex justify-content-end"><?php echo zen_image_submit(BUTTON_IMAGE_LOGIN, BUTTON_LOGIN_ALT, 'class="btn btn-primary"'); ?></div>
 <?php
                     echo '</form>';
 ?>
@@ -83,7 +84,7 @@ foreach ($column_blocks as $display_blocks) {
                     }
 ?>
             <div class="information"><?php echo TEXT_NEW_CUSTOMER_INTRODUCTION_SPLIT; ?></div>
-            <div class="center"><?php require DIR_FS_CATALOG . DIR_WS_MODULES . 'payment/paypal/tpl_ec_button.php'; ?></div>
+            <div class="text-center"><?php require DIR_FS_CATALOG . DIR_WS_MODULES . 'payment/paypal/tpl_ec_button.php'; ?></div>
 <?php
                     if ($ppec_divider_location === 'next') {
 ?>
@@ -98,21 +99,21 @@ foreach ($column_blocks as $display_blocks) {
                 //
                 case 'G':
 ?>
-            <div class="card mb-2">
-                <h2 class="card-header"><?php echo HEADING_GUEST_OPC; ?></h2>
-                <div class="card-body">
+            <div id="guestCustomers-card" class="card mb-2">
+                <h2 id="guestCustomers-card-header" class="card-header"><?php echo HEADING_GUEST_OPC; ?></h2>
+                <div id="guestCustomers-card-body" class="card-body" aria-labelledby="guestCustomers-card-header">
                     <div class="card-text"><?php echo TEXT_GUEST_OPC; ?>
 <?php
                     if (!$guest_active) {
                         echo zen_draw_form('guest', zen_href_link(FILENAME_CHECKOUT_ONE, '', 'SSL'), 'post') . zen_draw_hidden_field('guest_checkout', 1);
 ?>
-                    <div class="text-right"><?php echo zen_image_submit(BUTTON_IMAGE_CHECKOUT, BUTTON_CHECKOUT_ALT); ?></div>
+                    <div class="d-flex justify-content-end"><?php echo zen_image_submit(BUTTON_IMAGE_CHECKOUT, BUTTON_CHECKOUT_ALT, 'class="btn btn-primary"'); ?></div>
 <?php
                         echo '</form>';
                     } else {
 ?>
-                    <div class="text-right">
-                        <?php echo zca_button_link(zen_href_link(FILENAME_CHECKOUT_ONE, '', 'SSL'), BUTTON_GUEST_CHECKOUT_CONTINUE, 'button_continue'); ?>
+                    <div class="d-flex justify-content-end">
+                        <?php echo zca_button_link(zen_href_link(FILENAME_CHECKOUT_ONE, '', 'SSL'), BUTTON_GUEST_CHECKOUT_CONTINUE, 'button_continue btn btn-primary'); ?>
                     </div>
 <?php
                     }
@@ -128,14 +129,14 @@ foreach ($column_blocks as $display_blocks) {
                 //
                 case 'C':
 ?>
-            <div class="card mb-2">
-                <h2 class="card-header"><?php echo HEADING_NEW_CUSTOMER_OPC; ?></h2>
-                <div class="card-body">
+            <div id="newCustomers-card" class="card mb-2">
+                <h2 id="newCustomers-card-header" class="card-header"><?php echo HEADING_NEW_CUSTOMER_OPC; ?></h2>
+                <div id="newCustomers-card-body" class="card-body" aria-labelledby="newCustomers-card-header">
                     <div class="card-text"><?php echo TEXT_NEW_CUSTOMER_OPC; ?>
 <?php 
                     echo zen_draw_form('create', zen_href_link(FILENAME_CREATE_ACCOUNT, (isset($_GET['gv_no']) ? '&gv_no=' . preg_replace('/[^0-9.,%]/', '', $_GET['gv_no']) : ''), 'SSL'), 'post');
 ?>
-                        <div class="text-right"><?php echo zen_image_submit(BUTTON_IMAGE_CREATE_ACCOUNT, BUTTON_CREATE_ACCOUNT_ALT); ?></div>
+                        <div class="d-flex justify-content-end"><?php echo zen_image_submit(BUTTON_IMAGE_CREATE_ACCOUNT, BUTTON_CREATE_ACCOUNT_ALT, 'class="btn btn-primary"'); ?></div>
 <?php
                     echo '</form>';
 ?>
@@ -150,9 +151,9 @@ foreach ($column_blocks as $display_blocks) {
                 //
                 case 'B':
 ?>
-            <div class="card mb-2">
-                <h2 class="card-header"><?php echo HEADING_ACCOUNT_BENEFITS_OPC; ?></h2>
-                <div class="card-body">
+            <div id="accountBenefits-card" class="card mb-2">
+                <h2 id="accountBenefits-card-header" class="card-header"><?php echo HEADING_ACCOUNT_BENEFITS_OPC; ?></h2>
+                <div id="accountBenefits-card-body" class="card-body" aria-labelledby="accountBenefits-card-header">
                     <div class="card-text"><?php echo TEXT_ACCOUNT_BENEFITS_OPC; ?></div>
 <?php
                     for ($i = 1; $i < 5; $i++) {
@@ -161,7 +162,7 @@ foreach ($column_blocks as $display_blocks) {
                         if (defined($benefit_heading) && constant($benefit_heading) != '' && defined($benefit_text) && constant($benefit_text) != '') {
 ?>
                     <div class="card mt-2">
-                        <div class="card-header"><?php echo constant($benefit_heading); ?></div>
+                        <h3 class="card-header"><?php echo constant($benefit_heading); ?></h3>
                         <div class="card-body"><?php echo constant($benefit_text); ?></div>
                     </div>
 <?php

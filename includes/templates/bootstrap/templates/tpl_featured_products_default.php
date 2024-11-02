@@ -2,7 +2,7 @@
 /**
  * Page Template - Featured Products listing
  * 
- * BOOTSTRAP v1.0.BETA
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2016 Zen Cart Development Team
@@ -16,7 +16,7 @@
 
 <h1 id="featuredProductsDefault-pageHeading" class="pageHeading"><?php echo HEADING_TITLE; ?></h1>
 
- <?php
+<?php
   /**
    * require code to display the list-display-order dropdown
    */

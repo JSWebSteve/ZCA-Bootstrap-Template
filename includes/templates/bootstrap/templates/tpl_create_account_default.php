@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.0.0
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=create_account.<br />
  * Displays Create Account form.
@@ -25,12 +25,12 @@
 <div id="personalDetails-card" class="card mb-3">
 <h4 id="personalDetails-card-header" class="card-header"><?php echo CATEGORY_PERSONAL; ?></h4>
 
-<div id="personalDetails-card-body" class="card-body p-3">
+<div id="personalDetails-card-body" class="card-body p-3" aria-labelledby="personalDetails-card-header">
 
 <?php require($template->get_template_dir('tpl_modules_create_account.php',DIR_WS_TEMPLATE, $current_page_base,'templates'). '/tpl_modules_create_account.php'); ?>
 
-<div id="personalDetails-btn-toolbar" class="btn-toolbar justify-content-end mt-3" role="toolbar">
-<?php echo zen_image_submit(BUTTON_IMAGE_SUBMIT, BUTTON_SUBMIT_ALT); ?>
+<div id="personalDetails-btn-toolbar" class="d-flex justify-content-end mt-3" role="toolbar">
+<?php echo zen_image_submit(BUTTON_IMAGE_SUBMIT, BUTTON_SUBMIT_ALT, '', 'btn btn-primary'); ?>
 </div>
 
 </div>

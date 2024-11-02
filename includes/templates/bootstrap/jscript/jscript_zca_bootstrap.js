@@ -1,28 +1,33 @@
-$(document).ready(function () {
-    $('a.imageModal').on('click', function() {
-        $('.showimage').attr('src', $(this).find('img').attr('src'));
-        $('#myModal').modal('show');   
+// BOOTSTRAP v5.0.0
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a.imageModal').forEach(function(link) {
+        link.addEventListener('click', function() {
+            document.querySelector('.showimage').src = this.querySelector('img').src;
+            var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+            myModal.show();   
+        });
     });
     
-    if ($('#back-to-top').length) {
-        var scrollTrigger = 100, // px
-        backToTop = function () {
-            var scrollTop = $(window).scrollTop();
+    var backToTopButton = document.getElementById('back-to-top');
+    if (backToTopButton) {
+        var scrollTrigger = 100; // px
+        function backToTop() {
+            var scrollTop = window.scrollY;
             if (scrollTop > scrollTrigger) {
-                $('#back-to-top').addClass('show');
+                backToTopButton.classList.add('show');
             } else {
-                $('#back-to-top').removeClass('show');
+                backToTopButton.classList.remove('show');
             }
-        };
+        }
         backToTop();
-        $(window).on('scroll', function () {
-            backToTop();
-        });
-        $('#back-to-top').on('click', function (e) {
+        window.addEventListener('scroll', backToTop);
+        backToTopButton.addEventListener('click', function (e) {
             e.preventDefault();
-            $('html,body').animate({
-                scrollTop: 0
-            }, 700);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     }
 });

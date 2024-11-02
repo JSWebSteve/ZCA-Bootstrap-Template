@@ -2,6 +2,8 @@
 /**
  * categories_tabs.php module
  *
+ * BOOTSTRAP v5.0.0
+ *
  * @package   templateSystem
  * @copyright Copyright 2003-2018 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -31,7 +33,7 @@ $current_category_tab = (int)$cPath;
 foreach ($categories_tab as $category) {
     // currently selected category
     if ($current_category_tab === (int)$category['categories_id']) {
-        $new_style = 'nav-item nav-link m-1 activeLink';
+        $new_style = 'nav-link active fw-bold';
         $categories_tab_current = $category['categories_name'];
     } else {
         if (!$includeAllCategories) {
@@ -40,12 +42,15 @@ foreach ($categories_tab as $category) {
                 continue;
             }
         }
-        $new_style = 'nav-item nav-link m-1';
+        $new_style = 'nav-link';
         $categories_tab_current = $category['categories_name'];
     }
     // create link to top level category
     $links_list[] =
-        '<a class="' . $new_style . '" href="' . zen_href_link(FILENAME_DEFAULT, 'cPath=' . (int)$category['categories_id']) . '">' .
-            $categories_tab_current .
-        '</a> ';
+        '<li class="nav-item" role="presentation">' .
+        '<a class="' . $new_style . '" href="' . zen_href_link(FILENAME_DEFAULT, 'cPath=' . (int)$category['categories_id']) . '" ' .
+        'role="tab" aria-selected="' . ($current_category_tab === (int)$category['categories_id'] ? 'true' : 'false') . '">' .
+        $categories_tab_current .
+        '</a>' .
+        '</li>';
 }

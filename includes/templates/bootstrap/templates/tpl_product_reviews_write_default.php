@@ -2,7 +2,7 @@
 /**
  * Page Template
  *
- * BOOTSTRAP v3.6.2
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2024 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -73,16 +73,11 @@ if (!empty($products_model)) {
     <div id="productsReviewWrite-card" class="card">
         <div id="productsReviewWrite-card-header" class="card-header">
 <?php
-// -----
-// In zc200+, the name of the variable that contains the name of the reviewer has
-// changed from $customer to $reviewer.  Since this template still supports
-// zc157 and later, use $reviewer if present; otherwise, fall back to $customer.
-//
 $reviewer = $reviewer ?? $customer;
 ?>
             <?php echo SUB_TITLE_FROM . ' ' . zen_output_string_protected($reviewer->fields['customers_firstname'] . ' ' . $reviewer->fields['customers_lastname']); ?>
         </div>
-        <div id="productsReviewWrite-card-body" class="card-body">
+        <div id="productsReviewWrite-card-body" class="card-body" aria-labelledby="productsReviewWrite-card-header">
 <?php
 if ($messageStack->size('review_text') > 0) {
     echo $messageStack->output('review_text');
@@ -90,29 +85,31 @@ if ($messageStack->size('review_text') > 0) {
 ?>
             <div class="text-center p-3"><?php echo SUB_TITLE_RATING; ?></div>
 
-            <div class="custom-control custom-radio custom-control-inline">
-                <?php echo zen_draw_radio_field('rating', '1', '', 'id="rating-1" class="custom-control-input"'); ?>
-                <label class="custom-control-label rating" for="rating-1"><?php echo zca_get_rating_stars(1, 'xs'); ?></label>
+            <div class="form-check form-check-inline">
+                <?php echo zen_draw_radio_field('rating', '1', '', 'id="rating-1" class="form-check-input"'); ?>
+                <label class="form-check-label rating" for="rating-1"><?php echo zca_get_rating_stars(1, 'xs'); ?></label>
             </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <?php echo zen_draw_radio_field('rating', '2', '', 'id="rating-2" class="custom-control-input"'); ?>
-                <label class="custom-control-label rating" for="rating-2"><?php echo zca_get_rating_stars(2, 'xs'); ?></label>
+            <div class="form-check form-check-inline">
+                <?php echo zen_draw_radio_field('rating', '2', '', 'id="rating-2" class="form-check-input"'); ?>
+                <label class="form-check-label rating" for="rating-2"><?php echo zca_get_rating_stars(2, 'xs'); ?></label>
             </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <?php echo zen_draw_radio_field('rating', '3', '', 'id="rating-3" class="custom-control-input"'); ?>
-                <label class="custom-control-label rating" for="rating-3"><?php echo zca_get_rating_stars(3, 'xs'); ?></label>
+            <div class="form-check form-check-inline">
+                <?php echo zen_draw_radio_field('rating', '3', '', 'id="rating-3" class="form-check-input"'); ?>
+                <label class="form-check-label rating" for="rating-3"><?php echo zca_get_rating_stars(3, 'xs'); ?></label>
             </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <?php echo zen_draw_radio_field('rating', '4', '', 'id="rating-4" class="custom-control-input"'); ?>
-                <label class="custom-control-label rating" for="rating-4"><?php echo zca_get_rating_stars(4, 'xs'); ?></label>
+            <div class="form-check form-check-inline">
+                <?php echo zen_draw_radio_field('rating', '4', '', 'id="rating-4" class="form-check-input"'); ?>
+                <label class="form-check-label rating" for="rating-4"><?php echo zca_get_rating_stars(4, 'xs'); ?></label>
             </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <?php echo zen_draw_radio_field('rating', '5', '', 'id="rating-5" class="custom-control-input"'); ?>
-                <label class="custom-control-label rating" for="rating-5"><?php echo zca_get_rating_stars(5, 'xs'); ?></label>
+            <div class="form-check form-check-inline">
+                <?php echo zen_draw_radio_field('rating', '5', '', 'id="rating-5" class="form-check-input"'); ?>
+                <label class="form-check-label rating" for="rating-5"><?php echo zca_get_rating_stars(5, 'xs'); ?></label>
             </div>
 
-            <label id="textArea-label" for="review-text"><?php echo SUB_TITLE_REVIEW; ?></label>
-            <?php echo zen_draw_textarea_field('review_text', 60, 5, '', 'id="review-text"'); ?>
+            <div class="form-floating mb-3">
+                <?php echo zen_draw_textarea_field('review_text', '60', '5', '', 'id="review-text" placeholder="' . SUB_TITLE_REVIEW . '" class="form-control"'); ?>
+                <label for="review-text"><?php echo SUB_TITLE_REVIEW; ?></label>
+            </div>
             
             <?php echo zen_draw_input_field($antiSpamFieldName, '', ' size="60" id="RAS" style="visibility:hidden; display:none;" autocomplete="off"'); ?>
 
@@ -120,8 +117,8 @@ if ($messageStack->size('review_text') > 0) {
                 <?php echo TEXT_NO_HTML . (REVIEWS_APPROVAL === '1' ? '<br>' . TEXT_APPROVAL_REQUIRED: ''); ?>
             </div>
 
-            <div id="productsReviewWrite-btn-toolbar" class="btn-toolbar justify-content-end my-3" role="toolbar">
-                <?php echo zen_image_submit(BUTTON_IMAGE_SUBMIT, BUTTON_SUBMIT_ALT); ?>
+            <div class="d-flex justify-content-end my-3">
+                <?php echo zen_image_submit(BUTTON_IMAGE_SUBMIT, BUTTON_SUBMIT_ALT, '', 'btn btn-primary'); ?>
             </div>
 
         </div>

@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.5.2
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -42,10 +42,9 @@ if (USE_SPLIT_LOGIN_MODE === 'True' || $ec_button_enabled) {
             <div id="newCustomers-content-one" class="content"><?php echo TEXT_NEW_CUSTOMER_POST_INTRODUCTION_SPLIT; ?></div>
 
             <?php echo zen_draw_form('create', zen_href_link(FILENAME_CREATE_ACCOUNT, (isset($_GET['gv_no']) ? '&gv_no=' . preg_replace('/[^0-9.,%]/', '', $_GET['gv_no']) : ''), 'SSL')); ?>
-                <div id="newCustomers-btn-toolbar" class="btn-toolbar justify-content-end my-3" role="toolbar">
-                    <?php echo zen_image_submit(BUTTON_IMAGE_CREATE_ACCOUNT, BUTTON_CREATE_ACCOUNT_ALT, 'name="registrationButton"'); ?>
+                <div id="newCustomers-btn-toolbar" class="d-flex justify-content-end my-3" role="toolbar">
+                    <?php echo zen_image_submit(BUTTON_IMAGE_CREATE_ACCOUNT, BUTTON_CREATE_ACCOUNT_ALT, 'name="registrationButton" class="btn btn-primary"'); ?>
                 </div>
-
             <?php echo '</form>'; ?>
         </div>
     </div>
@@ -58,14 +57,18 @@ if (USE_SPLIT_LOGIN_MODE === 'True' || $ec_button_enabled) {
             <div id="returningCustomers-content" class="content pb-3"><?php echo TEXT_RETURNING_CUSTOMER_SPLIT; ?></div>
 
             <?php echo zen_draw_form('loginForm', zen_href_link(FILENAME_LOGIN, 'action=process' . (isset($_GET['gv_no']) ? '&gv_no=' . preg_replace('/[^0-9.,%]/', '', $_GET['gv_no']) : ''), 'SSL'), 'post', 'id="loginForm"'); ?>
-                <label class="inputLabel" for="login-email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?></label>
-                <?php echo zen_draw_input_field('email_address', '', 'size="18" id="login-email-address" autofocus autocomplete="username" class="mb-2" placeholder="' . ENTRY_EMAIL_ADDRESS_TEXT . '"' . ((int)ENTRY_EMAIL_ADDRESS_MIN_LENGTH > 0 ? ' required' : ''), 'email'); ?>
+                <div class="form-floating mb-3">
+                    <?php echo zen_draw_input_field('email_address', '', 'size="18" id="login-email-address" autocomplete="username" class="form-control" placeholder="' . ENTRY_EMAIL_ADDRESS . '"' . ((int)ENTRY_EMAIL_ADDRESS_MIN_LENGTH > 0 ? ' required' : ''), 'email'); ?>
+                    <label class="form-label" for="login-email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?></label>
+                </div>
 
-                <label class="inputLabel" for="login-password"><?php echo ENTRY_PASSWORD; ?></label>
-                <?php echo zen_draw_password_field('password', '', 'size="18" id="login-password" autocomplete="current-password" class="mb-2" placeholder="' . ENTRY_REQUIRED_SYMBOL . '"' . ((int)ENTRY_PASSWORD_MIN_LENGTH > 0 ? ' required' : '')); ?>
+                <div class="form-floating mb-3">
+                    <?php echo zen_draw_password_field('password', '', 'size="18" id="login-password" autocomplete="current-password" class="form-control" placeholder="' . ENTRY_PASSWORD . '"' . ((int)ENTRY_PASSWORD_MIN_LENGTH > 0 ? ' required' : '')); ?>
+                    <label class="form-label" for="login-password"><?php echo ENTRY_PASSWORD; ?></label>
+                </div>
 
-                <div id="returningCustomers-btn-toolbar" class="btn-toolbar justify-content-between" role="toolbar">
-                <?php echo '<a href="' . zen_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . TEXT_PASSWORD_FORGOTTEN . '</a>' . zen_image_submit(BUTTON_IMAGE_LOGIN, BUTTON_LOGIN_ALT); ?>
+                <div id="returningCustomers-btn-toolbar" class="d-flex justify-content-between align-items-center" role="toolbar">
+                    <?php echo '<a href="' . zen_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . TEXT_PASSWORD_FORGOTTEN . '</a>' . zen_image_submit(BUTTON_IMAGE_LOGIN, BUTTON_LOGIN_ALT, 'class="btn btn-primary"'); ?>
                 </div>
             <?php echo '</form>'; ?>
         </div>
@@ -81,37 +84,38 @@ if (USE_SPLIT_LOGIN_MODE === 'True' || $ec_button_enabled) {
     if ($_SESSION['cart']->count_contents() > 0) {
         echo TEXT_VISITORS_CART;
 ?>
-    <a data-toggle="modal" href="#cartHelpModal"><?php echo TEXT_MORE_INFO; ?></a>
+    <a data-bs-toggle="modal" href="#cartHelpModal"><?php echo TEXT_MORE_INFO; ?></a>
 <?php
         require $template->get_template_dir('tpl_info_shopping_cart.php', DIR_WS_TEMPLATE, $current_page_base, 'modalboxes') . '/tpl_info_shopping_cart.php';
     }
 ?>
     <nav class="pt-3">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-login-tab" data-toggle="tab" href="#nav-login" role="tab" tabindex="1" aria-controls="nav-login" aria-selected="true"><?php echo HEADING_RETURNING_CUSTOMER; ?></a>
-            <a class="nav-item nav-link" id="nav-create-tab" data-toggle="tab" href="#nav-create" role="tab" tabindex="1" aria-controls="nav-create" aria-selected="false"><?php echo HEADING_NEW_CUSTOMER; ?></a>
+            <button class="nav-link active" id="nav-login-tab" data-bs-toggle="tab" data-bs-target="#nav-login" type="button" role="tab" aria-controls="nav-login" aria-selected="true"><?php echo HEADING_RETURNING_CUSTOMER; ?></button>
+            <button class="nav-link" id="nav-create-tab" data-bs-toggle="tab" data-bs-target="#nav-create" type="button" role="tab" aria-controls="nav-create" aria-selected="false"><?php echo HEADING_NEW_CUSTOMER; ?></button>
         </div>
     </nav>
 
     <div class="tab-content mb-3" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">
             <?php echo zen_draw_form('loginForm', zen_href_link(FILENAME_LOGIN, 'action=process' . (isset($_GET['gv_no']) ? '&gv_no=' . preg_replace('/[^0-9.,%]/', '', $_GET['gv_no']) : ''), 'SSL'), 'post', 'id="loginForm"'); ?>
-                <label class="inputLabel mt-3" for="login-email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?></label>
-                <?php echo zen_draw_input_field('email_address', '', zen_set_field_length(TABLE_CUSTOMERS, 'customers_email_address', '40') . ' id="login-email-address" autofocus autocomplete="username" class="mb-2"  placeholder="' . ENTRY_EMAIL_ADDRESS_TEXT . '"' . ((int)ENTRY_EMAIL_ADDRESS_MIN_LENGTH > 0 ? ' required' : ''), 'email'); ?>
+                <div class="form-floating mt-3 mb-3">
+                    <?php echo zen_draw_input_field('email_address', '', zen_set_field_length(TABLE_CUSTOMERS, 'customers_email_address', '40') . ' id="login-email-address" autocomplete="username" class="form-control" placeholder="' . ENTRY_EMAIL_ADDRESS . '"' . ((int)ENTRY_EMAIL_ADDRESS_MIN_LENGTH > 0 ? ' required' : ''), 'email'); ?>
+                    <label class="form-label" for="login-email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?></label>
+                </div>
 
-                <label class="inputLabel" for="login-password"><?php echo ENTRY_PASSWORD; ?></label>
-                <?php echo zen_draw_password_field('password', '', zen_set_field_length(TABLE_CUSTOMERS, 'customers_password', 40) . ' id="login-password" autocomplete="current-password" class="mb-2" placeholder="' . ENTRY_REQUIRED_SYMBOL . '"' . ((int)ENTRY_PASSWORD_MIN_LENGTH > 0 ? ' required' : '')); ?>
-                <div class="p-2"></div>
+                <div class="form-floating mb-3">
+                    <?php echo zen_draw_password_field('password', '', zen_set_field_length(TABLE_CUSTOMERS, 'customers_password', 40) . ' id="login-password" autocomplete="current-password" class="form-control" placeholder="' . ENTRY_PASSWORD . '"' . ((int)ENTRY_PASSWORD_MIN_LENGTH > 0 ? ' required' : '')); ?>
+                    <label class="form-label" for="login-password"><?php echo ENTRY_PASSWORD; ?></label>
+                </div>
 
                 <?php echo zen_draw_hidden_field('securityToken', $_SESSION['securityToken']); ?>
 
-                <div id="loginDefault-btn-toolbar" class="btn-toolbar justify-content-between" role="toolbar">
-                <?php echo '<a href="' . zen_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . TEXT_PASSWORD_FORGOTTEN . '</a>' . zen_image_submit(BUTTON_IMAGE_LOGIN, BUTTON_LOGIN_ALT); ?>
+                <div id="loginDefault-btn-toolbar" class="d-flex justify-content-between align-items-center" role="toolbar">
+                    <?php echo '<a href="' . zen_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . TEXT_PASSWORD_FORGOTTEN . '</a>' . zen_image_submit(BUTTON_IMAGE_LOGIN, BUTTON_LOGIN_ALT, 'class="btn btn-primary"'); ?>
                 </div>
-
             <?php echo '</form>'; ?>
         </div>
-  
   
         <div class="tab-pane fade" id="nav-create" role="tabpanel" aria-labelledby="nav-create-tab">
             <?php echo zen_draw_form('createAccountForm', zen_href_link(FILENAME_CREATE_ACCOUNT, (isset($_GET['gv_no']) ? '&gv_no=' . preg_replace('/[^0-9.,%]/', '', $_GET['gv_no']) : ''), 'SSL'), 'post', 'onsubmit="return check_form(createAccountForm);" id="createAccountForm"') . zen_draw_hidden_field('action', 'process') . zen_draw_hidden_field('email_pref_html', 'email_format'); ?>
@@ -119,8 +123,8 @@ if (USE_SPLIT_LOGIN_MODE === 'True' || $ec_button_enabled) {
 
                 <?php require $template->get_template_dir('tpl_modules_create_account.php', DIR_WS_TEMPLATE, $current_page_base, 'templates') . '/tpl_modules_create_account.php'; ?>
 
-                <div id="loginDefault-btn-toolbar2" class="btn-toolbar justify-content-end my-3" role="toolbar">
-                    <?php echo zen_image_submit(BUTTON_IMAGE_SUBMIT, BUTTON_SUBMIT_ALT); ?>
+                <div id="loginDefault-btn-toolbar2" class="d-flex justify-content-end my-3" role="toolbar">
+                    <?php echo zen_image_submit(BUTTON_IMAGE_SUBMIT, BUTTON_SUBMIT_ALT, 'class="btn btn-primary"'); ?>
                 </div>
             <?php echo '</form>'; ?>
         </div>

@@ -2,7 +2,7 @@
 /**
  * Module Template
  * 
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -15,7 +15,7 @@ if (PRODUCT_INFO_SHOW_BOOTSTRAP_MODAL_POPUPS == 'Yes') {
     require $template->get_template_dir('tpl_image.php', DIR_WS_TEMPLATE, $current_page_base, 'modalboxes'). '/tpl_image.php';
 ?>
 <div id="productMainImage">
-    <a data-toggle="modal" data-target=".image-modal-lg" href="#image-modal-lg">
+    <a data-bs-toggle="modal" data-bs-target=".image-modal-lg" href="#image-modal-lg">
         <?php echo zen_image($products_image_medium, $products_name, MEDIUM_IMAGE_WIDTH, MEDIUM_IMAGE_HEIGHT); ?>
         <div class="p-1"></div>
         <span class="imgLink"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span>

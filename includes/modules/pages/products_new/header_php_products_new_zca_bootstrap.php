@@ -2,7 +2,7 @@
 /**
  * products_new header_php.php
  * 
- * BOOTSTRAP v3.6.3
+ * BOOTSTRAP v5.0.0
  *
  * @package page
  * @copyright Copyright 2003-2007 Zen Cart Development Team

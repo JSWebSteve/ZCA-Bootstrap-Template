@@ -2,7 +2,7 @@
 /**
  * Side Box Template
  *
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2018 Zen Cart Development Team
@@ -51,7 +51,7 @@ foreach ($box_categories_array as $next_box_cat) {
         // skip if this is for the document box (==3)
     } else {
         $content .=
-            '<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center ' . $new_style . '" href="' . zen_href_link(FILENAME_DEFAULT, $next_box_cat['path']) . '">';
+            '<a id="category-' . $next_box_cat['path'] . '" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center ' . $new_style . '" href="' . zen_href_link(FILENAME_DEFAULT, $next_box_cat['path']) . '">';
 
         if ($next_box_cat['current'] === true) {
             if ($next_box_cat['has_sub_cat'] === true) {
@@ -65,7 +65,7 @@ foreach ($box_categories_array as $next_box_cat) {
 
         if (SHOW_COUNTS === 'true') {
             if ((CATEGORIES_COUNT_ZERO === '1' && $next_box_cat['count'] === 0) || $next_box_cat['count'] >= 1) {
-                $content .= '<span class="badge badge-pill">' . CATEGORIES_COUNT_PREFIX . $next_box_cat['count'] . CATEGORIES_COUNT_SUFFIX . '</span>';
+                $content .= '<span class="badge rounded-pill bg-secondary">' . CATEGORIES_COUNT_PREFIX . $next_box_cat['count'] . CATEGORIES_COUNT_SUFFIX . '</span>';
             }
         }
 
@@ -77,7 +77,7 @@ if (SHOW_CATEGORIES_BOX_SPECIALS === 'true' || SHOW_CATEGORIES_BOX_PRODUCTS_NEW 
     if (SHOW_CATEGORIES_BOX_SPECIALS === 'true') {
         $show_this = $db->Execute("SELECT s.products_id FROM " . TABLE_SPECIALS . " s WHERE s.status = 1 LIMIT 1");
         if (!$show_this->EOF) {
-            $content .= '<a class="list-group-item list-group-item-action list-group-item-secondary" href="' . zen_href_link(FILENAME_SPECIALS) . '">' . CATEGORIES_BOX_HEADING_SPECIALS . '</a>';
+            $content .= '<a id="cat-specials" class="list-group-item list-group-item-action list-group-item-secondary" href="' . zen_href_link(FILENAME_SPECIALS) . '">' . CATEGORIES_BOX_HEADING_SPECIALS . '</a>';
         }
     }
     if (SHOW_CATEGORIES_BOX_PRODUCTS_NEW === 'true') {
@@ -90,17 +90,17 @@ if (SHOW_CATEGORIES_BOX_SPECIALS === 'true' || SHOW_CATEGORIES_BOX_PRODUCTS_NEW 
               WHERE p.products_status = 1 " . $display_limit . " LIMIT 1"
         );
         if (!$show_this->EOF) {
-            $content .= '<a class="list-group-item list-group-item-action list-group-item-secondary" href="' . zen_href_link(FILENAME_PRODUCTS_NEW) . '">' . CATEGORIES_BOX_HEADING_WHATS_NEW . '</a>';
+            $content .= '<a id="cat-products-new" class="list-group-item list-group-item-action list-group-item-secondary" href="' . zen_href_link(FILENAME_PRODUCTS_NEW) . '">' . CATEGORIES_BOX_HEADING_WHATS_NEW . '</a>';
         }
     }
     if (SHOW_CATEGORIES_BOX_FEATURED_PRODUCTS === 'true') {
         $show_this = $db->Execute("SELECT products_id FROM " . TABLE_FEATURED . " WHERE status = 1 LIMIT 1");
         if (!$show_this->EOF) {
-            $content .= '<a class="list-group-item list-group-item-action list-group-item-secondary" href="' . zen_href_link(FILENAME_FEATURED_PRODUCTS) . '">' . CATEGORIES_BOX_HEADING_FEATURED_PRODUCTS . '</a>';
+            $content .= '<a id="cat-featured" class="list-group-item list-group-item-action list-group-item-secondary" href="' . zen_href_link(FILENAME_FEATURED_PRODUCTS) . '">' . CATEGORIES_BOX_HEADING_FEATURED_PRODUCTS . '</a>';
         }
     }
     if (SHOW_CATEGORIES_BOX_PRODUCTS_ALL === 'true') {
-        $content .= '<a class="list-group-item list-group-item-action  list-group-item-secondary" href="' . zen_href_link(FILENAME_PRODUCTS_ALL) . '">' . CATEGORIES_BOX_HEADING_PRODUCTS_ALL . '</a>';
+        $content .= '<a id="cat-products-all" class="list-group-item list-group-item-action list-group-item-secondary" href="' . zen_href_link(FILENAME_PRODUCTS_ALL) . '">' . CATEGORIES_BOX_HEADING_PRODUCTS_ALL . '</a>';
     }
 }
 $content .= '</div>';

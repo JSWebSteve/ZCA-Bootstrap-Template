@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP 3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2016 Zen Cart Development Team
@@ -17,23 +17,25 @@
 <?php
 if (PRODUCT_LIST_ALPHA_SORTER === 'true') {
 ?>
-        <div class="col">
+        <div class="col-12 col-md-6">
 <?php
-    echo zen_draw_form('filter', zen_href_link(FILENAME_SEARCH_RESULT), 'get', 'class="form-inline"');
-    echo '<label class="inputLabel mx-2">' . TEXT_SHOW . '</label>';
+    echo zen_draw_form('filter', zen_href_link(FILENAME_SEARCH_RESULT), 'get', 'class="row g-3 align-items-center"');
+    echo '<div class="col-auto"><label class="col-form-label">' . TEXT_SHOW . '</label></div>';
+    echo '<div class="col-auto">';
 
     /* Redisplay all $_GET variables, except currency */
     echo zen_post_all_get_params('currency');
 
     require DIR_WS_MODULES . zen_get_module_directory(FILENAME_PRODUCT_LISTING_ALPHA_SORTER);
 
+    echo '</div>';
     echo '</form>';
 ?>
         </div>
 <?php
 }
 ?>
-        <div class="col">
+        <div class="col-12 col-md-6">
 <?php
 require $template->get_template_dir('/tpl_modules_listing_display_order.php', DIR_WS_TEMPLATE, $current_page_base, 'templates') . '/tpl_modules_listing_display_order.php';
 ?>

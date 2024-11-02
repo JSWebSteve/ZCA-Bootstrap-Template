@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2016 Zen Cart Development Team
@@ -25,7 +25,7 @@
     <p id="paragraph-three" class="content"><?php echo TEXT_INFORMATION_4; ?></p>
     <p id="paragraph-four" class="content"><?php echo TEXT_INFORMATION_5; ?></p>
 
-    <div id="sslCheckDefault-btn-toolbar" class="btn-toolbar justify-content-end my-3" role="toolbar">
+    <div id="sslCheckDefault-btn-toolbar" class="d-flex justify-content-end my-3" role="toolbar">
         <?php echo zca_button_link(zen_href_link(FILENAME_LOGIN, '', 'SSL'), BUTTON_CONTINUE_ALT, 'button_continue'); ?>
     </div>
 </div>

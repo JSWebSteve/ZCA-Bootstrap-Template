@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=down_for_maintenance.
  * When site is down for maintenance (and database is still active), this page is displayed to the customer
@@ -18,7 +18,7 @@
 <div id="downForMaintenanceDefault" class="centerColumn">
     <h1 id="downForMaintenanceDefault-pageHeading" class="pageHeading"><?php echo HEADING_TITLE; ?></h1>
 
-    <?php echo zen_image(DIR_WS_TEMPLATE_IMAGES . OTHER_IMAGE_DOWN_FOR_MAINTENANCE, OTHER_DOWN_FOR_MAINTENANCE_ALT); ?>
+    <?php echo zen_image(DIR_WS_TEMPLATE_IMAGES . OTHER_IMAGE_DOWN_FOR_MAINTENANCE, OTHER_DOWN_FOR_MAINTENANCE_ALT, '', '', 'class="img-fluid"'); ?>
 
     <div id="downForMaintenanceDefault-content" class="content">
         <h2><?php echo DOWN_FOR_MAINTENANCE_TEXT_INFORMATION; ?></h2>
@@ -42,8 +42,8 @@ if (DISPLAY_MAINTENANCE_PERIOD === 'true') {
 ?>
     <div class="p-3"></div>
 
-    <div id="downForMaintenanceDefault-btn-toolbar" class="btn-toolbar justify-content-between" role="toolbar">
-        <?php echo DOWN_FOR_MAINTENANCE_STATUS_TEXT; ?>
+    <div id="downForMaintenanceDefault-btn-toolbar" class="d-flex justify-content-between align-items-center" role="toolbar">
+        <span><?php echo DOWN_FOR_MAINTENANCE_STATUS_TEXT; ?></span>
         <?php echo zca_button_link(zen_href_link(FILENAME_DEFAULT), BUTTON_CONTINUE_ALT, 'button_continue'); ?>
     </div>
 <!-- body_text_eof //-->

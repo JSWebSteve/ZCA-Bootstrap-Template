@@ -2,7 +2,7 @@
 /**
  * Module Template
  * 
- * BOOTSTRAP 3.6.5
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2024 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -33,8 +33,9 @@ $display_order_options = [
     ['id' => '7', 'text' => TEXT_INFO_SORT_BY_PRODUCTS_DATE],
 ];
 ?>
-<div id="listingDisplayOrderSorter" class="row">
-    <label for="disp-order-sorter" class="mb-0 mt-1 mx-2"><?= TEXT_INFO_SORT_BY ?></label>
+<div id="listingDisplayOrderSorter" class="row align-items-center">
+    <label for="disp-order-sorter" class="col-auto mb-0 mt-1 me-2"><?= TEXT_INFO_SORT_BY ?></label>
+    <div class="col-auto">
 <?php
 $excluded_get_params = [
     'disp_order',
@@ -43,10 +44,11 @@ if (!isset($_GET['cPath'], $cPath)) {
     $excluded_get_params[] = 'cPath';
 }
 echo
-    zen_draw_form('sorter_form', zen_href_link($_GET['main_page']), 'get', 'class="form-inline"') .
+    zen_draw_form('sorter_form', zen_href_link($_GET['main_page']), 'get', 'class="d-flex align-items-center"') .
         zen_post_all_get_params($excluded_get_params) .
         zen_hide_session_id() .
-        zen_draw_pull_down_menu('disp_order', $display_order_options, $disp_order, 'id="disp-order-sorter" onchange="this.form.submit();"') .
+        zen_draw_pull_down_menu('disp_order', $display_order_options, $disp_order, 'id="disp-order-sorter" class="form-select" aria-label="' . TEXT_INFO_SORT_BY . '" onchange="this.form.submit();"') .
     '</form>';
 ?>
+    </div>
 </div>

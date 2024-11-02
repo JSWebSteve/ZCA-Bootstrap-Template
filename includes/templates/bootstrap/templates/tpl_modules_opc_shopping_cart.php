@@ -8,7 +8,7 @@
 //
 // Provide an in-script override for the case it's not defined.
 //
-// Last updated: OPC v2.4.2/Bootstrap v3.5.0
+// Last updated: OPC v2.4.2/Bootstrap v5.0.0
 //
 if (!defined('TEXT_OPTION_DIVIDER')) {
     define('TEXT_OPTION_DIVIDER', '&nbsp;-&nbsp;');
@@ -22,9 +22,9 @@ $display_tax_column = (count($order->info['tax_groups']) > 1);
 $_SESSION['zca_bootstrap_ot_colspan'] = ($display_tax_column) ? '3' : '2';
 ?>
 <div class="table-responsive card mb-3">
-    <h4 class="card-header"><?php echo HEADING_PRODUCTS; ?></h4>
-    <div class="card-body">
-        <div class="text-right mb-2">
+    <h4 id="shopping-cart-heading" class="card-header"><?php echo HEADING_PRODUCTS; ?></h4>
+    <div class="card-body" aria-labelledby="shopping-cart-heading">
+        <div class="d-flex justify-content-end mb-2">
             <?php echo zca_button_link(zen_href_link(FILENAME_SHOPPING_CART), BUTTON_EDIT_SMALL_ALT, 'small_edit d-block'); ?>
         </div>
         <table class="cartTableDisplay table table-bordered table-striped">
@@ -40,7 +40,7 @@ if ($display_tax_column === true) {
 <?php
 }
 ?>
-                    <th scope="col" id="ccTotalHeading" class="text-right"><?php echo TABLE_HEADING_TOTAL; ?></th>
+                    <th scope="col" id="ccTotalHeading" class="text-end"><?php echo TABLE_HEADING_TOTAL; ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -55,7 +55,7 @@ for ($i = 0, $n = count($order->products); $i < $n; $i++) {
 // if there are attributes, loop thru them and display one per line
     if (isset($order->products[$i]['attributes']) && count($order->products[$i]['attributes']) > 0) {
 ?>
-                        <ul class="cartAttribsList">
+                        <ul class="cartAttribsList list-unstyled">
 <?php
         foreach ($order->products[$i]['attributes'] as $next_attribute) {
 ?>
@@ -80,7 +80,7 @@ for ($i = 0, $n = count($order->products); $i < $n; $i++) {
 <?php
     }  // endif tax info display  
 ?>
-                    <td class="cartTotalDisplay text-right">
+                    <td class="cartTotalDisplay text-end">
 <?php 
     echo $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']);
     if ($order->products[$i]['onetime_charges'] != 0 ) {

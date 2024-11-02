@@ -3,7 +3,7 @@
 // Part of the One-Page Checkout plugin, provided under GPL 2.0 license by lat9
 // Copyright (C) 2013-2022, Vinos de Frutas Tropicales.  All rights reserved.
 //
-// Last updated: OPC v2.4.2/Bootstrap v3.4.0
+// Last updated: OPC v2.4.2/Bootstrap v5.0.0
 //
 ?>
 <?php 
@@ -17,14 +17,14 @@ if ($payment_module_available) {
 //
 $nojs_link = zen_href_link(FILENAME_CHECKOUT_SHIPPING, 'opctype=jserr', 'SSL');
 ?>
-<div class="centerColumn" id="checkoutPaymentNoJs"><?php echo sprintf(TEXT_NOSCRIPT_JS_ERROR, $nojs_link); ?></div>
+<div id="checkoutPaymentNoJs" class="centerColumn"><?php echo sprintf(TEXT_NOSCRIPT_JS_ERROR, $nojs_link); ?></div>
 
 <?php
 // -----
 // Start main form ...
 //
 ?>
-<div class="centerColumn opc-base" id="checkoutPayment" style="display:none;">
+<div id="checkoutPayment" class="centerColumn opc-base" style="display:none;">
     <h1 id="checkoutOneHeading"><?php echo HEADING_TITLE; ?></h1>
 <?php
   echo zen_draw_form('checkout_payment', zen_href_link(FILENAME_CHECKOUT_ONE_CONFIRMATION, '', 'SSL'), 'post', 'id="checkout_payment"') . zen_draw_hidden_field('action', 'process') . zen_draw_hidden_field('javascript_enabled', '0', 'id="javascript-enabled"'); 
@@ -42,8 +42,8 @@ foreach ($messages_to_check as $page_check) {
 }
 ?>
     <div class="row">
-        <div class="col-sm-6 col-lg-4">
-<?php
+        <div class="col-12 col-md-6 col-lg-4">
+        <?php
 // -----
 // Insert the (conditional) guest-login block.  That block's formatting will determine whether/not to render.
 //
@@ -61,8 +61,8 @@ require $template->get_template_dir('tpl_modules_opc_shipping_address.php', DIR_
 ?>
         </div>
 
-        <div class="col-sm-6 col-lg-4">
-<?php
+        <div class="col-12 col-md-6 col-lg-4">
+        <?php
 // -----
 // Insert the shipping-method choices block.
 //
@@ -80,8 +80,8 @@ require $template->get_template_dir('tpl_modules_opc_credit_selections.php', DIR
 ?>
         </div>
 
-    <div class="col-sm-12 col-lg-4">
-<?php
+        <div class="col-12 col-lg-4">
+        <?php
 // -----
 // Insert the shopping-cart/totals block.
 //

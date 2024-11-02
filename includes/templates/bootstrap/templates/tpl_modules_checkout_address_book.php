@@ -2,7 +2,7 @@
 /**
  * tpl_modules_checkout_address_book.php
  * 
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2009 Zen Cart Development Team
@@ -32,18 +32,19 @@ foreach ($addresses as $address) {
     }
 ?>
 <!--bof address book single entries card-->
-<div id="cab-card-<?php echo $address_book_id; ?>" class="card mb-3<?php echo $primary_class; ?>">
-    <div class="card-header">
-        <div class="custom-control custom-radio custom-control-inline">
-            <?php echo zen_draw_radio_field('address', $address_book_id, $selected, 'id="name-' . $address_book_id . '"'); ?>
-            <label for="name-<?php echo $address_book_id; ?>" class="custom-control-label"><?php echo zen_output_string_protected($address['firstname'] . ' ' . $address['lastname']) . $primary_address; ?></label>
+<div id="cab-card-<?php echo $address_book_id; ?>" class="card mb-3<?php echo $primary_class; ?>" role="region" aria-labelledby="cab-card-header-<?php echo $address_book_id; ?>">
+    <div id="cab-card-header-<?php echo $address_book_id; ?>" class="card-header">
+        <div class="form-check">
+            <?php echo zen_draw_radio_field('address', $address_book_id, $selected, 'id="name-' . $address_book_id . '" class="form-check-input" aria-label="' . zen_output_string_protected($address['firstname'] . ' ' . $address['lastname']) . '"'); ?>
+            <label class="form-check-label" for="name-<?php echo $address_book_id; ?>"><?php echo zen_output_string_protected($address['firstname'] . ' ' . $address['lastname']) . $primary_address; ?></label>
         </div>
     </div>
 
-    <div class="card-body p-3">
+    <div id="cab-card-body-<?php echo $address_book_id; ?>" class="card-body" aria-labelledby="cab-card-header-<?php echo $address_book_id; ?>">
         <address><?php echo zen_address_format(zen_get_address_format_id($address['country_id']), $address['address'], true, ' ', '<br>'); ?></address>
     </div>
 </div>
 <!--eof address book single entry card-->
 <?php
 }
+?>

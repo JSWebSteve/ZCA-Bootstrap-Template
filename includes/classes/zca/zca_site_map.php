@@ -2,7 +2,7 @@
 /**
  * site_map.php
  *
- * BOOTSTRAP v3.0.0
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2018 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -28,6 +28,7 @@ class zca_SiteMapTree extends zen_SiteMapTree
         $this->parent_group_start_string = $start;
         $this->parent_group_end_string = $end;
     }
+    
     public function setChildStartString($start, $end = "</li>\n")
     {
         $this->child_start_string = $start;

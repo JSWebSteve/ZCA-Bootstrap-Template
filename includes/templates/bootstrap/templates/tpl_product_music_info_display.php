@@ -2,7 +2,7 @@
 /**
  * Page Template
  *
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=product_music_info
  * Displays details of a music product

@@ -7,7 +7,7 @@
 // The $enabled_payment_modules variable must be handled using foreach, since numerical keys
 // might have been removed if the payment method is not supported for guest-checkout!!
 //
-// Last updated: OPC v2.4.2/Bootstrap v3.4.0
+// Last updated: OPC v2.4.2/Bootstrap v5.0.0
 //
 // -----
 // Don't display the payment-method block unless there is a shipping method available
@@ -16,8 +16,8 @@
 if ($shipping_module_available === true && $display_payment_block === true) {
 ?>
 <div id="checkoutPaymentMethod" class="card mb-3">
-    <h4 class="card-header"><?php echo TABLE_HEADING_PAYMENT_METHOD; ?></h4>
-    <div class="card-body">
+    <h4 id="payment-method-heading" class="card-header"><?php echo TABLE_HEADING_PAYMENT_METHOD; ?></h4>
+    <div class="card-body" aria-labelledby="payment-method-heading">
 <?php 
     // ** BEGIN PAYPAL EXPRESS CHECKOUT **
     if (!$payment_modules->in_special_checkout()) {
@@ -42,8 +42,8 @@ if ($shipping_module_available === true && $display_payment_block === true) {
         $payment_div_class = '';
         $payment_label_class = '';
         if ($num_selections > 1) {
-            $payment_div_class = ' custom-radio';
-            $payment_label_class = ' class="custom-control-label radioButtonLabel"';
+            $payment_div_class = ' form-check';
+            $payment_label_class = ' class="form-check-label"';
 ?>
         <p class="important"><?php echo TEXT_SELECT_PAYMENT_METHOD; ?></p>
 <?php
@@ -64,7 +64,7 @@ if ($shipping_module_available === true && $display_payment_block === true) {
             if ($num_selections > 1) {
                 if (empty($current_method['noradio'])) {
                     $is_selected = (isset($_SESSION['payment']) && $payment_id == $_SESSION['payment']);
-                    echo zen_draw_radio_field('payment', $payment_id, $is_selected, 'id="pmt-' . $payment_id . '"');
+                    echo zen_draw_radio_field('payment', $payment_id, $is_selected, 'id="pmt-' . $payment_id . '" class="form-check-input"');
                 }
             } else {
                 echo zen_draw_hidden_field('payment', $payment_id, 'id="pmt-' . $payment_id . '"');
@@ -86,14 +86,14 @@ if ($shipping_module_available === true && $display_payment_block === true) {
                     }
                 }
 ?>
-        <div class="alert"><?php echo TEXT_INFO_COD_FEES; ?></div>
+        <div class="alert alert-info" role="alert"><?php echo TEXT_INFO_COD_FEES; ?></div>
 <?php
             }
 ?>
 <?php
             if (isset($current_method['error'])) {
 ?>
-        <div><?php echo $current_method['error']; ?></div>
+        <div class="alert alert-danger" role="alert"><?php echo $current_method['error']; ?></div>
 
 <?php
             } elseif (isset($current_method['fields']) && is_array($current_method['fields'])) {
@@ -107,7 +107,7 @@ if ($shipping_module_available === true && $display_payment_block === true) {
                     //
                     if (!empty($current_field['title'])) {
 ?>
-            <label <?php echo (isset($current_field['tag']) ? 'for="' . $current_field['tag'] . '" ' : ''); ?>class="inputLabelPayment"><?php echo $current_field['title']; ?></label>
+            <label <?php echo (isset($current_field['tag']) ? 'for="' . $current_field['tag'] . '" ' : ''); ?>class="form-label inputLabelPayment"><?php echo $current_field['title']; ?></label>
 <?php
                     }
 

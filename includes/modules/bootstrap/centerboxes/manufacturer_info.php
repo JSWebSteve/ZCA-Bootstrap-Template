@@ -2,7 +2,7 @@
 /**
  * manufacturer_info sidebox - displays extra info about the selected product's manufacturer details (if defined in Admin->Catalog->Manufacturers)
  *
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2005 Zen Cart Development Team
@@ -10,6 +10,10 @@
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: manufacturer_info.php 2718 2005-12-28 06:42:39Z drbyte $
  */
+if (!defined('IS_ADMIN_FLAG')) {
+    die('Illegal Access');
+}
+
 if (isset($_GET['products_id'])) {
     $manufacturer_info_sidebox_query =
         "SELECT m.manufacturers_id, m.manufacturers_name, m.manufacturers_image, mi.manufacturers_url

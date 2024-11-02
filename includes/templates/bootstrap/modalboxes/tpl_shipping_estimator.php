@@ -2,17 +2,15 @@
 // -----
 // Part of the Bootstrap template, displaying a modal shipping-estimator on the shopping-cart page.
 //
-// BOOTSTRAP v3.7.2
+// BOOTSTRAP v5.0.0
 //
 ?>
-<div class="modal fade" id="shippingEstimatorModal" tabindex="-1" role="dialog" aria-labelledby="shippingEstimatorModalLabel" aria-hidden="true">
+<div id="shippingEstimatorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="shippingEstimatorModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title mx-auto" id="shippingEstimatorModalLabel"><?= CART_SHIPPING_OPTIONS ?></h3>
-                <button type="button" class="close m-0 p-0" data-dismiss="modal" aria-label="<?= TEXT_MODAL_CLOSE ?>">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h3 id="shippingEstimatorModalLabel" class="modal-title mx-auto"><?= CART_SHIPPING_OPTIONS ?></h3>
+                <button type="button" class="btn-close m-0 p-0" data-bs-dismiss="modal" aria-label="<?= TEXT_MODAL_CLOSE ?>"></button>
             </div>
       
             <div class="modal-body">
@@ -20,7 +18,7 @@
             </div>
       
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= TEXT_MODAL_CLOSE ?></button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= TEXT_MODAL_CLOSE ?></button>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
 /**
  * @author ZCAdditions.com, ZCA Bootstrap Template
  *
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
 */
  
@@ -94,12 +94,14 @@ function zca_get_rating_stars($rating, $size = '')
     $rating = ($rating < 0) ? 0 : $rating;
     $rating = ($rating > 5) ? 5 : $rating;
     
-    $rating_stars = '<span class="sr-only">' . $rating . ' ' . (($rating === 1) ? ARIA_REVIEW_STAR : ARIA_REVIEW_STARS) . '</span>';
+    $rating_stars = '<div class="product-rating" role="img" aria-label="' . $rating . ' ' . (($rating === 1) ? ARIA_REVIEW_STAR : ARIA_REVIEW_STARS) . '">';
+    $rating_stars .= '<span class="visually-hidden">' . $rating . ' ' . (($rating === 1) ? ARIA_REVIEW_STAR : ARIA_REVIEW_STARS) . '</span>';
     $size = ($size != '') ? " fa-$size" : '';
-    for ($i = 1; $i <= $rating; $i++) {
+    for ($i = 1; $i <= 5; $i++) {
         $fa_class = ($i <= $rating) ? 'fas' : 'far';
-        $rating_stars .= '<i class="' . $fa_class . ' fa-star' . $size . '"></i>';
+        $rating_stars .= '<i class="' . $fa_class . ' fa-star' . $size . '" aria-hidden="true"></i>';
     }
+    $rating_stars .= '</div>';
     return $rating_stars;
 }
 
@@ -126,7 +128,7 @@ function zca_get_translated_month_name()
 function zca_button_link($link, $text, $extra_classes = '', $parameters = '') {
     $extra_classes = ($extra_classes !== '') ? ' ' . trim($extra_classes) : '';
     $parameters = ($parameters !== '') ? ' ' . trim($parameters) : '';
-    return '<a class="p-2 btn' . $extra_classes . '" href="' . $link . '"' . $parameters . '>' . $text . '</a>';
+    return '<a id="' . zen_output_string($text) . '-button" class="p-2 btn btn-custom' . $extra_classes . '" href="' . $link . '"' . $parameters . ' role="button">' . $text . '</a>';
 }
 
 // -----
@@ -137,5 +139,5 @@ function zca_back_link($extra_classes = '', $parameters = '', $button_name = '')
     $extra_classes = ($extra_classes !== '') ? ' ' . trim($extra_classes) : '';
     $parameters = ($parameters !== '') ? ' ' . trim($parameters) : '';
     $button_name = ($button_name === '') ? BUTTON_BACK_ALT : $button_name;
-    return '<a class="p-2 btn button_back' . $extra_classes . '" href="' . zen_back_link(true) . '"' . $parameters . '>' . $button_name . '</a>';
+    return '<a id="back-link-button" class="p-2 btn btn-custom button_back' . $extra_classes . '" href="' . zen_back_link(true) . '"' . $parameters . ' role="button">' . $button_name . '</a>';
 }

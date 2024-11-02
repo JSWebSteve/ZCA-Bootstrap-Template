@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2005 Zen Cart Development Team
@@ -27,7 +27,7 @@ if (DEFINE_PRIVACY_STATUS === '1' || DEFINE_PRIVACY_STATUS === '2') {
 <?php
 }
 ?>
-    <div id="privacyDefault-btn-toolbar" class="btn-toolbar my-3" role="toolbar">
+    <div id="privacyDefault-btn-toolbar" class="d-flex justify-content-start my-3" role="toolbar" aria-label="Privacy page navigation">
         <?php echo zca_back_link(); ?>
     </div>
 </div>

@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -37,7 +37,7 @@ if (!empty($products_image)) {
 
 <!--bof Product details list  -->
             <ul id="productReviewsDefault-productDetailsList" class="productDetailsList list-group mb-3">
-                <li class="list-group-item"><?php echo TEXT_PRODUCT_MODEL . $products_model; ?></li>
+                <li id="productReviewsDefault-productDetailsList-model" class="list-group-item"><?php echo TEXT_PRODUCT_MODEL . $products_model; ?></li>
             </ul>
 <!--eof Product details list -->
         </div>
@@ -76,9 +76,9 @@ if ($reviews_split->number_of_rows > 0) {
     if (PREV_NEXT_BAR_LOCATION === '1' || PREV_NEXT_BAR_LOCATION === '3') {
 ?>
     <div id="productReviewsDefault-topRow" class="row mb-3">
-        <div id="productReviewsDefault-topNumber" class="topNumber col-sm"><?php echo $reviews_split->display_count(TEXT_DISPLAY_NUMBER_OF_REVIEWS); ?></div>
+        <div id="productReviewsDefault-topNumber" class="col-sm"><?php echo $reviews_split->display_count(TEXT_DISPLAY_NUMBER_OF_REVIEWS); ?></div>
 
-        <div id="productReviewsDefault-topLinks" class="topLinks col-sm"><?php echo TEXT_RESULT_PAGE . $reviews_split->display_links($max_display_page_links, zen_get_all_get_params(['page', 'info', 'main_page']), $paginateAsUL); ?></div>
+        <div id="productReviewsDefault-topLinks" class="col-sm"><?php echo TEXT_RESULT_PAGE . $reviews_split->display_links($max_display_page_links, zen_get_all_get_params(['page', 'info', 'main_page']), $paginateAsUL); ?></div>
     </div>
 <?php
     }
@@ -94,11 +94,11 @@ if ($reviews_split->number_of_rows > 0) {
                 <h3 class="rating"><?php echo zca_get_rating_stars($reviews['reviewsRating'], 'xs'); ?></h3>
             </div>      
             <blockquote class="blockquote mb-3">
-                <div id="productsReview<?php echo $reviews['id']; ?>-content" class="content"><?php echo zen_trunc_string(zen_output_string_protected(stripslashes($reviews['reviewsText'])), MAX_PREVIEW); ?></div>
+                <div id="productsReview<?php echo $reviews['id']; ?>-content" class="content mb-3"><?php echo zen_trunc_string(zen_output_string_protected(stripslashes($reviews['reviewsText'])), MAX_PREVIEW); ?></div>
                 <footer class="blockquote-footer"><cite title="Source Title"><?php echo sprintf(TEXT_REVIEW_BY, zen_output_string_protected($reviews['customersName'])); ?></cite></footer>
             </blockquote>
 
-            <div id="productsReview<?php echo $reviews['id']; ?>-readReviews" class="float-right">
+            <div id="productsReview<?php echo $reviews['id']; ?>-readReviews" class="d-flex justify-content-end">
                 <?php echo zca_button_link(zen_href_link(FILENAME_PRODUCT_REVIEWS_INFO, 'products_id=' . (int)$_GET['products_id'] . '&reviews_id=' . $reviews['id']), BUTTON_READ_REVIEWS_ALT, 'button_read_reviews'); ?>
             </div>
         </div>
@@ -117,8 +117,8 @@ if ($reviews_split->number_of_rows > 0) {
 if (($reviews_split->number_of_rows > 0) && (PREV_NEXT_BAR_LOCATION === '2' || PREV_NEXT_BAR_LOCATION === '3')) {
 ?>
     <div id="productReviewsDefault-bottomRow" class="row">
-        <div id="productReviewsDefault-bottomNumber" class="bottomNumber col-sm"><?php echo $reviews_split->display_count(TEXT_DISPLAY_NUMBER_OF_REVIEWS); ?></div>
-        <div id="productReviewsDefault-bottomLinks" class="bottomLinks col-sm"><?php echo TEXT_RESULT_PAGE . $reviews_split->display_links($max_display_page_links, zen_get_all_get_params(array('page', 'info', 'main_page')), $paginateAsUL); ?></div>
+        <div id="productReviewsDefault-bottomNumber" class="col-sm"><?php echo $reviews_split->display_count(TEXT_DISPLAY_NUMBER_OF_REVIEWS); ?></div>
+        <div id="productReviewsDefault-bottomLinks" class="col-sm"><?php echo TEXT_RESULT_PAGE . $reviews_split->display_links($max_display_page_links, zen_get_all_get_params(array('page', 'info', 'main_page')), $paginateAsUL); ?></div>
     </div>
 <?php
 }

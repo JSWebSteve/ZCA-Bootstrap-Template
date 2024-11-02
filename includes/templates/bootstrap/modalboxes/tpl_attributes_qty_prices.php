@@ -2,7 +2,7 @@
 /**
  * Override Modal for popup_attributes_qty_prices
  * 
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2016 Zen Cart Development Team
@@ -18,14 +18,12 @@ if ($processing_completed === true) {
     return;
 }
 ?>
-<div class="modal fade" id="attributesQtyPricesModal" tabindex="-1" role="dialog" aria-labelledby="attributesQtyPricesModalLabel" aria-hidden="true">
+<div id="attributesQtyPricesModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="attributesQtyPricesModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="attributesQtyPricesModalLabel"><?php echo TEXT_ATTRIBUTES_QTY_PRICES_HELP; ?></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo TEXT_MODAL_CLOSE; ?>">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 id="attributesQtyPricesModalLabel" class="modal-title"><?php echo TEXT_ATTRIBUTES_QTY_PRICES_HELP; ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo TEXT_MODAL_CLOSE; ?>"></button>
       </div>
       <div class="modal-body">
 <?php
@@ -118,7 +116,7 @@ foreach ($products_options_names_lookup as $next_option) {
                 }
 
                 $attribute_quantity .= '<td class="text-center">' . $zc_disp_qty . '</td>';
-                $attribute_quantity_price .= '<td class="text-right">' . $currencies->display_price($attribute_table_cost[$i + 1], zen_get_tax_rate($products_tax_class_id)) . '</td>';
+                $attribute_quantity_price .= '<td class="text-end">' . $currencies->display_price($attribute_table_cost[$i + 1], zen_get_tax_rate($products_tax_class_id)) . '</td>';
                 $cnt_qty_prices++;
             }
 ?>
@@ -184,7 +182,7 @@ if ($show_onetime === 'true') {
                 }
                 for ($i = 0, $n = $size; $i < $n; $i += 2) {
                     $attribute_quantity .= '<td class="text-center">' . $attribute_table_cost[$i] . '</td>';
-                    $attribute_quantity_price .= '<td class="text-right">' . $currencies->display_price($attribute_table_cost[$i + 1], zen_get_tax_rate($products_tax_class_id)) . '</td>';
+                    $attribute_quantity_price .= '<td class="text-end">' . $currencies->display_price($attribute_table_cost[$i + 1], zen_get_tax_rate($products_tax_class_id)) . '</td>';
                     $cnt_qty_prices++;
                 }
 ?>
@@ -199,7 +197,7 @@ if ($show_onetime === 'true') {
               <td><?php echo TABLE_ATTRIBUTES_QTY_PRICE_QTY; ?></td>
               <?php echo $attribute_quantity; ?>
             </tr>
-            <tr>';
+            <tr>
               <td><?php echo TABLE_ATTRIBUTES_QTY_PRICE_PRICE; ?></td>
               <?php echo $attribute_quantity_price; ?>
             </tr>
@@ -213,7 +211,7 @@ if ($show_onetime === 'true') {
 ?>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo TEXT_MODAL_CLOSE; ?></button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo TEXT_MODAL_CLOSE; ?></button>
       </div>
     </div>
   </div>

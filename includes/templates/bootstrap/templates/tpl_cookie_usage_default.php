@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=cookie_usage.<br />
  * Displays information page, if cookie only is set in admin and cookies disabled in users browser.
@@ -22,13 +22,13 @@
 <!--bof cookie privacy and security card-->
     <div id="cookiePrivacy-card" class="card mb-3">
         <h4 id="cookiePrivacy-card-header" class="card-header"><?php echo BOX_INFORMATION_HEADING; ?></h4>
-        <div id="cookiePrivacy-card-body" class="card-body p-3">
+        <div id="cookiePrivacy-card-body" class="card-body p-3" aria-labelledby="cookiePrivacy-card-header">
             <p id="paragraph-one" class="content my-3"><?php echo BOX_INFORMATION; ?></p>
             <p id="paragraph-two" class="content my-3"><?php echo TEXT_INFORMATION_2; ?></p>
             <p id="paragraph-three" class="content my-3"><?php echo TEXT_INFORMATION_3; ?></p>
             <p id="paragraph-four" class="content my-3"><?php echo TEXT_INFORMATION_4; ?></p>
             <p id="paragraph-five" class="content my-3"><?php echo TEXT_INFORMATION_5; ?></p>
-            <div id="cookiePrivacy-btn-toolbar" class="btn-toolbar justify-content-end mt-3" role="toolbar">
+            <div id="cookiePrivacy-btn-toolbar" class="d-flex justify-content-end mt-3" role="toolbar">
                 <?php echo zca_button_link(zen_back_link(true), BUTTON_CONTINUE_ALT, 'button_continue'); ?>
             </div>
         </div>

@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.6.4
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=checkout_success.
  * Displays confirmation details after order has been successfully processed.
@@ -48,11 +48,12 @@ if (isset($additional_payment_messages) && $additional_payment_messages !== '') 
 ?>
 <!-- eof payment-method-alerts -->
 
-<!--eof card deck-->
-    <div id="logOffMyAccount-card-deck" class="card-deck mb-3">
+<!--bof card deck-->
+<div id="logOffMyAccount-card-deck" class="row row-cols-1 row-cols-md-2 g-4 mb-3">
     
 <!--bof log off card-->
-        <div id="logOff-card" class="card">
+    <div class="col">
+        <div id="logOff-card" class="card h-100">
             <div id="logOff-card-body" class="card-body"> 
 <?php
 if (isset($_SESSION['customer_guest_id'])) {
@@ -67,22 +68,25 @@ if (isset($_SESSION['customer_guest_id'])) {
                 </div>
             </div>
         </div>
+    </div>
 <!--eof log off card-->
-
+    
 <!--bof my account card--> 
-        <div id="myAccount-card" class="card">
-            <div id="myAccount-card-body" class="card-body">
-                <?= TEXT_CONTACT_STORE_OWNER ?>
-
-                <div id="cust-btn-toolbar" class="btn-toolbar justify-content-center mt-3" role="toolbar">
+    <div class="col">
+        <div id="myAccount-card" class="card h-100">
+            <div id="myAccount-card-body" class="card-body d-flex flex-column"> 
+                <div><?= TEXT_CONTACT_STORE_OWNER ?></div>
+                <div id="cust-btn-toolbar" class="btn-toolbar justify-content-end mt-auto" role="toolbar">
                     <?= zca_button_link(zen_href_link(FILENAME_CONTACT_US, '', 'SSL'), BUTTON_CONTACT_US_TEXT, 'button_contact_us') ?>
                 </div>
             </div>
         </div>
+    </div>
 <!--eof my account card-->
 
-    </div>
-<!--eof card deck-->
+    
+        </div>
+    <!--eof card deck-->
 
 <!--bof order number card--> 
     <div id="orderNumber-card" class="card mb-3">
@@ -123,9 +127,9 @@ if ($flag_show_products_notification == true) {
 <?php
     foreach ($notificationsArray as $notifications) {
 ?>
-                <div class="custom-control custom-checkbox">
-                    <?= zen_draw_checkbox_field('notify[]', $notifications['products_id'], true, 'id="notify-' . $notifications['counter'] . '"') ?>
-                    <label class="custom-control-label checkboxLabel" for="notify-<?= $notifications['counter'] ?>">
+                <div class="form-check form-switch">
+                    <?= zen_draw_checkbox_field('notify[]', $notifications['products_id'], true, 'id="notify-' . $notifications['counter'] . '" class="form-check-input"') ?>
+                    <label class="form-check-label" for="notify-<?= $notifications['counter'] ?>">
                         <?= $notifications['products_name'] ?>
                     </label>
                 </div>

@@ -2,7 +2,7 @@
 /**
  * init_zca_bootstrap.php
  *
- * BOOTSTRAP v3.6.5
+ * BOOTSTRAP v5.0.0
  *
  * @package initSystem
  * @copyright Copyright 2003-2016 Zen Cart Development Team
@@ -10,7 +10,7 @@
  * @version $Id: rbarbour zcadditions.com Sun Dec 13 16:32:43 2015 -0500 New in v1.5.5
  */
 // -----
-// Updated for Bootstrap-v3.0.0 (zc157), removing the need for a $breadcrumb override.
+// Updated for Bootstrap-v3.0.0 (zc157/zc158), removing the need for a $breadcrumb override.
 //
 if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');

@@ -2,7 +2,7 @@
 /**
  * Page Template
  *
- * BOOTSTRAP v3.7.2
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=shopping_cart.<br />
  * Displays shopping-cart contents
@@ -18,8 +18,8 @@
 if ($flagHasCartContents) {
     if ($_SESSION['cart']->count_contents() > 0) {
 ?>
-    <div id="shoppingCartDefault-helpLink" class="helpLink float-right p-3">
-        <a data-toggle="modal" href="#cartHelpModal"><?php echo TEXT_CART_MODAL_HELP; ?></a>
+    <div id="shoppingCartDefault-helpLink" class="helpLink float-end p-3">
+        <a data-bs-toggle="modal" href="#cartHelpModal"><?php echo TEXT_CART_MODAL_HELP; ?></a>
     </div>
 
     <?php require $template->get_template_dir('tpl_info_shopping_cart.php', DIR_WS_TEMPLATE, $current_page_base, 'modalboxes') . '/tpl_info_shopping_cart.php'; ?>
@@ -50,7 +50,7 @@ if ($flagHasCartContents) {
 <?php 
     if (!empty($totalsDisplay)) {
 ?>
-    <div id="shoppingCartDefault-cartTotalsDisplay" class="cartTotalsDisplay text-center font-weight-bold p-3"><?php echo $totalsDisplay; ?></div>
+    <div id="shoppingCartDefault-cartTotalsDisplay" class="cartTotalsDisplay text-center fw-bold p-3"><?php echo $totalsDisplay; ?></div>
 <?php
     }
 
@@ -73,14 +73,14 @@ if ($flagHasCartContents) {
 <?php
     if (SHOW_SHOPPING_CART_UPDATE === '1' || SHOW_SHOPPING_CART_UPDATE === '3') {
 ?>
-                <th scope="col" class="d-none d-sm-table-cell" id="cartTableDisplay-qtyUpdateHeading"><span aria-label="<?php echo TEXT_CART_ARIA_HEADING_UPDATE_COLUMN; ?>">&nbsp;</span></th>
+                <th scope="col" class="d-none d-sm-table-cell" id="cartTableDisplay-qtyUpdateHeading"><span class="visually-hidden"><?php echo TEXT_CART_ARIA_HEADING_UPDATE_COLUMN; ?></span></th>
 <?php
     }
 ?>
                 <th scope="col" id="cartTableDisplay-productsHeading"><?php echo TABLE_HEADING_PRODUCTS; ?></th>
                 <th scope="col" id="cartTableDisplay-priceHeading"><?php echo TABLE_HEADING_PRICE; ?></th>
                 <th scope="col" id="cartTableDisplay-totalsHeading"><?php echo TABLE_HEADING_TOTAL; ?></th>
-                <th scope="col" class="d-none d-sm-table-cell" id="cartTableDisplay-removeHeading"><span aria-label="<?php echo TEXT_CART_ARIA_HEADING_DELETE_COLUMN; ?>">&nbsp;</span></th>
+                <th scope="col" class="d-none d-sm-table-cell" id="cartTableDisplay-removeHeading"><span class="visually-hidden"><?php echo TEXT_CART_ARIA_HEADING_DELETE_COLUMN; ?></span></th>
             </tr>
 <?php
     foreach ($productArray as $product) {
@@ -108,7 +108,7 @@ if ($flagHasCartContents) {
 ?>
                     <div class="form-check mt-1">
                         <?php echo $checkbox_field; ?>
-                        <label class="form-check-label sr-only" for="del-r-<?php echo $product['id']; ?>"><?php echo ARIA_DELETE_ITEM_FROM_CART; ?></label>
+                        <label class="form-check-label visually-hidden" for="del-r-<?php echo $product['id']; ?>"><?php echo ARIA_DELETE_ITEM_FROM_CART; ?></label>
                     </div>
 <?php
         }
@@ -124,7 +124,7 @@ if ($flagHasCartContents) {
 ?>
                 <td class="productsCell">
                     <a href="<?php echo $product['linkProductsName']; ?>">
-                        <span class="d-none d-sm-block float-left mr-3"><?php echo $product['productsImage']; ?></span>
+                        <span class="d-none d-sm-block float-start me-3"><?php echo $product['productsImage']; ?></span>
                         <?php echo $product['productsName'] . ' ' . $product['flagStockCheck']; ?>
                     </a>
 
@@ -133,7 +133,7 @@ if ($flagHasCartContents) {
         if (isset($product['attributes']) && is_array($product['attributes'])) {
 ?>
                     <div class="productsCell-attributes">
-                        <ul>
+                        <ul class="list-unstyled">
 <?php
             foreach ($product['attributes'] as $option => $value) {
 ?>
@@ -160,9 +160,9 @@ if ($flagHasCartContents) {
             $checkbox_field = zen_draw_checkbox_field('cart_delete[]', $product['id'], false, 'id="del-' . $product['id'] . '"');
             $checkbox_field = str_replace('custom-control-input', 'form-check-input', $checkbox_field);
 ?>
-                    <div class="form-check mt-1">
+                    <div class="form-check d-flex justify-content-center mt-1">
                         <?php echo $checkbox_field; ?>
-                        <label class="form-check-label sr-only" for="del-<?php echo $product['id']; ?>"><?php echo ARIA_DELETE_ITEM_FROM_CART; ?></label>
+                        <label class="form-check-label visually-hidden" for="del-<?php echo $product['id']; ?>"><?php echo ARIA_DELETE_ITEM_FROM_CART; ?></label>
                     </div>
 <?php
         }
@@ -187,14 +187,14 @@ if ($flagHasCartContents) {
 ?>
                 </td>
                 <td colspan="5">
-                    <div id="cartTotal" class="text-right font-weight-bold"><?php echo SUB_TITLE_SUB_TOTAL; ?> <?php echo $cartShowTotal; ?></div>
+                    <div id="cartTotal" class="text-end fw-bold"><?php echo SUB_TITLE_SUB_TOTAL; ?> <?php echo $cartShowTotal; ?></div>
                 </td>
             </tr>
         </table>
     </div>
 
 <!--bof shopping cart buttons-->
-    <div id="shoppingCartDefault-btn-toolbar" class="btn-toolbar justify-content-between my-3" role="toolbar">
+    <div id="shoppingCartDefault-btn-toolbar" class="d-flex justify-content-between my-3" role="toolbar" aria-label="Shopping Cart Actions">
         <?php echo zca_back_link('button_continue_shopping', '', BUTTON_CONTINUE_SHOPPING_ALT); ?>
         <?php echo zca_button_link(zen_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'), BUTTON_CHECKOUT_ALT, 'button_checkout'); ?>
     </div>
@@ -210,15 +210,16 @@ if ($flagHasCartContents) {
         if (isset($_POST['action']) && $_POST['action'] === 'submit') {
 ?>
     <script>
-    jQuery(document).ready(function () {
-        jQuery('#shippingEstimatorModal').modal('show');
+    document.addEventListener('DOMContentLoaded', function () {
+        var myModal = new bootstrap.Modal(document.getElementById('shippingEstimatorModal'));
+        myModal.show();
     });
     </script>
 <?php
         }
 ?>
     <div id="shoppingCartDefault-shoppingEstimator-btn-toolbar" class="btn-toolbar my-3" role="toolbar">
-        <?php echo zen_image_button(BUTTON_IMAGE_SHIPPING_ESTIMATOR, BUTTON_SHIPPING_ESTIMATOR_ALT, 'data-toggle="modal" data-target="#shippingEstimatorModal"'); ?>
+        <?php echo zen_image_button(BUTTON_IMAGE_SHIPPING_ESTIMATOR, BUTTON_SHIPPING_ESTIMATOR_ALT, 'data-bs-toggle="modal" data-bs-target="#shippingEstimatorModal"'); ?>
     </div>
 <?php
         require $template->get_template_dir('tpl_shipping_estimator.php', DIR_WS_TEMPLATE, $current_page_base, 'modalboxes') . '/tpl_shipping_estimator.php';

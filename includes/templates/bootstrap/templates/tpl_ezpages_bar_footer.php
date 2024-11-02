@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v1.0.BETA
+ * BOOTSTRAP v5.0.0
  *
  * Displays EZ-Pages footer-bar content.<br />
  *
@@ -20,11 +20,15 @@
 ?>
 
 <?php if (!empty($var_linksList)) { ?>
-<div id="ezpagesBarFooter" class="ezpagesBar rounded">
-<ul class="nav nav-pills">
-<?php for ($i=1, $n=sizeof($var_linksList); $i<=$n; $i++) {  ?>
-  <li class="nav-item"><a class="nav-link" href="<?php echo $var_linksList[$i]['link']; ?>"><?php echo $var_linksList[$i]['name']; ?></a></li>
-<?php } // end FOR loop ?>
-</ul>
-</div>
+<nav id="ezpagesBarFooter" class="ezpagesBar rounded" aria-label="EZ-Pages Footer Navigation">
+    <ul class="nav nav-pills justify-content-center">
+    <?php for ($i=1, $n=sizeof($var_linksList); $i<=$n; $i++) {  ?>
+        <li class="nav-item">
+            <a id="ezpagesBarFooter-link-<?php echo $i; ?>" class="nav-link" href="<?php echo $var_linksList[$i]['link']; ?>">
+                <?php echo $var_linksList[$i]['name']; ?>
+            </a>
+        </li>
+    <?php } // end FOR loop ?>
+    </ul>
+</nav>
 <?php } ?>

@@ -2,7 +2,7 @@
 /**
  * upcoming_products module
  *
- * BOOTSTRAP v3.4.0
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2018 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -37,11 +37,9 @@ if ((($manufacturers_id > 0 && empty($_GET['filter_id'])) || !empty($_GET['music
             $display_limit .
             $limit_clause;
 } else {
-    // get all products and cPaths in this subcat tree
     $productsInCategory = zen_get_categories_products_list((($manufacturers_id > 0 && !empty($_GET['filter_id'])) ? zen_get_generated_category_path_rev($_GET['filter_id']) : $cPath), false, true, 0, $display_limit);
 
     if (is_array($productsInCategory) && count($productsInCategory) > 0) {
-        // build products-list string to insert into SQL query
         $list_of_products = implode(',', array_keys($productsInCategory));
         $expected_query =
             "SELECT p.products_id, pd.products_name, products_date_available AS date_expected, p.master_categories_id

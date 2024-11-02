@@ -7,7 +7,7 @@
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @author ZCAdditions.com, ZCA Bootstrap Template Initialization
  *
- * BOOTSTRAP 3.1.3
+ * BOOTSTRAP v5.0.0
  */
 if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');

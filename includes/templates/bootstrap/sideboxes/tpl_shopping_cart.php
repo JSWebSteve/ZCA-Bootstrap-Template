@@ -2,7 +2,7 @@
 /**
  * Side Box Template
  * 
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -23,9 +23,10 @@ if ($_SESSION['cart']->count_contents() > 0) {
     $content .= '<ul class="list-group list-group-flush">';
     $products = $_SESSION['cart']->get_products();
     foreach ($products as $product) {
-        $content .= '<li class="list-group-item">';
+        $content .= '<li class="list-group-item d-flex justify-content-between align-items-center">';
 
-        $content .= $product['quantity'] . $quantity_suffix . '<a href="' . zen_href_link(zen_get_info_page($product['id']), 'products_id=' . $product['id']) . '">';
+        $content .= '<span>' . $product['quantity'] . $quantity_suffix . '</span>';
+        $content .= '<a href="' . zen_href_link(zen_get_info_page($product['id']), 'products_id=' . $product['id']) . '">';
 
         $content .= $product['name'] . '</a></li>';
 
@@ -35,11 +36,11 @@ if ($_SESSION['cart']->count_contents() > 0) {
     }
     $content .= '</ul>';
 } else {
-    $content .= '<div id="cartBoxEmpty">' . BOX_SHOPPING_CART_EMPTY . '</div>';
+    $content .= '<div id="cartBoxEmpty" class="alert alert-info">' . BOX_SHOPPING_CART_EMPTY . '</div>';
 }
 
 if ($_SESSION['cart']->count_contents() > 0) {
-    $content .= '<div class="cartBoxTotal font-weight-bold text-right pr-3">' . $currencies->format($_SESSION['cart']->show_total()) . '</div>';
+    $content .= '<div class="cartBoxTotal fw-bold text-end pe-3">' . $currencies->format($_SESSION['cart']->show_total()) . '</div>';
     $content .= '<div class="p-3"></div>';
 }
 
@@ -50,7 +51,7 @@ if (zen_is_logged_in() && !zen_in_guest_checkout()) {
     $gv_result = $db->Execute($gv_query);
 
     if (!$gv_result->EOF && $gv_result->fields['amount'] > 0 ) {
-        $content .= '<div id="cartBoxGVButton" class="text-center p-2">' . zca_button_link(zen_href_link(FILENAME_GV_SEND, '', 'SSL'), BUTTON_SEND_A_GIFT_CERT_ALT, 'button_send_a_gift_cert') . '</div>';
+        $content .= '<div id="cartBoxGVButton" class="text-center p-2">' . zca_button_link(zen_href_link(FILENAME_GV_SEND, '', 'SSL'), BUTTON_SEND_A_GIFT_CERT_ALT, 'button_send_a_gift_cert btn btn-primary') . '</div>';
         $content .= '<div id="cartBoxVoucherBalance" class="text-center p-2">' . VOUCHER_BALANCE . $currencies->format($gv_result->fields['amount']) . '</div>';
     }
 }

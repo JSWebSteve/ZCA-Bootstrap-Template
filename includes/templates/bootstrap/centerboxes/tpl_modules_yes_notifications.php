@@ -2,7 +2,7 @@
 /**
  * Side Box Template
  * 
- * BOOTSTRAP v3.5.2
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2005 Zen Cart Development Team
@@ -11,13 +11,19 @@
  * @version $Id: tpl_yes_notifications.php 2982 2006-02-07 07:56:41Z birdbrain $
  */
 ?>
-<div id="ProductNotifications-centerBoxContents" class="card mb-3 text-center">
-    <h3 id="ProductNotifications-centerBoxHeading" class="centerBoxHeading card-header"><?php echo BOX_HEADING_NOTIFICATIONS; ?></h3>
-    <div id="ProductNotifications-card-body" class="card-body p-3 text-center">
-        <a href="<?php echo zen_href_link($_GET['main_page'], zen_get_all_get_params(array('action')) . 'action=notify_remove', $request_type); ?>" title="<?php echo OTHER_BOX_NOTIFY_REMOVE_ALT; ?>">
-            <?php echo zen_image(DIR_WS_TEMPLATE_IMAGES . OTHER_IMAGE_BOX_NOTIFY_REMOVE, OTHER_BOX_NOTIFY_REMOVE_ALT); ?>
-            <br>
-            <?php echo sprintf(BOX_NOTIFICATIONS_NOTIFY_REMOVE, zen_get_products_name($_GET['products_id'])); ?>
+<div id="ProductNotifications-centerBoxContents" class="card mb-3">
+    <div id="ProductNotifications-centerBoxHeading" class="card-header h4" role="heading" aria-level="2">
+        <?= BOX_HEADING_NOTIFICATIONS ?>
+    </div>
+    <div id="ProductNotifications-card-body" class="card-body p-3" aria-labelledby="ProductNotifications-centerBoxHeading">
+        <a href="<?= zen_href_link($_GET['main_page'], zen_get_all_get_params(['action']) . 'action=notify_remove', $request_type) ?>" 
+           class="d-block text-center"
+           title="<?= OTHER_BOX_NOTIFY_REMOVE_ALT ?>"
+           aria-label="<?= sprintf(BOX_NOTIFICATIONS_NOTIFY_REMOVE, zen_get_products_name($_GET['products_id'])) ?>">
+            <?= zen_image(DIR_WS_TEMPLATE_IMAGES . OTHER_IMAGE_BOX_NOTIFY_REMOVE, OTHER_BOX_NOTIFY_REMOVE_ALT, '', '', 'class="img-fluid" role="img"') ?>
+            <div class="mt-2">
+                <?= sprintf(BOX_NOTIFICATIONS_NOTIFY_REMOVE, zen_get_products_name($_GET['products_id'])) ?>
+            </div>
         </a>
     </div>
 </div>

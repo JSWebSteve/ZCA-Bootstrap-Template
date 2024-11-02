@@ -2,7 +2,7 @@
 /**
  * Common Template - tpl_box_default_right.php
  * 
- * BOOTSTRAP v3.4.0
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2005 Zen Cart Development Team
@@ -18,10 +18,14 @@
 $title = str_replace(['<label>', '</label>'], '', $title);
 
 if (!empty($title_link)) {
-    $title = '<a href="' . zen_href_link($title_link) . '">' . $title . BOX_HEADING_LINKS . '</a>';
+    $title = '<a href="' . zen_href_link($title_link) . '" class="text-decoration-none" aria-label="' . $title . '">' . $title . BOX_HEADING_LINKS . '</a>';
 }
 ?>
 <div id="<?php echo str_replace('_', '-', $box_id ) . '-rightBoxCard'; ?>" class="rightBoxCard card mb-3">
-    <h4 id="<?php echo str_replace('_', '-', $box_id) . '-rightBoxHeading'; ?>" class="rightBoxHeading card-header"><?php echo $title; ?></h4>
-    <?php echo $content; ?>
+    <h4 id="<?php echo str_replace('_', '-', $box_id) . '-rightBoxHeading'; ?>" class="rightBoxHeading card-header" role="heading" aria-level="2">
+        <?php echo $title; ?>
+    </h4>
+    <div class="card-body p-3">
+        <?php echo $content; ?>
+    </div>
 </div>

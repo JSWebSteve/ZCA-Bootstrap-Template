@@ -2,7 +2,7 @@
 /**
  * Side Box Template: Searchbox
  *
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -15,10 +15,11 @@ $content =
             zen_draw_hidden_field('main_page', FILENAME_SEARCH_RESULT) .
             zen_draw_hidden_field('search_in_description', '1') .
             zen_hide_session_id() .
-            zen_draw_input_field('keyword', '', 'placeholder="' . SEARCH_DEFAULT_TEXT . '" aria-label="' . SEARCH_DEFAULT_TEXT . '"') .
-            '<br>' .
-            zen_image_submit(BUTTON_IMAGE_SEARCH, HEADER_SEARCH_BUTTON) .
-            '<br>' .
+            '<div class="form-floating mb-3">' .
+                zen_draw_input_field('keyword', '', 'id="keyword-sidebox" placeholder="' . SEARCH_DEFAULT_TEXT . '" aria-label="' . SEARCH_DEFAULT_TEXT . '" class="form-control"') .
+                '<label for="keyword-sidebox">' . SEARCH_DEFAULT_TEXT . '</label>' .
+            '</div>' .
+            zen_image_submit(BUTTON_IMAGE_SEARCH, HEADER_SEARCH_BUTTON, 'class="btn btn-primary w-100 mb-3"') .
             '<a href="' . zen_href_link(FILENAME_SEARCH) . '">' . BOX_SEARCH_ADVANCED_SEARCH . '</a>' .
         '</form>' .
     '</div>';

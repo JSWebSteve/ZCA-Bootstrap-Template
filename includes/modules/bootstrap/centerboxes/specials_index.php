@@ -7,7 +7,7 @@
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: lat9 2019 Jan 06 Modified in v1.5.6b $
  *
- * BOOTSTRAP v3.6.4
+ * BOOTSTRAP v5.0.0
  */
 if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
@@ -34,11 +34,9 @@ if ((($manufacturers_id > 0 && empty($_GET['filter_id'])) || !empty($_GET['music
             AND s.status = 1
             AND pd.language_id = " . (int)$_SESSION['languages_id'];
 } else {
-    // get all products and cPaths in this subcat tree
     $productsInCategory = zen_get_categories_products_list((($manufacturers_id > 0 && !empty($_GET['filter_id'])) ? zen_get_generated_category_path_rev($_GET['filter_id']) : $cPath), false, true, 0, $display_limit);
 
     if (is_array($productsInCategory) && count($productsInCategory) > 0) {
-        // build products-list string to insert into SQL query
         $list_of_products = implode(',', array_keys($productsInCategory));
         $special_products_query =
             "SELECT DISTINCT p.products_id, p.products_image, pd.products_name, p.master_categories_id, p.product_is_call
@@ -67,7 +65,6 @@ $col = 0;
 $list_box_contents = [];
 $title = '';
 
-// show only when 1 or more
 if ($num_products_count > 0) {
     while (!$special_products->EOF) {
         $special_products_id = $special_products->fields['products_id'];
@@ -84,14 +81,20 @@ if ($num_products_count > 0) {
         $special_products_image = '';
         if (!($special_products->fields['products_image'] === '' && PRODUCTS_IMAGE_NO_IMAGE_STATUS === '0')) {
             $special_products_image =
-                '<a href="' . $special_products_link . '" title="' . zen_output_string_protected($special_products_name) . '">' .
-                    zen_image(DIR_WS_IMAGES . $special_products->fields['products_image'], $special_products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) .
-                '</a><br>';
+                '<a href="' . $special_products_link . '" class="d-block" title="' . zen_output_string_protected($special_products_name) . '">' .
+                    zen_image(DIR_WS_IMAGES . $special_products->fields['products_image'], $special_products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'class="img-fluid mx-auto" loading="lazy"') .
+                '</a>';
         }
 
         $list_box_contents[$row][$col] = [
-            'params' => ' class="centerBoxContentsSpecials centerBoxContents card mb-3 p-3 text-center"',
-            'text' => $special_products_image . '<a href="' . $special_products_link . '">' . $special_products_name . '</a><br>' . $products_price
+            'params' => 'class="card h-100"',
+            'text' => '<div class="card-body d-flex flex-column text-center">' . 
+                        $special_products_image . 
+                        '<h3 class="h6 card-title mt-2"><a href="' . $special_products_link . '" class="text-decoration-none">' . 
+                            $special_products_name . 
+                        '</a></h3>' .
+                        '<div class="card-text mt-auto">' . $products_price . '</div>' .
+                     '</div>'
         ];
 
         $col++;
@@ -105,9 +108,9 @@ if ($num_products_count > 0) {
     $heading_month_name = sprintf(TABLE_HEADING_SPECIALS_INDEX, zca_get_translated_month_name());
     if (!empty($new_products_category_id)) {
         $category_title = zen_get_category_name((int)$new_products_category_id, $_SESSION['languages_id']);
-        $title = '<p id="specialCenterbox-card-header" class="centerBoxHeading card-header h3">' . $heading_month_name . ($category_title != '' ? ' - ' . $category_title : '' ) . '</p>';
+        $title = '<h2 id="specialCenterbox-card-header" class="h3">' . $heading_month_name . ($category_title != '' ? ' - ' . $category_title : '' ) . '</h2>';
     } else {
-        $title = '<p id="specialCenterbox-card-header" class="centerBoxHeading card-header h3">' . $heading_month_name . '</p>';
+        $title = '<h2 id="specialCenterbox-card-header" class="h3">' . $heading_month_name . '</h2>';
     }
     $zc_show_special_products = true;
 }

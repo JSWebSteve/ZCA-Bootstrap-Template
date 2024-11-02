@@ -2,7 +2,7 @@
 /**
  * Page Template
  *
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=account_history.<br />
  * Displays all customers previous orders
@@ -24,9 +24,9 @@ if ($accountHasHistory === true) {
 <!--bof order history card-->
     <div id="order<?php echo $history['orders_id']; ?>-card" class="card mb-3">
         <h4 id="order<?php echo $history['orders_id']; ?>-card-header" class="card-header"><?php echo TEXT_ORDER_NUMBER . $history['orders_id']; ?></h4>
-        <div id="order<?php echo $history['orders_id']; ?>-card-body" class="card-body p-3">
+        <div id="order<?php echo $history['orders_id']; ?>-card-body" class="card-body p-3" aria-labelledby="order<?php echo $history['orders_id']; ?>-card-header">
             <div class="row">
-                <div class="col-sm text-right">
+                <div class="col-sm text-end">
                     <?php echo TEXT_ORDER_STATUS . $history['orders_status_name']; ?>    
                 </div>
             </div>
@@ -49,7 +49,7 @@ if ($accountHasHistory === true) {
                 </div>
             </div>
 
-            <div id="order<?php echo $history['orders_id']; ?>-btn-toolbar" class="btn-toolbar justify-content-end my-3" role="toolbar">
+            <div id="order<?php echo $history['orders_id']; ?>-btn-toolbar" class="d-flex justify-content-end my-3" role="toolbar">
                 <?php echo zca_button_link(zen_href_link(FILENAME_ACCOUNT_HISTORY_INFO, $page_parameter . 'order_id=' . $history['orders_id'], 'SSL'), BUTTON_VIEW_SMALL_ALT, 'button_view'); ?>
             </div>
         </div>
@@ -77,7 +77,7 @@ if ($accountHasHistory === true) {
 <?php
 }
 ?>
-    <div id="accountHistoryDefault-btn-toolbar" class="btn-toolbar my-3" role="toolbar">
+    <div id="accountHistoryDefault-btn-toolbar" class="d-flex justify-content-start my-3" role="toolbar">
         <?php echo zca_button_link(zen_href_link(FILENAME_ACCOUNT, '', 'SSL'), BUTTON_BACK_ALT, 'button_back'); ?>
     </div>
 </div>

@@ -2,7 +2,7 @@
 /**
  * Side Box Template
  * 
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2016 Zen Cart Development Team
@@ -16,9 +16,9 @@ $content = '<div id="' . str_replace('_', '-', $box_id . 'Content') . '" class="
 if ($is_carousel === true) {
     $carousel_fade = in_array('reviews', $sidebox_carousels_to_fade) ? 'carousel-fade' : '';
     $content .=
-        '<div class="carousel slide ' . $carousel_fade . '" data-ride="carousel">
+        '<div class="carousel slide ' . $carousel_fade . '" data-bs-ride="carousel">
             <div class="carousel-inner">' .
-                '<div class="card-deck h-100">';
+                '<div class="card-group h-100">';
 }
 
 $active_class = 'active';
@@ -30,11 +30,12 @@ while (!$random_review_sidebox_product->EOF) {
 
     $content .=
         $carousel_start .
-        '<div class="card mb-3 p-3 sideBoxContentItem">' .
-            '<a href="' . zen_href_link(FILENAME_PRODUCT_REVIEWS_INFO, 'products_id=' . $current_review['products_id'] . '&reviews_id=' . $current_review['reviews_id']) . '" title="' . zen_output_string_protected($current_review['products_name']) . '">' .
-                zen_image(DIR_WS_IMAGES . $random_review_sidebox_product->fields['products_image'], $current_review['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) .
-                '<br>' .
-                nl2br(zen_trunc_string(zen_output_string_protected(stripslashes($current_review['reviews_text'])), 60), true) .
+        '<div id="review-' . $current_review['reviews_id'] . '" class="card mb-3 p-3 sideBoxContentItem">' .
+            '<a href="' . zen_href_link(FILENAME_PRODUCT_REVIEWS_INFO, 'products_id=' . $current_review['products_id'] . '&reviews_id=' . $current_review['reviews_id']) . '" class="text-decoration-none" title="' . zen_output_string_protected($current_review['products_name']) . '">' .
+                zen_image(DIR_WS_IMAGES . $random_review_sidebox_product->fields['products_image'], $current_review['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'class="img-fluid"') .
+                '<div class="card-body">' .
+                    '<p class="card-text">' . nl2br(zen_trunc_string(zen_output_string_protected(stripslashes($current_review['reviews_text'])), 60), true) . '</p>' .
+                '</div>' .
             '</a>' .
             '<div class="p-3 text-center rating">' .
                 zca_get_rating_stars($random_review_sidebox_product->fields['reviews_rating'], 'xs') .
@@ -54,4 +55,3 @@ if ($is_carousel === true) {
 }
 
 $content .= "</div>\n";
-

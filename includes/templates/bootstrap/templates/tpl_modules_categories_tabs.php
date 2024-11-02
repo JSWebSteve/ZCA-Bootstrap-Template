@@ -2,7 +2,7 @@
 /**
  * Module Template - categories_tabs
  * 
- * BOOTSTRAP v1.0.BETA
+ * BOOTSTRAP v5.0.0
  *
  * Template stub used to display categories-tabs output
  *
@@ -17,7 +17,7 @@
 ?>
 <?php if (CATEGORIES_TABS_STATUS == '1' && sizeof($links_list) >= 1) { ?>
 <div id="categoriesTabs" class="d-none d-lg-block">
-<nav class="nav nav-pills nav-fill" id="navCatTabs">
+<nav class="nav nav-pills nav-fill" id="navCatTabs" aria-label="Category Navigation">
 <?php for ($i=0, $n=sizeof($links_list); $i<$n; $i++) { ?>
   <?php echo $links_list[$i];?>
 <?php } ?>

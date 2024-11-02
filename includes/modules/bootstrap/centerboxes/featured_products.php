@@ -7,7 +7,7 @@
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Pan2020 2019 Mar 27 Modified in v1.5.6b $
  *
- * BOOTSTRAP v3.6.4
+ * BOOTSTRAP v5.0.0
  */
 if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
@@ -31,11 +31,9 @@ if ((($manufacturers_id > 0 && empty($_GET['filter_id'])) || !empty($_GET['music
           WHERE p.products_status = 1
             AND f.status = 1";
 } else {
-    // get all products and cPaths in this subcat tree
     $productsInCategory = zen_get_categories_products_list( (($manufacturers_id > 0 && !empty($_GET['filter_id'])) ? zen_get_generated_category_path_rev($_GET['filter_id']) : $cPath), false, true, 0, $display_limit);
 
     if (is_array($productsInCategory) && count($productsInCategory) > 0) {
-        // build products-list string to insert into SQL query
         $list_of_products = implode(',', array_keys($productsInCategory));
         $featured_products_query =
             "SELECT p.products_id, p.products_image, pd.products_name, p.master_categories_id
@@ -62,7 +60,6 @@ $col = 0;
 $list_box_contents = [];
 $title = '';
 
-// show only when 1 or more
 if ($num_products_count > 0) {
     while (!$featured_products->EOF) {
         $featured_products_id = $featured_products->fields['products_id'];
@@ -79,13 +76,20 @@ if ($num_products_count > 0) {
         $featured_products_image = '';
         if (!($featured_products->fields['products_image'] === '' && PRODUCTS_IMAGE_NO_IMAGE_STATUS === '0')) {
             $featured_products_image =
-                '<a href="' . $featured_products_link . '" title="' . zen_output_string_protected($featured_products_name) . '">' .
-                    zen_image(DIR_WS_IMAGES . $featured_products->fields['products_image'], $featured_products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) .
-                '</a><br>';
+                '<a href="' . $featured_products_link . '" class="d-block" title="' . zen_output_string_protected($featured_products_name) . '">' .
+                    zen_image(DIR_WS_IMAGES . $featured_products->fields['products_image'], $featured_products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'class="img-fluid mx-auto" loading="lazy"') .
+                '</a>';
         }
+        
         $list_box_contents[$row][$col] = [
-            'params' => ' class="centerBoxContentsFeatured centerBoxContents card mb-3 p-3 text-center"',
-            'text' => $featured_products_image . '<a href="' . $featured_products_link . '">' . $featured_products_name . '</a><br>' . $products_price
+            'params' => 'class="card h-100"',
+            'text' => '<div class="card-body d-flex flex-column text-center">' . 
+                        $featured_products_image . 
+                        '<h3 class="h6 card-title mt-2"><a href="' . $featured_products_link . '" class="text-decoration-none">' . 
+                            $featured_products_name . 
+                        '</a></h3>' .
+                        '<div class="card-text mt-auto">' . $products_price . '</div>' .
+                     '</div>'
         ];
 
         $col++;
@@ -98,9 +102,9 @@ if ($num_products_count > 0) {
 
     if (isset($new_products_category_id) && $new_products_category_id != 0) {
         $category_title = zen_get_category_name((int)$new_products_category_id, $_SESSION['languages_id']);
-        $title = '<p id="featuredCenterbox-card-header" class="centerBoxHeading card-header h3">' . TABLE_HEADING_FEATURED_PRODUCTS . ($category_title != '' ? ' - ' . $category_title : '') . '</p>';
+        $title = '<h2 id="featuredCenterbox-card-header" class="h3">' . TABLE_HEADING_FEATURED_PRODUCTS . ($category_title != '' ? ' - ' . $category_title : '') . '</h2>';
     } else {
-        $title = '<p id="featuredCenterbox-card-header" class="centerBoxHeading card-header h3">' . TABLE_HEADING_FEATURED_PRODUCTS . '</p>';
+        $title = '<h2 id="featuredCenterbox-card-header" class="h3">' . TABLE_HEADING_FEATURED_PRODUCTS . '</h2>';
     }
     $zc_show_featured = true;
 }

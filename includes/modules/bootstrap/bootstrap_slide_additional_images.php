@@ -2,7 +2,7 @@
 /**
  * additional_images module
  *
- * BOOTSTRAP v3.7.1
+ * BOOTSTRAP v5.0.0
  *
  * Prepares list of additional product images to be displayed in template
  *
@@ -92,15 +92,12 @@ if ($num_images !== 0) {
         $products_image_large = ($flag_has_large === true) ? $products_image_large : $file;
         $flag_display_large = (IMAGE_ADDITIONAL_DISPLAY_LINK_EVEN_WHEN_NO_LARGE === 'Yes' || $flag_has_large === true);
         $base_image = $file;
-        $thumb_slashes = zen_image(addslashes($base_image), addslashes($products_name), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
-        $thumb_regular = zen_image($base_image, $products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
-        $large_link = zen_href_link(FILENAME_POPUP_IMAGE_ADDITIONAL, 'pID=' . $_GET['products_id'] . '&pic=' . $slideNumber . '&products_image_large_additional=' . $products_image_large);
-        $slideNumber++;
 
-        $slide = zen_image($products_image_large);
+        $slide = zen_image($products_image_large, $products_name, '', '', 'class="d-block w-100" loading="lazy"');
+        
         // List Box array generation:
         $list_box_contents[$row][$col] = [
-            'params' => 'class="item carousel-item" data-slide-number="' . $slideNumber . '"',
+            'params' => 'class="carousel-item' . ($slideNumber === 1 ? ' active' : '') . '" data-bs-slide-number="' . $slideNumber . '" role="tabpanel" aria-label="' . sprintf(ARIA_SLIDE_NUMBER, $slideNumber) . '"',
             'text' => $slide
         ];
         $col++;
@@ -108,7 +105,8 @@ if ($num_images !== 0) {
             $col = 0;
             $row++;
         }
-    } // end for loop
-} // endif
+        $slideNumber++;
+    }
+}
 
 $zco_notifier->notify('NOTIFY_MODULES_ADDITIONAL_PRODUCT_IMAGES_END');

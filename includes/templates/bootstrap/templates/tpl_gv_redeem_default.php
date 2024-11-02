@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.5.0
+ * BOOTSTRAP v5.0.0
  *
  * Display information related to GV redemption (could be redemption details, or an error message)
  *
@@ -24,7 +24,7 @@ if (isset($_GET['goback']) && $_GET['goback'] === 'true') {
     $link = zen_href_link(FILENAME_GV_FAQ);
 }
 ?>
-    <div id="gvFaqDefault-btn-toolbar" class="btn-toolbar justify-content-end my-3" role="toolbar">
+    <div id="gvFaqDefault-btn-toolbar" class="d-flex justify-content-end my-3" role="toolbar">
         <?php echo zca_button_link($link, BUTTON_CONTINUE_ALT, 'button_continue'); ?>
     </div>
 </div>

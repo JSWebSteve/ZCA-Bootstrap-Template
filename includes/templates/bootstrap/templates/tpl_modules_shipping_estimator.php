@@ -2,7 +2,7 @@
 /**
  * Module Template - for shipping-estimator display
  *
- * BOOTSTRAP v3.7.3
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -36,7 +36,7 @@ if (SHOW_SHIPPING_ESTIMATOR_BUTTON === '2') {
 
 if (!empty($totalsDisplay)) {
 ?>
-    <div class="text-center"><?= $totalsDisplay ?></div>
+    <div class="text-center mb-3"><?= $totalsDisplay ?></div>
 <?php 
 }
 ?>
@@ -53,42 +53,50 @@ if (zen_is_logged_in() && !zen_in_guest_checkout()) {
     // only display addresses if more than 1
     if ($addresses->RecordCount() > 1) {
 ?>
-            <label class="inputLabel" for="seAddressPulldown"><?= CART_SHIPPING_METHOD_ADDRESS ?></label>
-            <?= zen_draw_pull_down_menu('address_id', $addresses_array, $selected_address, 'onchange="return shipincart_submit();" id="seAddressPulldown"') ?>
+            <div class="form-floating mb-3">
+                <?= zen_draw_pull_down_menu('address_id', $addresses_array, $selected_address, 'onchange="return shipincart_submit();" id="seAddressPulldown" class="form-select" aria-label="' . CART_SHIPPING_METHOD_ADDRESS . '"') ?>
+                <label for="seAddressPulldown"><?= CART_SHIPPING_METHOD_ADDRESS ?></label>
+            </div>
 <?php
     }
 ?>
-            <div class="font-weight-bold" id="seShipTo"><?= CART_SHIPPING_METHOD_TO ?></div>
+            <div class="fw-bold mb-2" id="seShipTo"><?= CART_SHIPPING_METHOD_TO ?></div>
             <address><?= zen_address_format($order->delivery['format_id'], $order->delivery, 1, ' ', '<br>') ?></address>
 <?php
 } elseif ($_SESSION['cart']->get_content_type() !== 'virtual') {
     $flag_show_pulldown_states = (ACCOUNT_STATE_DRAW_INITIAL_DROPDOWN === 'true');
 ?>
-            <label class="inputLabel" for="country"><?= ENTRY_COUNTRY ?></label>
-            <?= zen_get_country_list('zone_country_id', $selected_country, 'id="country"' . (($flag_show_pulldown_states === true) ? ' onchange="update_zone(this.form);"' : '')) ?>
-            <div class="p-2"></div>
+            <div class="form-floating mb-3">
+                <?= zen_get_country_list('zone_country_id', $selected_country, 'id="country" class="form-select"' . (($flag_show_pulldown_states === true) ? ' onchange="update_zone(this.form);"' : '') . ' aria-label="' . ENTRY_COUNTRY . '"') ?>
+                <label for="country"><?= ENTRY_COUNTRY ?></label>
+            </div>
 <?php
     if ($flag_show_pulldown_states === true) {
 ?>
-            <label class="inputLabel" for="stateZone" id="zoneLabel"><?= ENTRY_STATE ?></label>
-            <?= zen_draw_pull_down_menu('zone_id', zen_prepare_country_zones_pull_down($selected_country), $state_zone_id, 'id="stateZone"') ?>
-            <div class="p-2" id="stBreak"></div>
+            <div class="form-floating mb-3">
+                <?= zen_draw_pull_down_menu('zone_id', zen_prepare_country_zones_pull_down($selected_country), $state_zone_id, 'id="stateZone" class="form-select" aria-label="' . ENTRY_STATE . '"') ?>
+                <label for="stateZone" id="zoneLabel"><?= ENTRY_STATE ?></label>
+            </div>
 <?php
     }
 ?>
-            <label class="inputLabel" for="state" id="stateLabel"><?= $state_field_label ?? '' ?></label>
-            <?= zen_draw_input_field('state', $selectedState, zen_set_field_length(TABLE_ADDRESS_BOOK, 'entry_state', '40') . ' id="state"') ?>
-            <div class="p-2"></div>
+            <div class="form-floating mb-3">
+                <?= zen_draw_input_field('state', $selectedState, zen_set_field_length(TABLE_ADDRESS_BOOK, 'entry_state', '40') . ' id="state" class="form-control" placeholder="' . ($state_field_label ?? '') . '"') ?>
+                <label for="state" id="stateLabel"><?= $state_field_label ?? '' ?></label>
+            </div>
 <?php
     if (CART_SHIPPING_METHOD_ZIP_REQUIRED === 'true') {
 ?>
-            <label class="inputLabel" for="postcode"><?= ENTRY_POST_CODE ?></label>
-            <?= zen_draw_input_field('postcode', $postcode, 'size="7" id="postcode"') ?>
-            <div class="p-2"></div>
+            <div class="form-floating mb-3">
+                <?= zen_draw_input_field('postcode', $postcode, 'id="postcode" class="form-control" placeholder="' . ENTRY_POST_CODE . '"') ?>
+                <label for="postcode"><?= ENTRY_POST_CODE ?></label>
+            </div>
 <?php
     }
 ?>
-            <div class="text-right mt-2 mb-2"><?= zen_image_submit(BUTTON_IMAGE_UPDATE, BUTTON_UPDATE_ALT) ?></div>
+            <div class="d-flex justify-content-end mt-3 mb-3">
+                <?= zen_image_submit(BUTTON_IMAGE_UPDATE, BUTTON_UPDATE_ALT, '', 'btn btn-primary') ?>
+            </div>
 <?php
 }
 ?>
@@ -119,7 +127,7 @@ if ($_SESSION['cart']->get_content_type() === 'virtual') {
                 <thead>
                     <tr>
                         <th scope="col" id="seProductsHeading"><?= CART_SHIPPING_METHOD_TEXT ?></th>
-                        <th scope="col" id="seTotalHeading" class="text-right"><?= CART_SHIPPING_METHOD_RATES ?></th>
+                        <th scope="col" id="seTotalHeading" class="text-end"><?= CART_SHIPPING_METHOD_RATES ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -149,20 +157,18 @@ if ($_SESSION['cart']->get_content_type() === 'virtual') {
 
         foreach ($next_module['methods'] as $next_method) {
             $thisquoteid = $next_module['id'] . '_' . $next_method['id'];
-            $extra_class = ($selected_shipping['id'] === $thisquoteid) ? 'font-weight-bold' : '';
+            $extra_class = ($selected_shipping['id'] === $thisquoteid) ? 'fw-bold' : '';
 ?>
                     <tr<?= $extra ?>>
                         <td class="<?= $extra_class ?>">
                             <?= $next_module['module'] ?>&nbsp;(<?= $next_method['title'] ?>)
                         </td>
-                        <td class="cartTotalDisplay text-right <?= $extra_class ?>">
+                        <td class="cartTotalDisplay text-end <?= $extra_class ?>">
                             <?= $currencies->format(zen_add_tax($next_method['cost'], $next_module['tax'] ?? 0)) ?>
                         </td>
-<?php
-        }
-?>
                     </tr>
 <?php
+        }
     }
 ?>
                 </tbody>

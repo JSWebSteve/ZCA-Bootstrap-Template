@@ -2,7 +2,7 @@
 /**
  * Common Template - tpl_box_default_single.php
  * 
- * BOOTSTRAP v1.0.BETA
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2005 Zen Cart Development Team
@@ -12,19 +12,17 @@
  */
 
 // choose box images based on box position
-  if ($title_link) {
-    $title = '<a href="' . zen_href_link($title_link) . '">' . $title . BOX_HEADING_LINKS . '</a>';
-  }
-//
+if ($title_link) {
+    $title = '<a href="' . zen_href_link($title_link) . '" class="text-decoration-none" aria-label="' . $title . '">' . $title . BOX_HEADING_LINKS . '</a>';
+}
 ?>
 <!--// bof: <?php echo $box_id; ?> //-->
 <div id="<?php echo str_replace('_', '-', $box_id ) . '-singleBoxCard'; ?>" class="singleBoxCard card mb-3">
-    
-
-<h4 id="<?php echo str_replace('_', '-', $box_id) . '-singleBoxHeading'; ?>" class="singleBoxHeading card-header"><?php echo $title; ?></h4>
-
-<?php echo $content; ?>
-
+    <h4 id="<?php echo str_replace('_', '-', $box_id) . '-singleBoxHeading'; ?>" class="singleBoxHeading card-header" role="heading" aria-level="2">
+        <?php echo $title; ?>
+    </h4>
+    <div class="card-body p-3">
+        <?php echo $content; ?>
+    </div>
 </div>
 <!--// eof: <?php echo $box_id; ?> //-->
-

@@ -2,11 +2,7 @@
 /**
  * Common Template - tpl_columnar_display_carousel.php
  *
- * Inspired by https://bootsnipp.com/snippets/0egAD
- *
- * BOOTSTRAP v3.7.0
- *
- * This file is used for generating a carousel for various centerboxes.
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -92,7 +88,7 @@ $centerbox_carousel_wrapper_id = 'centerbox-carousel-' . $centerbox_carousel_cou
 <div class="card mb-3<?= $card_main_class ?>"<?= $card_main_id ?>>
     <?= $title ?>
     <div class="card-body text-center"<?= $card_body_id ?>>
-        <div id="<?= $centerbox_carousel_wrapper_id ?>" class="carousel slide multi-carousel <?= $carousel_fade ?>" data-ride="carousel">
+        <div id="<?= $centerbox_carousel_wrapper_id ?>" class="carousel slide multi-carousel <?= $carousel_fade ?>" data-bs-ride="carousel">
             <div class="carousel-inner">
 <?php
 $carousel_item_class = "$carousel_class_lg $carousel_class_md";
@@ -110,14 +106,21 @@ foreach ($list_box_contents as $row => $cols) {
 }
 ?>
             </div>
-            <a class="carousel-control-prev d-inline-block text-left" href="#centerbox-carousel-<?= $centerbox_carousel_count?>" role="button" data-slide="prev">
-                <span><i class="fas fa-lg fa-chevron-left" aria-hidden="true"></i></span>
-                <span class="sr-only"><?= BUTTON_PREVIOUS_ALT ?></span>
+
+            <a class="carousel-control-prev d-inline-block text-start" href="#<?= $centerbox_carousel_wrapper_id ?>" role="button" data-bs-slide="prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1.25em" fill="#000000" stroke="#000000" stroke-width="1.5" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                <span class="visually-hidden"><?= BUTTON_PREVIOUS_ALT ?></span>
             </a>
-            <a class="carousel-control-next d-inline-block text-right" href="#centerbox-carousel-<?= $centerbox_carousel_count?>" role="button" data-slide="next">
-                <span><i class="fas fa-lg fa-chevron-right" aria-hidden="true"></i></span>
-                <span class="sr-only"><?= BUTTON_NEXT_ALT ?></span>
+
+            <a class="carousel-control-next d-inline-block text-end" href="#<?= $centerbox_carousel_wrapper_id ?>" role="button" data-bs-slide="next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1.25em" fill="#000000" stroke="#000000" stroke-width="1.5" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+                <span class="visually-hidden"><?= BUTTON_NEXT_ALT ?></span>
             </a>
+
         </div>
     </div>
 </div>

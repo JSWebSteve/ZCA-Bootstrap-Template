@@ -2,7 +2,7 @@
 /**
  * Module Template
  * 
- * BOOTSTRAP v3.6.4
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -24,8 +24,8 @@ switch (BS4_FLOAT_ADD_SELECTED) {
         $bottom_button_extra_class = '';
         break;
     case 'Small Devices Only':
-        $top_button_extra_class = 'bs4-button-float sm-only';
-        $bottom_button_extra_class = 'bs4-button-hide-sm';
+        $top_button_extra_class = 'bs4-button-float d-block d-sm-none';
+        $bottom_button_extra_class = 'd-none d-sm-block';
         break;
     default:
         $top_button_extra_class = 'bs4-button-float always';
@@ -33,12 +33,12 @@ switch (BS4_FLOAT_ADD_SELECTED) {
         break;
 }
 ?>
-<div id="productsListing" class="listingCenterColumn">
+<div id="productsListing" class="centerColumn">
 <?php
 if ($show_top_submit_button === true) {
 ?>
-    <div id="productsListing-btn-toolbarTop" class="btn-toolbar justify-content-end my-3" role="toolbar">
-        <?= zen_image_submit(BUTTON_IMAGE_ADD_PRODUCTS_TO_CART, BUTTON_ADD_PRODUCTS_TO_CART_ALT, 'id="submit1" name="submit1"', $top_button_extra_class) ?>
+    <div id="productsListing-btn-toolbarTop" class="d-flex justify-content-end my-3" role="toolbar">
+        <?= zen_image_submit(BUTTON_IMAGE_ADD_PRODUCTS_TO_CART, BUTTON_ADD_PRODUCTS_TO_CART_ALT, 'id="submit1" name="submit1"', $top_button_extra_class . ' btn btn-primary button_in_cart button_add_selected') ?>
     </div>
 <?php
 } // show top submit
@@ -46,9 +46,9 @@ if ($show_top_submit_button === true) {
 <?php 
 if ($listing_split->number_of_rows > 0 && (PREV_NEXT_BAR_LOCATION == '1' || PREV_NEXT_BAR_LOCATION == '3')) {
 ?>
-    <div id="productsListing-topRow" class="d-flex align-items-center justify-content-between flex-column flex-md-row">
-        <div id="productsListing-topNumber" class="topNumber"><?= $listing_split->display_count(TEXT_DISPLAY_NUMBER_OF_PRODUCTS) ?></div>
-        <div id="productsListing-topLinks" class="topLinks">
+    <div id="productsListing-topRow" class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+        <div id="productsListing-topNumber" class="order-2 order-md-1"><?= $listing_split->display_count(TEXT_DISPLAY_NUMBER_OF_PRODUCTS) ?></div>
+        <div id="productsListing-topLinks" class="order-1 order-md-2">
             <?= TEXT_RESULT_PAGE . $listing_split->display_links($max_display_page_links, zen_get_all_get_params(['page', 'info', 'x', 'y', 'main_page']), $paginateAsUL) ?>
         </div>
     </div>
@@ -68,9 +68,9 @@ if (in_array($product_listing_layout_style, ['columns', 'fluid'])) {
 <?php 
 if ($listing_split->number_of_rows && (PREV_NEXT_BAR_LOCATION == '2' || PREV_NEXT_BAR_LOCATION == '3')) {
 ?>
-    <div id="productsListing-bottomRow" class="d-flex align-items-center justify-content-between flex-column flex-md-row">
-        <div id="productsListing-bottomNumber" class="bottomNumber"><?= $listing_split->display_count(TEXT_DISPLAY_NUMBER_OF_PRODUCTS) ?></div>
-        <div id="productsListing-bottomLinks" class="bottomLinks">
+    <div id="productsListing-bottomRow" class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+        <div id="productsListing-bottomNumber" class="order-2 order-md-1"><?= $listing_split->display_count(TEXT_DISPLAY_NUMBER_OF_PRODUCTS) ?></div>
+        <div id="productsListing-bottomLinks" class="order-1 order-md-2">
             <?= TEXT_RESULT_PAGE . $listing_split->display_links($max_display_page_links, zen_get_all_get_params(['page', 'info', 'x', 'y']), $paginateAsUL) ?>
         </div>
     </div>
@@ -80,15 +80,14 @@ if ($listing_split->number_of_rows && (PREV_NEXT_BAR_LOCATION == '2' || PREV_NEX
 <?php
 if ($show_bottom_submit_button == true) {
 ?>
-    <div id="productsListing-btn-toolbarBottom" class="btn-toolbar justify-content-end my-3" role="toolbar">
-        <?= zen_image_submit(BUTTON_IMAGE_ADD_PRODUCTS_TO_CART, BUTTON_ADD_PRODUCTS_TO_CART_ALT, 'id="submit2" name="submit1"', $bottom_button_extra_class) ?>
+    <div id="productsListing-btn-toolbarBottom" class="d-flex justify-content-end my-3" role="toolbar">
+        <?= zen_image_submit(BUTTON_IMAGE_ADD_PRODUCTS_TO_CART, BUTTON_ADD_PRODUCTS_TO_CART_ALT, 'id="submit2" name="submit1"', $bottom_button_extra_class . ' btn btn-primary button_in_cart button_add_selected') ?>
     </div>
 <?php
 } // show_bottom_submit_button
 ?>
 </div>
 <?php
-// if ($show_top_submit_button == true or $show_bottom_submit_button == true or (PRODUCT_LISTING_MULTIPLE_ADD_TO_CART != 0 and $show_submit == true and $listing_split->number_of_rows > 0)) {
 if ($show_top_submit_button == true || $show_bottom_submit_button == true) {
     echo '</form>';
 }

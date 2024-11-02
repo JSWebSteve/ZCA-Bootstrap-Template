@@ -2,7 +2,7 @@
 /**
  * Module Template
  * 
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2005 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -27,12 +27,12 @@ if (BS4_SPECIALS_CENTERBOX_CAROUSEL === '') {
     // If not rendering as a carousel, output the columnar display.
     //
     require $template->get_template_dir('tpl_columnar_display.php', DIR_WS_TEMPLATE, $current_page_base, 'common') . '/tpl_columnar_display.php';
-} else {
-    // -----
-    // Otherwise, rendering as a carousel.
-    //
-    $carousel_config = BS4_SPECIALS_CENTERBOX_CAROUSEL;
-    require $template->get_template_dir('tpl_columnar_display_carousel.php', DIR_WS_TEMPLATE, $current_page_base, 'common') . '/tpl_columnar_display_carousel.php';
+    return;
 }
+// -----
+// Otherwise, rendering as a carousel.
+//
+$carousel_config = BS4_SPECIALS_CENTERBOX_CAROUSEL;
+require $template->get_template_dir('tpl_columnar_display_carousel.php', DIR_WS_TEMPLATE, $current_page_base, 'common') . '/tpl_columnar_display_carousel.php';
 ?>
 <!-- eof: specials -->

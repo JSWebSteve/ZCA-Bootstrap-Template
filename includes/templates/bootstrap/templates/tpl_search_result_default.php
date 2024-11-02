@@ -2,7 +2,7 @@
 /**
  * Page Template
  * 
- * BOOTSTRAP v3.7.0
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=advanced_search_result.<br />
  * Displays results of advanced search
@@ -19,7 +19,7 @@
 <?php
 if ($do_filter_list || PRODUCT_LIST_ALPHA_SORTER === 'true') {
 ?>
-    <?php echo zen_draw_form('filter', zen_href_link(FILENAME_SEARCH_RESULT), 'get') . zen_post_all_get_params('currency'); ?>
+    <?php echo zen_draw_form('filter', zen_href_link(FILENAME_SEARCH_RESULT), 'get', 'class="mb-3"') . zen_post_all_get_params('currency'); ?>
         <div id="advancedSearchResultDefault-sorterRow" class="row mb-3">
             <?php require DIR_WS_MODULES . zen_get_module_directory(FILENAME_PRODUCT_LISTING_ALPHA_SORTER); ?>
         </div>

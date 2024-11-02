@@ -2,7 +2,7 @@
 /**
  * Page Template
  *
- * BOOTSTRAP v3.7.2
+ * BOOTSTRAP v5.0.0
  *
  * Loaded automatically by index.php?main_page=product_info.
  * Displays details of a typical product
@@ -78,7 +78,7 @@ if (PRODUCT_INFO_SHOW_BOOTSTRAP_MODAL_POPUPS === 'Yes' && PRODUCT_INFO_SHOW_BOOT
         $buttonText = $num_images . TEXT_MULTIPLE_IMAGES;
 ?>
                 <div class="p-1"></div>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bootstrap-slide-modal-lg">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target=".bootstrap-slide-modal-lg">
                     <?= $buttonText ?>
                 </button>
                 <div class="p-3"></div>
@@ -266,7 +266,7 @@ if (CUSTOMERS_APPROVAL === '3' && TEXT_LOGIN_FOR_PRICE_BUTTON_REPLACE_SHOWROOM =
         $the_button =
             zen_draw_hidden_field('cart_quantity', '1') .
             zen_draw_hidden_field('products_id', (int)$_GET['products_id']) .
-            zen_image_submit(BUTTON_IMAGE_IN_CART, BUTTON_IN_CART_ALT);
+            zen_image_submit(BUTTON_IMAGE_IN_CART, BUTTON_IN_CART_ALT, '', 'btn btn-primary button_in_cart');
     } else {
         // show the quantity box
         $the_button =
@@ -274,7 +274,7 @@ if (CUSTOMERS_APPROVAL === '3' && TEXT_LOGIN_FOR_PRICE_BUTTON_REPLACE_SHOWROOM =
                 '<input class="form-control" type="text" name="cart_quantity" value="' . $products_get_buy_now_qty . '" aria-label="' . ARIA_QTY_ADD_TO_CART . '">' .
                 '<div class="input-group-append">' .
                     zen_draw_hidden_field('products_id', (int)$_GET['products_id']) .
-                    zen_image_submit(BUTTON_IMAGE_IN_CART, BUTTON_IN_CART_ALT) .
+                    zen_image_submit(BUTTON_IMAGE_IN_CART, BUTTON_IN_CART_ALT, '', 'btn btn-primary button_in_cart') .
                 '</div>' .
             '</div>';
 

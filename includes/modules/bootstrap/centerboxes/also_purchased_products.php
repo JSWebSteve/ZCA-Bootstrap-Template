@@ -2,7 +2,7 @@
 /**
  * also_purchased_products module
  * 
- * BOOTSTRAP v3.6.4
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -22,7 +22,6 @@ if (isset($_GET['products_id']) && SHOW_PRODUCT_INFO_COLUMNS_ALSO_PURCHASED_PROD
     $list_box_contents = array();
     $title = '';
 
-    // show only when 1 or more and equal to or greater than minimum set in admin
     if ($num_products_ordered >= MIN_DISPLAY_ALSO_PURCHASED && $num_products_ordered > 0) {
         if ($num_products_ordered < SHOW_PRODUCT_INFO_COLUMNS_ALSO_PURCHASED_PRODUCTS) {
             $col_width = floor(100/$num_products_ordered);
@@ -33,32 +32,30 @@ if (isset($_GET['products_id']) && SHOW_PRODUCT_INFO_COLUMNS_ALSO_PURCHASED_PROD
         while (!$also_purchased_products->EOF) {
             $app_products_id = $also_purchased_products->fields['products_id'];
 
-            /** bof products price */
             $products_price = zen_get_products_display_price($app_products_id);
-            $also_purchased_products_price = '<div class="centerBoxContentsItem-price text-center">' . $products_price . '</div>';
-            /** eof products price */
+            $also_purchased_products_price = '<div class="price text-center">' . $products_price . '</div>';
 
-            /** bof products name */
             $app_products_name = zen_get_products_name($app_products_id);
             $app_products_link = zen_href_link(zen_get_info_page($app_products_id), "products_id=$app_products_id");
     
-            $also_purchased_products_name = '<div class="centerBoxContentsItem-name text-center"><a href="' . $app_products_link . '">' . $app_products_name . '</a></div>';
-            /** eof products name */
+            $also_purchased_products_name = '<h3 class="h6 card-title"><a href="' . $app_products_link . '" class="text-decoration-none">' . $app_products_name . '</a></h3>';
 
-            /** bof products image */
             if (empty($also_purchased_products->fields['products_image']) && PRODUCTS_IMAGE_NO_IMAGE_STATUS === '0') {
                 $also_purchased_products_image = '';
             } else {
                 $also_purchased_products_image =
-                    '<div class="centerBoxContentsItem-image text-center"><a href="' . $app_products_link . '" title="' . zen_output_string_protected($app_products_name) . '">' .
-                        zen_image(DIR_WS_IMAGES . $also_purchased_products->fields['products_image'], $app_products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) .
-                    '</a></div>';
+                    '<a href="' . $app_products_link . '" class="d-block" title="' . zen_output_string_protected($app_products_name) . '">' .
+                        zen_image(DIR_WS_IMAGES . $also_purchased_products->fields['products_image'], $app_products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'class="img-fluid mx-auto" loading="lazy"') .
+                    '</a>';
             }
-            /** eof products image */
       
             $list_box_contents[$row][$col] = [
-                'params' => 'class="centerBoxContents card mb-3 p-3 text-center"',
-                'text' => $also_purchased_products_image . $also_purchased_products_name . $also_purchased_products_price
+                'params' => 'class="card h-100"',
+                'text' => '<div class="card-body d-flex flex-column">' . 
+                            $also_purchased_products_image . 
+                            $also_purchased_products_name . 
+                            $also_purchased_products_price . 
+                         '</div>'
             ];
 
             $col++;
@@ -70,7 +67,7 @@ if (isset($_GET['products_id']) && SHOW_PRODUCT_INFO_COLUMNS_ALSO_PURCHASED_PROD
         }
     }
     if ($also_purchased_products->RecordCount() > 0 && $also_purchased_products->RecordCount() >= MIN_DISPLAY_ALSO_PURCHASED) {
-        $title = '<p id="alsoPurchasedCenterbox-card-header" class="centerBoxHeading card-header h3">' . TEXT_ALSO_PURCHASED_PRODUCTS . '</p>';
+        $title = '<h2 id="alsoPurchasedCenterbox-card-header" class="h3">' . TEXT_ALSO_PURCHASED_PRODUCTS . '</h2>';
         $zc_show_also_purchased = true;
     }
 }

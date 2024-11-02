@@ -2,6 +2,8 @@
 /**
  * Page Template
  *
+ * BOOTSTRAP v5.0.0
+ *
  * Loaded automatically by index.php?main_page=checkout_success.<br />
  * Displays confirmation details after order has been successfully processed.
  *
@@ -18,7 +20,7 @@
 // Last updated: OPC v2.4.2/Bootstrap v3.4.0
 //
 ?>
-<div class="centerColumn" id="checkoutSuccess">
+<div id="checkoutSuccess" class="centerColumn">
 <?php 
 if ($messageStack->size('checkout_success') > 0) {
     echo $messageStack->output('checkout_success');
@@ -34,39 +36,42 @@ if ($offer_account_creation) {
             <p class="card-title"><?php echo TEXT_GUEST_ADD_PWD_TO_CREATE_ACCT; ?></p>
             
             <?php echo zen_draw_form('guest-pwd', zen_href_link(FILENAME_CHECKOUT_SUCCESS, 'action=create_account', 'SSL'), 'post'); ?>
-                <div class="form-group row">
-                    <label class="inputLabel" for="password-new" class="col-sm-2 col-form-label"><?php echo ENTRY_PASSWORD; ?></label>
-                    <div class="col-sm-4">
-                        <?php echo zen_draw_password_field('password', '', 'id="password-new" autocomplete="off" placeholder="' . ENTRY_PASSWORD_TEXT . '"'); ?>
+                <div class="row mb-3">
+                    <div class="col-sm-6">
+                        <div class="form-floating">
+                            <?php echo zen_draw_password_field('password', '', 'id="password-new" autocomplete="off" placeholder="' . ENTRY_PASSWORD_TEXT . '" class="form-control"'); ?>
+                            <label for="password-new"><?php echo ENTRY_PASSWORD; ?></label>
+                        </div>
                     </div>
-
-                    <label class="inputLabel" for="password-confirm" class="col-sm-2 col-form-label"><?php echo ENTRY_PASSWORD_CONFIRMATION; ?></label>
-                    <div class="col-sm-4">
-                        <?php echo zen_draw_password_field('confirmation', '', 'id="password-confirm" autocomplete="off" placeholder="' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '"'); ?>
+                    <div class="col-sm-6">
+                        <div class="form-floating">
+                            <?php echo zen_draw_password_field('confirmation', '', 'id="password-confirm" autocomplete="off" placeholder="' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '" class="form-control"'); ?>
+                            <label for="password-confirm"><?php echo ENTRY_PASSWORD_CONFIRMATION; ?></label>
+                        </div>
                     </div>
                 </div>
                 <h3><?php echo ENTRY_EMAIL_PREFERENCE; ?></h3>
 <?php
     if (ACCOUNT_NEWSLETTER_STATUS !== '0') {
 ?>
-                <div class="custom-control custom-checkbox">
-                    <?php echo zen_draw_checkbox_field('newsletter', '1', false, 'id="newsletter-checkbox"'); ?>
-                    <label class="custom-control-label checkboxLabel" for="newsletter-checkbox"> <?php echo ENTRY_NEWSLETTER; ?></label>
+                <div class="form-check form-switch">
+                    <?php echo zen_draw_checkbox_field('newsletter', '1', false, 'class="form-check-input" id="newsletter-checkbox"'); ?>
+                    <label class="form-check-label" for="newsletter-checkbox"><?php echo ENTRY_NEWSLETTER; ?></label>
                 </div>
                 <?php echo (!empty(ENTRY_NEWSLETTER_TEXT) ? '<span class="alert">' . ENTRY_NEWSLETTER_TEXT . '</span>': ''); ?>
 <?php 
     } 
 ?>
-                <div class="custom-control custom-radio custom-control-inline ml-3">
-                    <?php echo zen_draw_radio_field('email_format', 'HTML', ($email_format === 'HTML'),'id="email-format-html"'); ?>
-                    <label class="custom-control-label radioButtonLabel" for="email-format-html"><?php echo ENTRY_EMAIL_HTML_DISPLAY; ?></label>
+                <div class="form-check form-check-inline ms-3">
+                    <?php echo zen_draw_radio_field('email_format', 'HTML', ($email_format === 'HTML'),'id="email-format-html" class="form-check-input"'); ?>
+                    <label class="form-check-label" for="email-format-html"><?php echo ENTRY_EMAIL_HTML_DISPLAY; ?></label>
                 </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <?php echo zen_draw_radio_field('email_format', 'TEXT', ($email_format === 'TEXT'), 'id="email-format-text"'); ?>
-                    <label class="custom-control-label radioButtonLabel" for="email-format-text"><?php echo ENTRY_EMAIL_TEXT_DISPLAY; ?></label>
+                <div class="form-check form-check-inline">
+                    <?php echo zen_draw_radio_field('email_format', 'TEXT', ($email_format === 'TEXT'), 'id="email-format-text" class="form-check-input"'); ?>
+                    <label class="form-check-label" for="email-format-text"><?php echo ENTRY_EMAIL_TEXT_DISPLAY; ?></label>
                 </div>
                 
-                <div class="text-right"><?php echo zen_image_submit(BUTTON_IMAGE_CREATE_ACCOUNT, BUTTON_CREATE_ACCOUNT_ALT); ?></div>
+                <div class="text-end mt-3"><?php echo zen_image_submit(BUTTON_IMAGE_CREATE_ACCOUNT, BUTTON_CREATE_ACCOUNT_ALT, '', 'btn btn-primary'); ?></div>
             <?php echo '</form>'; ?>
         </div>
     </div>

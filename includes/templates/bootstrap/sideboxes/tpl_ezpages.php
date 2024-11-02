@@ -2,7 +2,7 @@
 /**
  * Side Box Template
  * 
- * BOOTSTRAP v1.0.BETA
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2005 Zen Cart Development Team
@@ -14,7 +14,7 @@
   $content .= '<div id="' . str_replace('_', '-', $box_id . 'Content') . '" class="list-group-flush sideBoxContent">';
 
   for ($i=1, $n=sizeof($var_linksList); $i<=$n; $i++) { 
-    $content .= '<a class="list-group-item list-group-item-action" href="' . $var_linksList[$i]['link'] . '">' . $var_linksList[$i]['name'] . '</a>' . "\n" ;
+    $content .= '<a id="ezpage-' . $i . '" class="list-group-item list-group-item-action" href="' . $var_linksList[$i]['link'] . '" aria-label="' . $var_linksList[$i]['name'] . '">' . $var_linksList[$i]['name'] . '</a>' . "\n" ;
   } // end FOR loop
 
   $content .= '</div>';

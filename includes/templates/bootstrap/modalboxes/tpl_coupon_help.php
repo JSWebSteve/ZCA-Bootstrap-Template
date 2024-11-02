@@ -2,7 +2,7 @@
 /**
  * Override Template for common/tpl_main_page.php
  *
- * BOOTSTRAP v3.5.2
+ * BOOTSTRAP v5.0.0
  *
  * @package templateSystem
  * @copyright Copyright 2003-2018 Zen Cart Development Team
@@ -43,13 +43,12 @@ if ($coupon->EOF) {
 zca_load_language_for_modal('popup_coupon_help'); 
 ?>
 <!-- Modal -->
-<div class="modal fade" id="couponHelpModal" tabindex="-1" role="dialog" aria-labelledby="couponHelpModalLabel" aria-hidden="true">
+<div id="couponHelpModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="couponHelpModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo TEXT_MODAL_CLOSE; ?>">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 id="couponHelpModalLabel" class="modal-title"><?php echo HEADING_COUPON_HELP; ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo TEXT_MODAL_CLOSE; ?>"></button>
             </div>
             <div class="modal-body">
 <?php
@@ -91,15 +90,15 @@ if ($coupon->fields['coupon_minimum_order'] > 0) {
 }
 
 $coupon_info[] = str_replace('<br>', '', sprintf(TEXT_COUPON_HELP_DATE, zen_date_short($coupon->fields['coupon_start_date']), zen_date_short($coupon->fields['coupon_expire_date'])));
-$text_coupon_help .= '<ul id="couponInfo">' . '<li>' . implode('</li><li>', $coupon_info) . '</li></ul>';
+$text_coupon_help .= '<ul id="couponInfo" class="list-unstyled">' . '<li>' . implode('</li><li>', $coupon_info) . '</li></ul>';
 
 $text_coupon_help .= '<strong>' . str_replace('<br>', '', TEXT_COUPON_HELP_RESTRICT) . '</strong>';
 
 if ($coupon->fields['coupon_zone_restriction'] > 0) {
-    $text_coupon_help .= '<br><br>' . TEXT_COUPON_GV_RESTRICTION_ZONES;
+    $text_coupon_help .= '<p>' . TEXT_COUPON_GV_RESTRICTION_ZONES . '</p>';
 }
 
-$text_coupon_help .= '<br><br>' .  TEXT_COUPON_HELP_CATEGORIES;
+$text_coupon_help .= '<p>' .  TEXT_COUPON_HELP_CATEGORIES . '</p>';
 $sql = "SELECT * FROM " . TABLE_COUPON_RESTRICT . "  WHERE coupon_id = :couponID: AND category_id !='0'";
 $sql = $db->bindVars($sql, ':couponID:', $_SESSION['cc_id'], 'integer');
 $get_result = $db->Execute($sql);
@@ -133,9 +132,9 @@ if (count($cats) === 0) {
     sort($cats);
 }
 
-$text_coupon_help .= '<ul id="couponCatRestrictions">' . '<li>' . implode('</li><li>', $cats) . '</li></ul>';
+$text_coupon_help .= '<ul id="couponCatRestrictions" class="list-unstyled">' . '<li>' . implode('</li><li>', $cats) . '</li></ul>';
 
-$text_coupon_help .= TEXT_COUPON_HELP_PRODUCTS;
+$text_coupon_help .= '<p>' . TEXT_COUPON_HELP_PRODUCTS . '</p>';
 
 $sql = "SELECT * FROM " . TABLE_COUPON_RESTRICT . " WHERE coupon_id = :couponID: AND product_id != 0";
 $sql = $db->bindVars($sql, ':couponID:', $_SESSION['cc_id'], 'integer');
@@ -155,13 +154,13 @@ if (count($prods) === 0) {
     $prods[] = TEXT_NO_PROD_RESTRICTIONS;
 }
 sort($prods);
-$text_coupon_help .= '<ul id="couponProdRestrictions">' . '<li>' . implode('</li><li>', $prods) . '</li></ul>' . TEXT_COUPON_GV_RESTRICTION;
+$text_coupon_help .= '<ul id="couponProdRestrictions" class="list-unstyled">' . '<li>' . implode('</li><li>', $prods) . '</li></ul>' . '<p>' . TEXT_COUPON_GV_RESTRICTION . '</p>';
 
 echo $text_coupon_help;
 ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo TEXT_MODAL_CLOSE; ?></button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo TEXT_MODAL_CLOSE; ?></button>
             </div>
         </div>
     </div>
