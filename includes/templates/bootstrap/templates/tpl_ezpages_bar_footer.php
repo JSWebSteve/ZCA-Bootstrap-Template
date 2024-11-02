@@ -21,7 +21,7 @@
 
 <?php if (!empty($var_linksList)) { ?>
 <nav id="ezpagesBarFooter" class="ezpagesBar rounded" aria-label="EZ-Pages Footer Navigation">
-    <ul class="nav nav-pills justify-content-center">
+    <ul class="nav nav-pills">
     <?php for ($i=1, $n=sizeof($var_linksList); $i<=$n; $i++) {  ?>
         <li class="nav-item">
             <a id="ezpagesBarFooter-link-<?php echo $i; ?>" class="nav-link" href="<?php echo $var_linksList[$i]['link']; ?>">
