@@ -149,7 +149,10 @@ span.alert {
 <?php
 //- Buttons
 ?>
-.btn {
+.btn,
+#back-to-top.btn,
+#back-to-top.btn:active,
+#back-to-top.btn:first-child:active {
     color: <?= ZCA_BUTTON_TEXT_COLOR ?>;
     background-color: <?= ZCA_BUTTON_BACKGROUND_COLOR ?>;
     border-color: <?= ZCA_BUTTON_BORDER_COLOR ?>;
