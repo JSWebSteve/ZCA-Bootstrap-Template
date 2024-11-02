@@ -13,7 +13,7 @@
 ?>
 <!-- bof: upcoming_products -->
 <div id="upcomingProducts-centerBoxContents" class="card mb-3">
-    <h4 id="upcomingProducts-centerBoxHeading" class="card-header" role="heading" aria-level="2">
+    <h4 id="upcomingProducts-centerBoxHeading" class="centerBoxHeading card-header" role="heading" aria-level="2">
         <?php echo TABLE_HEADING_UPCOMING_PRODUCTS; ?>
     </h4>
     <div id="upcomingProducts-card-body" class="card-body p-3" aria-labelledby="upcomingProducts-centerBoxHeading">

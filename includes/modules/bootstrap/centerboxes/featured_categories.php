@@ -72,9 +72,9 @@ if ($num_categories_count > 0) {
 
     if (!empty($current_category_id)) {
         $category_title = zen_get_category_name((int)$current_category_id);
-        $title = '<h2 id="featuredCenterbox-card-header" class="h3">' . TABLE_HEADING_FEATURED_CATEGORIES . ($category_title !== '' ? ' - ' . $category_title : '') . '</h2>';
+        $title = '<h2 id="featuredCenterbox-card-header" class="centerBoxHeading card-header h3">' . TABLE_HEADING_FEATURED_CATEGORIES . ($category_title !== '' ? ' - ' . $category_title : '') . '</h2>';
     } else {
-        $title = '<h2 id="featuredCenterbox-card-header" class="h3">' . TABLE_HEADING_FEATURED_CATEGORIES . '</h2>';
+        $title = '<h2 id="featuredCenterbox-card-header" class="centerBoxHeading card-header h3">' . TABLE_HEADING_FEATURED_CATEGORIES . '</h2>';
     }
     $zc_show_featured = true;
 }

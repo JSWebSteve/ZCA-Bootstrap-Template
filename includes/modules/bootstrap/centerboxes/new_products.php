@@ -102,9 +102,9 @@ if ($num_products_count > 0) {
     $heading_month_name = sprintf(TABLE_HEADING_NEW_PRODUCTS, zca_get_translated_month_name());
     if (!empty($new_products_category_id)) {
         $category_title = zen_get_category_name((int)$new_products_category_id, $_SESSION['languages_id']);
-        $title = '<h2 id="newCenterbox-card-header" class="h3">' . $heading_month_name . ($category_title !== '' ? ' - ' . $category_title : '') . '</h2>';
+        $title = '<h2 id="newCenterbox-card-header" class="centerBoxHeading card-header h3">' . $heading_month_name . ($category_title !== '' ? ' - ' . $category_title : '') . '</h2>';
     } else {
-        $title = '<h2 id="newCenterbox-card-header" class="h3">' . $heading_month_name . '</h2>';
+        $title = '<h2 id="newCenterbox-card-header" class="centerBoxHeading card-header h3">' . $heading_month_name . '</h2>';
     }
     $zc_show_new_products = true;
 }
