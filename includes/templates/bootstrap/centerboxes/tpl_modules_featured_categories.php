@@ -2,7 +2,7 @@
 /**
  * Module Template
  *
- * BOOTSTRAP 3.7.3
+ * BOOTSTRAP v5.0.0
  *
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce

@@ -107,14 +107,14 @@ foreach ($list_box_contents as $row => $cols) {
 ?>
             </div>
 
-            <a class="carousel-control-prev d-inline-block text-start" href="#<?= $centerbox_carousel_wrapper_id ?>" role="button" data-bs-slide="prev">
+            <a class="carousel-control-prev d-inline-block text-start px-2 w-auto" href="#<?= $centerbox_carousel_wrapper_id ?>" role="button" data-bs-slide="prev">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1.25em" fill="#000000" stroke="#000000" stroke-width="1.5" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
                 </svg>
                 <span class="visually-hidden"><?= BUTTON_PREVIOUS_ALT ?></span>
             </a>
 
-            <a class="carousel-control-next d-inline-block text-end" href="#<?= $centerbox_carousel_wrapper_id ?>" role="button" data-bs-slide="next">
+            <a class="carousel-control-next d-inline-block text-end px-2 w-auto" href="#<?= $centerbox_carousel_wrapper_id ?>" role="button" data-bs-slide="next">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1.25em" fill="#000000" stroke="#000000" stroke-width="1.5" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                 </svg>

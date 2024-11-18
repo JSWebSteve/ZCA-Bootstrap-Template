@@ -12,11 +12,11 @@
  */
 ?>
 <!-- bof: upcoming_products -->
-<div id="upcomingProducts-centerBoxContents" class="card mb-3">
-    <h4 id="upcomingProducts-centerBoxHeading" class="centerBoxHeading card-header" role="heading" aria-level="2">
+<div id="upcomingProducts-centerBoxContents" class="card mb-3 text-center">
+    <div id="upcomingProducts-centerBoxHeading" class="centerBoxHeading card-header h4" role="heading" aria-level="2">
         <?php echo TABLE_HEADING_UPCOMING_PRODUCTS; ?>
-    </h4>
-    <div id="upcomingProducts-card-body" class="card-body p-3" aria-labelledby="upcomingProducts-centerBoxHeading">
+    </div>
+    <div id="upcomingProducts-card-body" class="card-body p-3 text-center" aria-labelledby="upcomingProducts-centerBoxHeading">
         <div class="table-responsive">
             <table id="upcomingProducts-table" class="table table-striped table-hover">
                 <caption class="visually-hidden"><?php echo CAPTION_UPCOMING_PRODUCTS; ?></caption>

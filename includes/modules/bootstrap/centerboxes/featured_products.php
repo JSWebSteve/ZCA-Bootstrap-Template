@@ -102,9 +102,9 @@ if ($num_products_count > 0) {
 
     if (isset($new_products_category_id) && $new_products_category_id != 0) {
         $category_title = zen_get_category_name((int)$new_products_category_id, $_SESSION['languages_id']);
-        $title = '<h2 id="featuredCenterbox-card-header" class="centerBoxHeading card-header h3">' . TABLE_HEADING_FEATURED_PRODUCTS . ($category_title != '' ? ' - ' . $category_title : '') . '</h2>';
+        $title = '<p id="featuredCenterbox-card-header" class="centerBoxHeading card-header h3">' . TABLE_HEADING_FEATURED_PRODUCTS . ($category_title != '' ? ' - ' . $category_title : '') . '</p>';
     } else {
-        $title = '<h2 id="featuredCenterbox-card-header" class="centerBoxHeading card-header h3">' . TABLE_HEADING_FEATURED_PRODUCTS . '</h2>';
+        $title = '<p id="featuredCenterbox-card-header" class="centerBoxHeading card-header h3">' . TABLE_HEADING_FEATURED_PRODUCTS . '</p>';
     }
     $zc_show_featured = true;
 }

@@ -11,8 +11,8 @@
  * @version $Id: tpl_yes_notifications.php 2982 2006-02-07 07:56:41Z birdbrain $
  */
 ?>
-<div id="ProductNotifications-centerBoxContents" class="card mb-3">
-    <div id="ProductNotifications-centerBoxHeading" class="card-header h4" role="heading" aria-level="2">
+<div id="ProductNotifications-centerBoxContents" class="card mb-3 text-center">
+    <div id="ProductNotifications-centerBoxHeading" class="centerBoxHeading card-header h4" role="heading" aria-level="2">
         <?= BOX_HEADING_NOTIFICATIONS ?>
     </div>
     <div id="ProductNotifications-card-body" class="card-body p-3" aria-labelledby="ProductNotifications-centerBoxHeading">

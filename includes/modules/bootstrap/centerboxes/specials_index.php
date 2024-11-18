@@ -108,9 +108,9 @@ if ($num_products_count > 0) {
     $heading_month_name = sprintf(TABLE_HEADING_SPECIALS_INDEX, zca_get_translated_month_name());
     if (!empty($new_products_category_id)) {
         $category_title = zen_get_category_name((int)$new_products_category_id, $_SESSION['languages_id']);
-        $title = '<h2 id="specialCenterbox-card-header" class="centerBoxHeading card-header h3">' . $heading_month_name . ($category_title != '' ? ' - ' . $category_title : '' ) . '</h2>';
+        $title = '<p id="specialCenterbox-card-header" class="centerBoxHeading card-header h3">' . $heading_month_name . ($category_title != '' ? ' - ' . $category_title : '' ) . '</p>';
     } else {
-        $title = '<h2 id="specialCenterbox-card-header" class="centerBoxHeading card-header h3">' . $heading_month_name . '</h2>';
+        $title = '<p id="specialCenterbox-card-header" class="centerBoxHeading card-header h3">' . $heading_month_name . '</p>';
     }
     $zc_show_special_products = true;
 }
